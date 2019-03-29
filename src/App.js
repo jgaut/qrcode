@@ -39,43 +39,6 @@ class App extends Component {
     alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
 
-      Auth.signUp(this.state.email, this.state.password)
-      .then((data) => {
-        console.log(data);
-        navigate('SignUpConfirm', {username: data.user.username});
-      })
-      .catch((err) => {
-        console.log(err);
-        if(err && err.code && typeof err.code != 'undefined' && err.code == 'UsernameExistsException'){
-
-          // For advanced usage
-          // You can pass an object which has the username, password and validationData which is sent to a PreAuthentication Lambda trigger
-          Auth.signIn({
-              username, // Required, the username
-              password, // Optional, the password
-          }).then((user) => {
-            console.log(user);
-            navigate('App', {number: Math.random()});
-            }
-          )
-          .catch((err) => {
-            console.log(err);
-            if(err && err.code && typeof err.code != 'undefined' && err.code == 'UserNotConfirmedException'){
-              navigate('SignUpConfirm', {username: this.state.email});
-            }else{
-              this.setState({ err: err.message || err || ''});
-              this.setState({errColor: '#000000'}); 
-            }
-            }
-          );
-        }else{
-            this.setState({errColor: '#000000'}); 
-            this.setState({ err: err.message || err || ''});
-
-        }
-      }
-      );
-
   }
 
   render() {
