@@ -16,14 +16,22 @@ class App extends Component {
 
   handleChange(event) {
     //console.log(event.target);
-    switch(event.target.name){
+    /*switch(event.target.name){
       case 'email' :
         this.setState({email: event.target.value});
         break;
       case 'password' :
         this.setState({password: event.target.value});
         break;
-    }
+    }*/
+
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   handleSubmit(event) {
