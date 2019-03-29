@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   handleChange(event) {
-    console.log(event);
+    console.log(event.target);
     this.setState({value: event.target.value});
   }
 
