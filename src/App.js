@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import Auth from '@aws-amplify/auth';
+import awsconfig from './aws-exports';
+
+// retrieve temporary AWS credentials and sign requests
+Auth.configure(awsconfig);
 
 class App extends Component {
 
@@ -13,6 +17,8 @@ class App extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+
   }
 
   handleChange(event) {
