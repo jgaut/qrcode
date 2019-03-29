@@ -15,8 +15,7 @@ class App extends Component {
   }
 
   handleChange(event) {
-    console.log(event.target);
-
+    //console.log(event.target);
     switch(event.target.name){
       case 'email' :
         this.setState({email: event.target.value});
@@ -28,7 +27,7 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state);
+    alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
   }
 
