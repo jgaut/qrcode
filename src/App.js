@@ -18,6 +18,16 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
+    Auth.currentAuthenticatedUser({bypassCache: false})
+      .then((user) => {
+        console.log(user);
+        //navigate('AppAuth', {user: user.attributes.email});
+        }
+      ).catch((err) => {
+        console.log(err);
+        //navigate('SignInUp');
+        }
+      );
 
   }
 
@@ -48,18 +58,6 @@ class App extends Component {
   }
 
   render() {
-
-
-     Auth.currentAuthenticatedUser({bypassCache: false})
-      .then((user) => {
-        console.log(user);
-        //navigate('AppAuth', {user: user.attributes.email});
-        }
-      ).catch((err) => {
-        console.log(err);
-        //navigate('SignInUp');
-        }
-      );
 
     return (
       <div className="App">
