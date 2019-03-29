@@ -8,6 +8,7 @@ class App extends Component {
     this.state = {
       email: '',
       password: '',
+      value:''
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -38,6 +39,9 @@ class App extends Component {
   </p>
   <p>
   {this.state.password}
+  </p>
+    <p>
+  {this.state.value}
   </p>
 </form>
         </header>
