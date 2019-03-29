@@ -15,8 +15,15 @@ class App extends Component {
 
   handleChange(event) {
     console.log(event.target);
+
+    switch(event.target.name){
+      case 'email' :
+        this.setState({email: event.target.value});
+      case 'password' :
+        this.setState({password: event.target.value});
+    }
     //this.setState({event.target.name: event.target.value});
-    this.state[event.target.name]=event.target.value;
+    //this.state[event.target.name]=event.target.value;
   }
 
   render() {
