@@ -10,14 +10,13 @@ class App extends Component {
           
           <form>
   <label>
-    Login :
-    <input type="text" name="login" />
+    Login <input type="text" name="login" />
   </label>
   <br></br>
     <label>
-    Password :
-    <input type="text" name="password" />
+    Password <input type="text" name="password" />
   </label>
+  <br></br>
   <input type="submit" value="Submit" />
 </form>
         </header>
