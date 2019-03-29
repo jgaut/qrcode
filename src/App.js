@@ -18,11 +18,11 @@ class App extends Component {
           
           <form>
   <label>
-    email <input type="text" name="email" value={this.state.email} onChangeText={email => this.setState({ email })}/>
+    email <input type="text" name="email" value={this.state.email} onChange={email => this.setState({ email })}/>
   </label>
   <br></br>
     <label>
-    Password <input type="password" name="password" value={this.state.password} onChangeText={password => this.setState({ password })} />
+    Password <input type="password" name="password" value={this.state.password} onChange={password => this.setState({ password })} />
   </label>
   <br></br>
   <input type="submit" value="Submit" />
