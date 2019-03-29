@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+
   render() {
     return (
       <div className="App">
@@ -9,14 +18,21 @@ class App extends Component {
           
           <form>
   <label>
-    email <input type="text" name="login" />
+    email <input type="text" name="email" value={this.state.email} onChangeText={email => this.setState({ email })}/>
   </label>
   <br></br>
     <label>
-    Password <input type="text" name="password" />
+    Password <input type="password" name="password" value={this.state.password} onChangeText={password => this.setState({ password })} />
   </label>
   <br></br>
   <input type="submit" value="Submit" />
+  <br></br>
+  <p>
+  {this.state.email}
+  </p>
+  <p>
+  {this.state.password}
+  </p>
 </form>
         </header>
       </div>
