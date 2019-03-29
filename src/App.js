@@ -19,8 +19,10 @@ class App extends Component {
     switch(event.target.name){
       case 'email' :
         this.setState({email: event.target.value});
+        break;
       case 'password' :
         this.setState({password: event.target.value});
+        break;
     }
     //this.setState({event.target.name: event.target.value});
     //this.state[event.target.name]=event.target.value;
