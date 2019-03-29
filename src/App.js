@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Input } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -19,6 +19,17 @@ class App extends Component {
           >
             Learn React
           </a>
+          <form>
+  <label>
+    First name:
+    <input type="text" name="firstname" />
+  </label>
+    <label>
+    Last name:
+    <input type="text" name="lastname" />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
         </header>
       </div>
     );
