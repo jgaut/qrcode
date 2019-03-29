@@ -1,0 +1,9 @@
+{
+    "bucketName": "qrcodebbae64624e2c4eaa95c85650b48ffb6c",
+    "authPolicyName": "s3_amplify_760879ff",
+    "unauthPolicyName": "s3_amplify_760879ff",
+    "authRoleName": "qrcode-20190329114624-authRole",
+    "unauthRoleName": "qrcode-20190329114624-unauthRole",
+    "authPermissions": "rw",
+    "unauthPermissions": ""
+}
