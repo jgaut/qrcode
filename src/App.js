@@ -9,7 +9,7 @@ class App extends Component {
           
           <form>
   <label>
-    Login <input type="text" name="login" />
+    email <input type="text" name="login" />
   </label>
   <br></br>
     <label>
