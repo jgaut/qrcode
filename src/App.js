@@ -11,6 +11,7 @@ class App extends Component {
       value:''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -24,8 +25,11 @@ class App extends Component {
         this.setState({password: event.target.value});
         break;
     }
-    //this.setState({event.target.name: event.target.value});
-    //this.state[event.target.name]=event.target.value;
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state);
+    event.preventDefault();
   }
 
   render() {
@@ -33,27 +37,17 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           
-          <form>
-  <label>
-    email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
-  </label>
-  <br></br>
-    <label>
-    Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-  </label>
-  <br></br>
-  <input type="submit" value="Submit" />
-  <br></br>
-  <p>
-  {this.state.email}
-  </p>
-  <p>
-  {this.state.password}
-  </p>
-    <p>
-  {this.state.value}
-  </p>
-</form>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
+            </label>
+            <br></br>
+              <label>
+              Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+            </label>
+            <br></br>
+            <input type="submit" value="Login / Sign Up" />
+          </form>
         </header>
       </div>
     );
