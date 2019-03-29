@@ -3,12 +3,18 @@ import './App.css';
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    console.log(event);
+    this.setState({value: event.target.value});
   }
 
   render() {
@@ -18,11 +24,11 @@ class App extends Component {
           
           <form>
   <label>
-    email <input type="text" name="email" value={this.state.email} onChange={email => this.setState({ email })}/>
+    email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
   </label>
   <br></br>
     <label>
-    Password <input type="password" name="password" value={this.state.password} onChange={password => this.setState({ password })} />
+    Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
   </label>
   <br></br>
   <input type="submit" value="Submit" />
