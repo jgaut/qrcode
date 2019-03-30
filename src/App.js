@@ -16,9 +16,10 @@ class App extends Component {
       value:0,
       code:'',
     };
-    //this.handleChange = this.handleChange.bind(this);
-    //this.handleSubmit = this.handleLoginSubmit.bind(this);
-    //this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
+    
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleLoginSubmit.bind(this);
+    this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
       .then((user) => {
@@ -67,7 +68,7 @@ class App extends Component {
         return (
           <div className="App">
             <header className="App-header">
-              <form onSubmit={this.setState({value:1})}>
+              <form onSubmit={this.handleLoginSubmit}>
                 <label>
                   Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
                 </label>
