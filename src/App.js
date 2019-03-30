@@ -91,7 +91,9 @@ class App extends Component {
               <form onSubmit={this.handleLoginSubmit}>
                 <label>
                   Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
-                </label>
+                </label>               
+                <br></br>
+                <input type="submit" value="Validate" />
               </form>
             </header>
           </div>
@@ -107,7 +109,7 @@ class App extends Component {
                   Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
                 </label>
                 <br></br>
-                <input type="submit" value="Vaidate" />
+                <input type="submit" value="Validate" />
               </form>
             </header>
           </div>
