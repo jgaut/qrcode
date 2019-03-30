@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       email: '',
       password: '',
-      value:''
+      value:0,
+      code:0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,28 +55,45 @@ class App extends Component {
   handleSubmit(event) {
     alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
-
+    this.setState({code:1});
   }
 
   render() {
 
-    return (
-      <div className="App">
-        <header className="App-header">
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
-            </label>
-            <br></br>
-              <label>
-              Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-            </label>
-            <br></br>
-            <input type="submit" value="Login / Sign Up" />
-          </form>
-        </header>
-      </div>
-    );
+    switch(this.state.value){
+      case 0:
+        return (
+          <div className="App">
+            <header className="App-header">
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
+                </label>
+                <br></br>
+                  <label>
+                  Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                </label>
+                <br></br>
+                <input type="submit" value="Login / Sign Up" />
+              </form>
+            </header>
+          </div>
+        );
+        break;
+      case 1:
+        return (
+          <div className="App">
+            <header className="App-header">
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  Validation code <input type="text" name="email" value={this.state.code} onChange={this.handleChange}/>
+                </label>
+              </form>
+            </header>
+          </div>
+        );
+        break;
+    }
   }
 }
 
