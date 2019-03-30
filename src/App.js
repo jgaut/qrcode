@@ -16,9 +16,9 @@ class App extends Component {
       value:0,
       code:'',
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleLoginSubmit.bind(this);
-    this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
+    //this.handleSubmit = this.handleLoginSubmit.bind(this);
+    //this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
       .then((user) => {
@@ -47,16 +47,22 @@ class App extends Component {
 
   handleLoginSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
-    event.preventDefault();
-    this.state.value=1;
-    this.forceUpdate();
+    const value = 1;
+    const name = 'value';
+
+    this.setState({
+      [name]: value
+    });
   }
 
   handleValidateCodeSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
-    event.preventDefault();
-    this.state.value=0;
-    this.forceUpdate();
+    const value = 0;
+    const name = 'value';
+
+    this.setState({
+      [name]: value
+    });
   }
 
   render() {
