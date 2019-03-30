@@ -21,7 +21,8 @@ class App extends Component {
       code:'',
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleLoginSubmit.bind(this);
+    this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
       .then((user) => {
