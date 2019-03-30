@@ -6,10 +6,6 @@ import awsconfig from './aws-exports';
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
 
-const NOTAUTH=0;
-const VALIDATECODE=1;
-const AUTH=2;
-
 class App extends Component {
 
   constructor(props) {
@@ -17,7 +13,7 @@ class App extends Component {
     this.state = {
       email: '',
       password: '',
-      value:NOTAUTH,
+      value:0,
       code:'',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -52,19 +48,19 @@ class App extends Component {
   handleLoginSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
-    this.setState({value:VALIDATECODE});
+    this.setState({value:1});
   }
 
   handleValidateCodeSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
-    this.setState({value:NOTAUTH});
+    this.setState({value:0});
   }
 
   render() {
     console.log(this.state.value);
     switch(this.state.value){
-      case NOTAUTH:
+      case 0:
         return (
           <div className="App">
             <header className="App-header">
@@ -84,7 +80,7 @@ class App extends Component {
         );
         break;
 
-      case VALIDATECODE:
+      case 1:
         return (
           <div className="App">
             <header className="App-header">
@@ -100,7 +96,7 @@ class App extends Component {
         );
         break;
 
-      case AUTH:
+      case 2:
         return (
           <div className="App">
             <header className="App-header">
