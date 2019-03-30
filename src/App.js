@@ -6,6 +6,10 @@ import awsconfig from './aws-exports';
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
 
+const NOTAUTH=0;
+const VALIDATECODE=1;
+const AUTH=2;
+
 class App extends Component {
 
   constructor(props) {
@@ -13,8 +17,8 @@ class App extends Component {
     this.state = {
       email: '',
       password: '',
-      value:0,
-      code:0,
+      value:NOTAUTH,
+      code:'',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,14 +38,6 @@ class App extends Component {
 
   handleChange(event) {
     //console.log(event.target);
-    /*switch(event.target.name){
-      case 'email' :
-        this.setState({email: event.target.value});
-        break;
-      case 'password' :
-        this.setState({password: event.target.value});
-        break;
-    }*/
 
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -52,16 +48,22 @@ class App extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleLoginSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
-    this.setState({value:1});
+    this.setState({value:VALIDATECODE});
+  }
+
+  handleValidateCodeSubmit(event) {
+    //alert('A name was submitted: ' + JSON.stringify(this.state));
+    event.preventDefault();
+    this.setState({value:NOTAUTH});
   }
 
   render() {
     console.log(this.state.value);
     switch(this.state.value){
-      case 0:
+      case NOTAUTH:
         return (
           <div className="App">
             <header className="App-header">
@@ -80,14 +82,31 @@ class App extends Component {
           </div>
         );
         break;
-      case 1:
+
+      case VALIDATECODE:
         return (
           <div className="App">
             <header className="App-header">
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleLoginSubmit}>
                 <label>
                   Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
                 </label>
+              </form>
+            </header>
+          </div>
+        );
+        break;
+
+      case AUTH:
+        return (
+          <div className="App">
+            <header className="App-header">
+              <form onSubmit={this.handleValidateCodeSubmit}>
+                <label>
+                  Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
+                </label>
+                <br></br>
+                <input type="submit" value="Vaidate" />
               </form>
             </header>
           </div>
