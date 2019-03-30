@@ -67,7 +67,7 @@ class App extends Component {
         return (
           <div className="App">
             <header className="App-header">
-              <form onSubmit={this.handleLoginSubmit}>
+              <form onSubmit={this.setState({value:1})}>
                 <label>
                   Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
                 </label>
