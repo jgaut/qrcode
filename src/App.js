@@ -68,7 +68,7 @@ class App extends Component {
         return (
           <div className="App">
             <header className="App-header">
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleLoginSubmit}>
                 <label>
                   Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
                 </label>
@@ -88,7 +88,7 @@ class App extends Component {
         return (
           <div className="App">
             <header className="App-header">
-              <form onSubmit={this.handleLoginSubmit}>
+              <form onSubmit={this.handleValidateCodeSubmit}>
                 <label>
                   Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
                 </label>               
