@@ -49,10 +49,7 @@ class App extends Component {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
     const value = 1;
     const name = 'value';
-
-    this.setState({
-      [name]: value
-    });
+    this.setState({value});
   }
 
   handleValidateCodeSubmit(event) {
@@ -60,9 +57,7 @@ class App extends Component {
     const value = 0;
     const name = 'value';
 
-    this.setState({
-      [name]: value
-    });
+    this.setState({value});
   }
 
   render() {
