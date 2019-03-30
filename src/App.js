@@ -66,7 +66,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.value);
+    console.log(JSON.stringify(this.state));
     switch(this.state.value){
       case 0:
         return (
