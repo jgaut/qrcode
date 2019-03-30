@@ -48,13 +48,15 @@ class App extends Component {
   handleLoginSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
-    this.setState({value:1});
+    this.state.value=1;
+    this.forceUpdate();
   }
 
   handleValidateCodeSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
-    this.setState({value:0});
+    this.state.value=0;
+    this.forceUpdate();
   }
 
   render() {
