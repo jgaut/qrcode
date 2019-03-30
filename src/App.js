@@ -53,13 +53,13 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + JSON.stringify(this.state));
+    //alert('A name was submitted: ' + JSON.stringify(this.state));
     event.preventDefault();
-    this.setState({code:1});
+    this.setState({value:1});
   }
 
   render() {
-
+    console.log(this.state.value);
     switch(this.state.value){
       case 0:
         return (
@@ -86,7 +86,7 @@ class App extends Component {
             <header className="App-header">
               <form onSubmit={this.handleSubmit}>
                 <label>
-                  Validation code <input type="text" name="email" value={this.state.code} onChange={this.handleChange}/>
+                  Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
                 </label>
               </form>
             </header>
