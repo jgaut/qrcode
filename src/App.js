@@ -17,8 +17,6 @@ class App extends Component {
 
   render() {
 
-    
-
     return (
       <Router>
       <div className="App">
@@ -26,21 +24,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/signinup" component={SignInUp} />
             <Route exact path="/signinconfirm" component={SignInConfirm} />
-            <Route path='/' render={() => (
-              Auth.currentAuthenticatedUser({bypassCache: false})
-              .then((user) => {
-                console.log(user);
-                //navigate('AppAuth', {user: user.attributes.email});
-                return (<Redirect to="signinup" />);
-                }
-              ).catch((err) => {
-                console.log(err);
-                //navigate('SignInUp');
-                return (<Redirect to="signinup" />);
-                }
-              )
-              
-            )}/> 
+
           </Switch>
           
         </header>
