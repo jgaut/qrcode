@@ -48,17 +48,21 @@ class SignInConfirm extends Component {
     this.props.history.push('/')
   }
 
+  onSubmit = () => {
+    this.props.history.push('/')
+  }
+
   render() {
     console.log(JSON.stringify(this.state));
       return (
         <div className="App">
           <header className="App-header">
-            <form onSubmit={this.handleValidateCodeSubmit}>
+            <form>
               <label>
                 Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
               </label>               
               <br></br>
-              <input type="submit" value="Validate" />
+              <button onClick={this.onSubmit}>Validate</button>
             </form>
           </header>
         </div>
