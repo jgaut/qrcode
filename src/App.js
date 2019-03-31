@@ -17,8 +17,8 @@ Auth.configure(awsconfig);
 
 class App extends Component {
 
-  constructor(...props) {
-    super(...props);
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -38,12 +38,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-        <Router>
-          <Switch>
-            <Route exact path="/" component={App} />
-            <Route path="/SignInUp" component={SignInUp} />
-          </Switch>
-          </Router>
         </header>
       </div>
     );
