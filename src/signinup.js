@@ -13,17 +13,6 @@ class SignInUp extends Component {
     
     this.handleChange = this.handleChange.bind(this);
 
-    Auth.currentAuthenticatedUser({bypassCache: false})
-      .then((user) => {
-        console.log(user);
-        //navigate('AppAuth', {user: user.attributes.email});
-        }
-      ).catch((err) => {
-        console.log(err);
-        //navigate('SignInUp');
-        }
-      );
-
   }
 
   handleChange(event) {
@@ -33,14 +22,15 @@ class SignInUp extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    /*this.setState({
+    this.setState({
       [name]: value
-    });*/
+    });
   }
 
   onSubmit(event) {
-    //alert('A name was submitted: ' + JSON.stringify(this.state));
-    //this.setState({value});
+    //Try to auth with AWS
+
+
   }
 
   render() {
