@@ -31,7 +31,7 @@ class SignInConfirm extends Component {
   }
 
   componentWillMount(){
-    this.props.history.push('/');
+    //this.props.history.push('/');
   }
 
   handleChange(event) {
