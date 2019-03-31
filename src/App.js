@@ -36,9 +36,8 @@ class App extends Component {
       );
     //this.props.history.push('SignInUp');
     return (
-      <div className="App">
-        <header className="App-header">
-          dzadzeafdzefezffz
+     
+          
           <Router>
           <NavLink exact activeClassName="active" to="/signinup">
             SignInUp
@@ -51,8 +50,7 @@ class App extends Component {
         <Route exact path="/signinconfirm" component={SignInConfirm} />
       </Switch>
           </Router>
-        </header>
-      </div>
+
     );
       
   }
