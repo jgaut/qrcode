@@ -23,9 +23,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Switch>
+            <Route path='/' render={() => (<Redirect to="/noauth" />)}/> 
             <Route exact path="/signinup" component={SignInUp} />
             <Route exact path="/signinconfirm" component={SignInConfirm} />
-            <Route path='/' render={() => (<Redirect to="/noauth" />)}/> 
           </Switch>
         </header>
       </div>
