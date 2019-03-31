@@ -45,6 +45,8 @@ class App extends Component {
           <NavLink exact activeClassName="active" to="/signinconfirm">
             SignInConfirm
           </NavLink>
+
+          <Redirect to="/signinup"/>
           <Switch>
             <Route exact path="/signinup" component={SignInUp} />
             <Route exact path="/signinconfirm" component={SignInConfirm} />
