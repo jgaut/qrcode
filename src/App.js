@@ -38,9 +38,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           dzadzeafdzefezffz
+          <Router>
           <NavLink exact activeClassName="active" to="/signinup">
             Home
           </NavLink>
+          </Router>
         </header>
       </div>
     );
