@@ -38,6 +38,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/SignInUp" component={SignInUp} />
+          </Switch>
         </header>
       </div>
     );
