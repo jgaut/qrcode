@@ -10,6 +10,7 @@ import {
   BrowserRouter as Router,
   Switch
 } from "react-router-dom";
+import { hashHistory } from 'react-router;'
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -33,6 +34,7 @@ class App extends Component {
         
         }
       );
+      hashHistory.push('/signinup');
     //this.props.history.push('SignInUp');
     return (
       <Router>
