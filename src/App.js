@@ -29,13 +29,13 @@ class App extends Component {
               Auth.currentAuthenticatedUser({bypassCache: false})
     .then((user) => {
       console.log(user);
-      this.props.history.push('/signinup');
-      //return(<Redirect to="/signinup" />);
+      //this.props.history.push('/signinup');
+      return(<Redirect to="/signinup" />);
       }
     ).catch((err) => {
       console.log(err);
-      this.props.history.push('/signinup');
-      //return(<Redirect to="/signinup" />);
+      //this.props.history.push('/signinup');
+      return(<Redirect to="/signinup" />);
       }
     )
     
