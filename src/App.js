@@ -4,7 +4,7 @@ import Auth from '@aws-amplify/auth';
 import awsconfig from './aws-exports';
 import SignInUp from './signinup';
 import SignInConfirm from './signinconfirm';
-import { NavLink, Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { NavLink,Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -38,12 +38,12 @@ class App extends Component {
         <header className="App-header">
           dzadzeafdzefezffz
           
-          <Link exact activeClassName="active" to="/signinup">
+          <NavLink exact activeClassName="active" to="/signinup">
             SignInUp
-          </Link>
-          <Link exact activeClassName="active" to="/signinconfirm">
+          </NavLink>
+          <NavLink exact activeClassName="active" to="/signinconfirm">
             SignInConfirm
-          </Link>
+          </NavLink>
           <Switch>
         <Route exact path="/signinup" component={SignInUp} />
         <Route exact path="/signinconfirm" component={SignInConfirm} />
