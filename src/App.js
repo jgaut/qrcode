@@ -8,7 +8,8 @@ import {
   Route,
   NavLink,
   BrowserRouter as Router,
-  Switch
+  Switch,
+  withRouter
 } from "react-router-dom";
 
 // retrieve temporary AWS credentials and sign requests
