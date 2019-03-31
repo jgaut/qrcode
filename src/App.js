@@ -38,12 +38,12 @@ class App extends Component {
         <header className="App-header">
           dzadzeafdzefezffz
           
-          <NavLink exact activeClassName="active" to="/signinup">
+          <Link exact activeClassName="active" to="/signinup">
             SignInUp
-          </NavLink>
-          <NavLink exact activeClassName="active" to="/signinconfirm">
+          </Link>
+          <Link exact activeClassName="active" to="/signinconfirm">
             SignInConfirm
-          </NavLink>
+          </Link>
           <Switch>
         <Route exact path="/signinup" component={SignInUp} />
         <Route exact path="/signinconfirm" component={SignInConfirm} />
