@@ -26,7 +26,7 @@ class App extends Component {
             <Route exact path="/signinconfirm" component={SignInConfirm} />
             <Route path='/' render={() => (
           
-                return (<Redirect to="/signinup" />);
+                return (<Redirect to="/signinup" />)
             
               
             )}/> 
