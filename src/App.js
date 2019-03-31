@@ -4,13 +4,6 @@ import Auth from '@aws-amplify/auth';
 import awsconfig from './aws-exports';
 import SignInUp from './signinup';
 import SignInConfirm from './signinconfirm';
-import {
-  Route,
-  NavLink,
-  BrowserRouter as Router,
-  Switch,
-  withRouter
-} from "react-router-dom";
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -38,6 +31,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          dzadzeafdzefezffz
         </header>
       </div>
     );
