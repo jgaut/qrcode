@@ -8,9 +8,9 @@ import {
   Route,
   NavLink,
   BrowserRouter as Router,
-  Switch
+  Switch,
+  hashHistory
 } from "react-router-dom";
-import { hashHistory } from 'react-router;'
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -31,7 +31,6 @@ class App extends Component {
       ).catch((err) => {
         console.log(err);
         //navigate('SignInUp');
-        
         }
       );
       hashHistory.push('/signinup');
