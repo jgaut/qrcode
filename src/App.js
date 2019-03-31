@@ -15,8 +15,8 @@ class App extends Component {
     super(props);
   }
 
-  componentWillMount(){
-    
+  componentDidMount(){
+
     this.props.history.push('/');
     
   }
