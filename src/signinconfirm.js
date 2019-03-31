@@ -17,17 +17,6 @@ class SignInConfirm extends Component {
     this.handleChange = this.handleChange.bind(this);
     //this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
 
-    Auth.currentAuthenticatedUser({bypassCache: false})
-      .then((user) => {
-        console.log(user);
-        //navigate('AppAuth', {user: user.attributes.email});
-        }
-      ).catch((err) => {
-        console.log(err);
-        //navigate('SignInUp');
-        }
-      );
-
   }
 
   componentWillMount(){
@@ -46,12 +35,6 @@ class SignInConfirm extends Component {
     });
   }
 
-  handleValidateCodeSubmit(event) {
-    //alert('A name was submitted: ' + JSON.stringify(this.state));
-    //this.setState({value});
-    this.props.history.push('/')
-  }
-
   onSubmit = () => {
     this.props.history.push('/')
   }
@@ -61,13 +44,13 @@ class SignInConfirm extends Component {
       return (
         <div className="App">
           <header className="App-header">
-            <form>
+            
               <label>
                 Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
               </label>               
               <br></br>
               <button onClick={this.onSubmit}>Validate</button>
-            </form>
+          
           </header>
         </div>
       );
