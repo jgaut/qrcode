@@ -8,8 +8,7 @@ import {
   Route,
   NavLink,
   BrowserRouter as Router,
-  Switch,
-  withRouter
+  Switch
 } from "react-router-dom";
 
 // retrieve temporary AWS credentials and sign requests
@@ -58,4 +57,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;
