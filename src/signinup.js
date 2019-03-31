@@ -65,4 +65,4 @@ class SignInUp extends Component {
   }
 }
 
-export SignInUp;
+export default SignInUp;
