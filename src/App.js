@@ -10,7 +10,6 @@ import {
   BrowserRouter as Router,
   Switch
 } from "react-router-dom";
-import { withRouter } from 'react-router';
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -60,4 +59,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;
