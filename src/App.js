@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import ReactDOM from "react-dom";
 import './App.css';
 import Auth from '@aws-amplify/auth';
 import awsconfig from './aws-exports';
-import SignInUp from './signinup'
-import SignInConfirm from './signinconfirm'
+import SignInUp from './signinup';
+import SignInConfirm from './signinconfirm';
+import {
+  Route,
+  NavLink,
+  BrowserRouter as Router,
+  Switch
+} from "react-router-dom";
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -26,10 +31,10 @@ class App extends Component {
       ).catch((err) => {
         console.log(err);
         //navigate('SignInUp');
-        this.props.history.push('SignInUp');
+        
         }
       );
-
+    this.props.history.push('SignInUp');
     return (
       <div className="App">
         <header className="App-header">
