@@ -33,7 +33,7 @@ class App extends Component {
         
         }
       );
-    //this.props.history.push('SignInUp');
+    this.props.history.push('SignInUp');
     return (
       <div className="App">
         <header className="App-header">
