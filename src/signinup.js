@@ -34,9 +34,9 @@ class SignInUp extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
+    /*this.setState({
       [name]: value
-    });
+    });*/
   }
 
   handleLoginSubmit(event) {
