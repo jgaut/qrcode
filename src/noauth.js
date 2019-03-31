@@ -9,19 +9,6 @@ class NoAuth extends Component {
     super(props);
   }
 
-  componentDidMount(){
-    Auth.currentAuthenticatedUser({bypassCache: false})
-    .then((user) => {
-      console.log(user);
-      //this.props.history.push('/signinup');
-      }
-    ).catch((err) => {
-      console.log(err);
-      //this.props.history.push('/signinup');
-      }
-    )  
-  }
-
   render() {
 
     return (
