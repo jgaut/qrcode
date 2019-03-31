@@ -16,13 +16,11 @@ class App extends Component {
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then((user) => {
       console.log(user);
-      //navigate('AppAuth', {user: user.attributes.email});
-      this.props.history.push('/signinconfirm');
+      this.props.history.push('/profile');
       }
     ).catch((err) => {
       console.log(err);
-      //navigate('SignInUp');
-      this.props.history.push('/signinconfirm');
+      this.props.history.push('/signinup');
       }
     )  
   }
