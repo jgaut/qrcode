@@ -33,7 +33,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
 
-          <Redirect to="/signinup"/>
+          <Redirect to="/signinconfirm"/>
           <Switch>
             <Route exact path="/signinup" component={SignInUp} />
             <Route exact path="/signinconfirm" component={SignInConfirm} />
