@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Auth from '@aws-amplify/auth';
+import awsconfig from './aws-exports';
+import SignInUp from './signinup'
+import SignInConfirm from './signinconfirm'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
