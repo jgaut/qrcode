@@ -44,10 +44,7 @@ class SignInConfirm extends Component {
 
   handleValidateCodeSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
-    const value = 0;
-    const name = 'value';
-
-    this.setState({value});
+    //this.setState({value});
   }
 
   render() {
