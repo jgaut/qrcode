@@ -4,7 +4,7 @@ import Auth from '@aws-amplify/auth';
 import awsconfig from './aws-exports';
 import SignInUp from './signinup';
 import SignInConfirm from './signinconfirm';
-import { NavLink,Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { NavLink,Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
