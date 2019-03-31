@@ -27,10 +27,6 @@ class SignInUp extends Component {
     });
   }
 
-  componentWillMount(){
-    this.props.history.push('/signinconfirm');
-  }
-
   onSubmit(event) {
     //Try to auth with AWS
 

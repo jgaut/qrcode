@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Auth from '@aws-amplify/auth';
-import awsconfig from './aws-exports';
 import SignInUp from './signinup';
 import SignInConfirm from './signinconfirm';
 import NoAuth from './noauth';
@@ -16,20 +15,25 @@ class App extends Component {
     super(props);
   }
 
+  componentWillMount(){
+    Auth.currentAuthenticatedUser({bypassCache: false})
+    .then((user) => {
+      console.log(user);
+      //navigate('AppAuth', {user: user.attributes.email});
+      this.props.history.push('/signinconfirm');
+      }
+    ).catch((err) => {
+      console.log(err);
+      //navigate('SignInUp');
+      this.props.history.push('/signinconfirm');
+      }
+    )  
+  }
+
   render() {
 
     return (
-      <Router>
-      <div className="App">
-        <header className="App-header">
-          <Switch>
-            <Route exact path="/signinup" component={SignInUp} />
-            <Route exact path="/signinconfirm" component={SignInConfirm} />
-            <Route path='/' render={() => (<Redirect to="/noauth" />)}/> 
-          </Switch>
-        </header>
-      </div>
-      </Router>
+      <div></div>
     );
       
   }
