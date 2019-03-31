@@ -15,12 +15,6 @@ class App extends Component {
     super(props);
   }
 
-  componentDidMount(){
-
-    this.props.history.push('/');
-    
-  }
-
   render() {
 
     Auth.currentAuthenticatedUser({bypassCache: false})
