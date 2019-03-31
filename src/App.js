@@ -40,8 +40,11 @@ class App extends Component {
           dzadzeafdzefezffz
           <Router>
           <NavLink exact activeClassName="active" to="/signinup">
-            Home
+            SignInUp
           </NavLink>
+          <Switch>
+        <Route exact path="/signinup" component={SignInUp} />
+      </Switch>
           </Router>
         </header>
       </div>
