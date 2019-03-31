@@ -15,7 +15,7 @@ class SignInConfirm extends Component {
     };
     
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
+    //this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
       .then((user) => {
@@ -45,7 +45,7 @@ class SignInConfirm extends Component {
   handleValidateCodeSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
     //this.setState({value});
-    this.props.history.push('/signinup');
+    this.props.history.push('/')
   }
 
   render() {
