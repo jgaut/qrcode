@@ -38,7 +38,7 @@ class App extends Component {
                 //navigate('SignInUp');
                 return (<Redirect to="signinup" />);
                 }
-              );
+              )
               
             )}/> 
           </Switch>
