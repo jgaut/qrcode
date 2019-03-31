@@ -16,7 +16,7 @@ class App extends Component {
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then((user) => {
       console.log(user);
-      this.props.history.push('/profile');
+      this.props.history.push('/signinup');
       }
     ).catch((err) => {
       console.log(err);
