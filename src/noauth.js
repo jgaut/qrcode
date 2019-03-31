@@ -11,7 +11,7 @@ class NoAuth extends Component {
       this.props.history.push('/profile');
       }
     ).catch((err) => {
-      console.log("err : "+ err);
+      console.log(err);
       this.props.history.push('/signinup');
       }
     )  
