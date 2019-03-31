@@ -32,11 +32,12 @@ class App extends Component {
       <Router>
       <div className="App">
         <header className="App-header">
-
-          <Redirect to="/signinup"/>
           <Switch>
             <Route exact path="/signinup" component={SignInUp} />
             <Route exact path="/signinconfirm" component={SignInConfirm} />
+            <Route path='/' render={() => (
+              <Redirect to="signinup" />
+            )}/> 
           </Switch>
           
         </header>
