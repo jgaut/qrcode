@@ -7,7 +7,7 @@ class NoAuth extends Component {
   componentWillMount(){
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then((user) => {
-      console.log("user : " + user);
+      console.log(user);
       this.props.history.push('/profile');
       }
     ).catch((err) => {
