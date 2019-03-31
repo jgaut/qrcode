@@ -12,7 +12,6 @@ class SignInUp extends Component {
     };
     
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleLoginSubmit.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
       .then((user) => {
@@ -39,7 +38,7 @@ class SignInUp extends Component {
     });*/
   }
 
-  handleLoginSubmit(event) {
+  onSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
     //this.setState({value});
   }
@@ -48,7 +47,7 @@ class SignInUp extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <form onSubmit={this.handleLoginSubmit}>
+          <form>
             <label>
               Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
             </label>
@@ -57,7 +56,7 @@ class SignInUp extends Component {
               Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
             </label>
             <br></br>
-            <input type="submit" value="Login / Sign Up" />
+            <button onClick={this.onSubmit}>Validate</button>
           </form>
         </header>
       </div>
