@@ -9,7 +9,7 @@ class NoAuth extends Component {
     super(props);
   }
 
-  componentWillMount(){
+  componentDidMount(){
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then((user) => {
       console.log(user);
