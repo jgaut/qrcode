@@ -37,7 +37,7 @@ class SignInUp extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <form>
+          
             <label>
               Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
             </label>
@@ -47,7 +47,7 @@ class SignInUp extends Component {
             </label>
             <br></br>
             <button onClick={this.onSubmit}>Validate</button>
-          </form>
+          
         </header>
       </div>
     );      
