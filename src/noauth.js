@@ -6,9 +6,6 @@ import SignInConfirm from './signinconfirm';
 import NoAuth from './noauth';
 import { NavLink,Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 
-// retrieve temporary AWS credentials and sign requests
-Auth.configure(awsconfig);
-
 class App extends Component {
 
   constructor(props) {
