@@ -29,12 +29,12 @@ class App extends Component {
               .then((user) => {
                 console.log(user);
                 //navigate('AppAuth', {user: user.attributes.email});
-                return (<Redirect to="signinup" />);
+                return (<Redirect to="/signinup" />);
                 }
               ).catch((err) => {
                 console.log(err);
                 //navigate('SignInUp');
-                return (<Redirect to="signinup" />);
+                return (<Redirect to="/signinup" />);
                 }
               )
               
