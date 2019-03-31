@@ -17,6 +17,8 @@ class App extends Component {
 
   componentWillMount(){
     
+    this.props.history.push('/');
+    
   }
 
   render() {
@@ -36,8 +38,7 @@ class App extends Component {
       <Router>
       <div className="App">
         <header className="App-header">
-          dzadzeafdzefezffz
-          
+          Loading...
           <NavLink exact activeClassName="active" to="/signinup">
             SignInUp
           </NavLink>
@@ -45,9 +46,9 @@ class App extends Component {
             SignInConfirm
           </NavLink>
           <Switch>
-        <Route exact path="/signinup" component={SignInUp} />
-        <Route exact path="/signinconfirm" component={SignInConfirm} />
-      </Switch>
+            <Route exact path="/signinup" component={SignInUp} />
+            <Route exact path="/signinconfirm" component={SignInConfirm} />
+          </Switch>
           
         </header>
       </div>
