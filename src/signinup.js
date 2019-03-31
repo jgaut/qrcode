@@ -41,9 +41,7 @@ class SignInUp extends Component {
 
   handleLoginSubmit(event) {
     //alert('A name was submitted: ' + JSON.stringify(this.state));
-    const value = 1;
-    const name = 'value';
-    this.setState({value});
+    //this.setState({value});
   }
 
   render() {
