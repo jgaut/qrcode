@@ -31,7 +31,7 @@ class App extends Component {
               .then((user) => {
                 console.log(user);
                 //navigate('AppAuth', {user: user.attributes.email});
-                return (<Redirect to="profile" />);
+                return (<Redirect to="signinup" />);
                 }
               ).catch((err) => {
                 console.log(err);
