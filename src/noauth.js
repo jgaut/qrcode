@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Auth from '@aws-amplify/auth';
-import SignInUp from './signinup';
-import SignInConfirm from './signinconfirm';
-import NoAuth from './noauth';
 import { NavLink,Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 
-class App extends Component {
+class NoAuth extends Component {
 
   constructor(props) {
     super(props);
@@ -16,11 +13,11 @@ class App extends Component {
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then((user) => {
       console.log(user);
-      this.props.history.push('/signinup');
+      //this.props.history.push('/signinup');
       }
     ).catch((err) => {
       console.log(err);
-      this.props.history.push('/signinup');
+      //this.props.history.push('/signinup');
       }
     )  
   }
@@ -34,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default NoAuth;
