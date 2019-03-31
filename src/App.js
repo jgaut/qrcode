@@ -32,13 +32,6 @@ class App extends Component {
       <Router>
       <div className="App">
         <header className="App-header">
-          Loading...
-          <NavLink exact activeClassName="active" to="/signinup">
-            SignInUp
-          </NavLink>
-          <NavLink exact activeClassName="active" to="/signinconfirm">
-            SignInConfirm
-          </NavLink>
 
           <Redirect to="/signinup"/>
           <Switch>
