@@ -44,7 +44,7 @@ class SignInConfirm extends Component {
       return (
         <div className="App">
           <header className="App-header">
-            
+              {this.props.location.state.email}
               <label>
                 Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
               </label>               
