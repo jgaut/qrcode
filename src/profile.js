@@ -14,9 +14,9 @@ class Profile extends Component {
 	      nom: '',
 	      prenom: '',
 	      age: '',
-        sub:'',
 	    };
-	    
+
+	    this.sub = '';
       this.ischange=false;
 
 	    this.handleChange = this.handleChange.bind(this);
@@ -27,7 +27,7 @@ class Profile extends Component {
       Auth.currentAuthenticatedUser({
     bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
 }).then(user => {
-  this.state.sub = user.attributes.sub;
+  this.sub = user.attributes.sub;
   this.Load();
   //console.log(this.state.sub);
  
@@ -37,7 +37,7 @@ class Profile extends Component {
  	}
 
   Load(){
-    Storage.get(this.state.sub+'.json', {level: 'public'})
+    Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
         //console.log('get result'+result);
 
@@ -66,7 +66,7 @@ class Profile extends Component {
   Save(){
     if(this.ischange){
     console.log("Save my data !");
-    Storage.put(this.state.sub+".json", JSON.stringify(this.state), {
+    Storage.put(this.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
       })
@@ -91,7 +91,7 @@ class Profile extends Component {
   }
 
   render() {
-    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+this.state.sub;
+    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+this.sub;
     console.log(qrcodeValue);
     var size = 512;
     return (
