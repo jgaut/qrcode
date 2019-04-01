@@ -46,7 +46,7 @@ class SignInUp extends Component {
     })
     .catch((err) => {
       console.log(err);
-      if(err && err.code && typeof err.code != 'undefined' && err.code == 'UsernameExistsException'){
+      if(err && err.code && typeof err.code != 'undefined' && err.code === 'UsernameExistsException'){
 
         // For advanced usage
         // You can pass an object which has the username, password and validationData which is sent to a PreAuthentication Lambda trigger
@@ -61,7 +61,7 @@ class SignInUp extends Component {
         )
         .catch((err) => {
           console.log(err);
-          if(err && err.code && typeof err.code != 'undefined' && err.code == 'UserNotConfirmedException'){
+          if(err && err.code && typeof err.code != 'undefined' && err.code === 'UserNotConfirmedException'){
             this.props.history.push({
               pathname: '/signinconfirm',
               search: '',
