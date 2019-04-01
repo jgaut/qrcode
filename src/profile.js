@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Amplify, { Auth, Storage } from 'aws-amplify';
 import awsmobile from './aws-exports';
+import QRCode from 'qrcode.react';
 
 Amplify.configure(awsmobile);
 
@@ -91,6 +92,7 @@ class Profile extends Component {
       		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<button onClick={this.LogOut}>Logout</button>
+          <QRCode value="http://facebook.github.io/react/" />
 		</div>
     );
       
