@@ -92,7 +92,7 @@ class Profile extends Component {
       		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<button onClick={this.LogOut}>Logout</button><br></br>
-          <QRCode value={qrcodeValue} />
+          <QRCode value={qrcodeValue} size=256 />
 		</div>
     );
       
