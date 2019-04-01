@@ -9,30 +9,27 @@ Amplify.configure(awsmobile);
 class Profile extends Component {
 
 	constructor(props) {
-	    super(props);
-	    this.state = {
-	      nom: '',
-	      prenom: '',
-	      age: '',
-	    };
+    super(props);
+    this.state = {
+      nom: '',
+      prenom: '',
+      age: '',
+    };
 
-	    this.sub = '';
-      this.ischange=false;
+    this.sub = '';
+    this.ischange=false;
 
-	    this.handleChange = this.handleChange.bind(this);
-	    this.LogOut = this.LogOut.bind(this);
-      this.Save = this.Save.bind(this);
-      this.Load = this.Load.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.LogOut = this.LogOut.bind(this);
+    this.Save = this.Save.bind(this);
+    this.Load = this.Load.bind(this);
 
-      Auth.currentAuthenticatedUser({
-    bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-}).then(user => {
-  this.sub = user.attributes.sub;
-  this.Load();
-  //console.log(this.state.sub);
- 
-})
-.catch(err => console.log(err));
+    Auth.currentAuthenticatedUser({bypassCache: false})
+    .then(user => {
+      this.sub = user.attributes.sub;
+      this.Load();
+    })
+    .catch(err => console.log(err));
 
  	}
 
