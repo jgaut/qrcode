@@ -19,10 +19,6 @@ class SignInConfirm extends Component {
 
   }
 
-  componentWillMount(){
-    //this.props.history.push('/');
-  }
-
   handleChange(event) {
     //console.log(event.target);
 
@@ -40,20 +36,19 @@ class SignInConfirm extends Component {
   }
 
   render() {
-    console.log(JSON.stringify(this.state));
-      return (
-        <div className="App">
-          <header className="App-header">
-              {this.props.location.state.email}
-              <label>
-                Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
-              </label>               
-              <br></br>
-              <button onClick={this.onSubmit}>Validate</button>
-          
-          </header>
-        </div>
-      );
+    //console.log(JSON.stringify(this.state));
+    return (
+      <div className="App">
+        <header className="App-header">
+          {this.props.location.state.email}
+          <label>
+            Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
+          </label>               
+          <br></br>
+          <button onClick={this.onSubmit}>Validate</button>
+        </header>
+      </div>
+    );
   }
 }
 
