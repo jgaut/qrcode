@@ -31,13 +31,16 @@ class SignInUp extends Component {
 
   onSubmit(){
 
-    Auth.signUp(this.state.email, this.state.password)
+    var email = this.state.email;
+    var password = this.state.password;
+
+    Auth.signUp(email, password)
     .then((data) => {
       console.log(data);
       this.props.history.push({
         pathname: '/signinconfirm',
         search: '',
-        state: { email: this.state.email }
+        state: { email: email }
       });
     })
     .catch((err) => {
@@ -47,8 +50,8 @@ class SignInUp extends Component {
         // For advanced usage
         // You can pass an object which has the username, password and validationData which is sent to a PreAuthentication Lambda trigger
         Auth.signIn({
-            this.state.email, // Required, the username
-            this.state.password // Optional, the password
+            email, // Required, the username
+            password // Optional, the password
         }).then((user) => {
           console.log(user);
           this.props.history.push('/');
@@ -60,7 +63,7 @@ class SignInUp extends Component {
             this.props.history.push({
               pathname: '/signinconfirm',
               search: '',
-              state: { email: this.state.email }
+              state: { email: email }
             });
           }else{
             this.setState({ err: err.message || err || ''});
