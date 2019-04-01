@@ -93,7 +93,7 @@ class SignInUp extends Component {
             Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
           </label>
           <br></br>
-          <button onClick={this.onSubmit}>Validate</button>
+          <button onClick={this.onSubmit}>Sign In - Sign Up</button>
           <label>{this.state.err}</label>
         </header>
       </div>
