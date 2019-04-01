@@ -34,7 +34,7 @@ class Profile extends Component {
     })
     .catch(err => console.log(err));
 
-    var code = new Mnemonic(Mnemonic.Words.SPANISH);
+    var code = new Mnemonic(Mnemonic.Words.FRENCH);
     console.log(code.toString());
  	}
 
