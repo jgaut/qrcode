@@ -5,8 +5,14 @@
   "dependencies": {
     "aws-amplify": "^1.1.23",
     "aws-amplify-react": "^2.3.3",
+    "bitcore-lib": "^8.1.1",
+    "bitcore-mnemonic": "^8.1.1",
+    "local-storage": "^1.4.2",
+    "qrcode.react": "^0.9.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
