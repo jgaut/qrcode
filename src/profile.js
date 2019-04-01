@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Auth from '@aws-amplify/auth';
-import Storage from '@aws-amplify/storage';
+import { Auth, Storage } from 'aws-amplify';
 
 class Profile extends Component {
 
@@ -41,7 +40,7 @@ class Profile extends Component {
     Storage.put('test.txt', 'Hello')
     .then (result => console.log(result)) // {key: "test.txt"}
     .catch(err => console.log(err));
-    
+
     Storage.put(this.state.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
