@@ -53,7 +53,7 @@ class SignInUp extends Component {
             email, // Required, the username
             password,// Optional, the password
             attributes: {
-              email,
+              email: email,
             },
         }).then((user) => {
           console.log(user);
