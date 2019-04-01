@@ -84,7 +84,7 @@ class Profile extends Component {
   }
 
   render() {
-    var qrcodeValue = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.state.sub+".json";
+    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/"+this.state.sub;
     console.log(qrcodeValue);
     var size = 512;
     return (
