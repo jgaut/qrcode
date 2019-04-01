@@ -16,6 +16,9 @@ class Profile extends Component {
   const uuid = params.uuid;
   const key = params.key;
 
+  console.log("uuid : " + uuid);
+  console.log("key : " + key);
+  
   fetch("https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+uuid+".json")
     .then(response => response.json())
       .then(data => {
