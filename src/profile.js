@@ -28,6 +28,7 @@ class Profile extends Component {
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
       this.sub = user.attributes.sub;
+      console.log(this.sub);
       this.Load();
     })
     .catch(err => console.log(err));
