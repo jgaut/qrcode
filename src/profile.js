@@ -79,6 +79,9 @@ class Profile extends Component {
     this.setState({
       [name]: value
     });
+
+    console.log("Save my data !");
+    this.Save();
   }
 
   render() {
@@ -89,7 +92,7 @@ class Profile extends Component {
       		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange}/><br></br>
       		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange}/><br></br>
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange}/><br></br>
-      		<button onClick={this.Save}>Save</button> <button onClick={this.LogOut}>Logout</button>
+      		<button onClick={this.LogOut}>Logout</button>
 		</div>
     );
       
