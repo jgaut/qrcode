@@ -49,9 +49,7 @@ class SignInConfirm extends Component {
             console.log(err);
             this.setState({ err: err.message || err || ''});
         });
-      }}>
-    
-  }
+    }
 
   render() {
     //console.log(JSON.stringify(this.state));
