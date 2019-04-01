@@ -40,6 +40,20 @@ class Profile extends Component {
  	}
 
   Load(){
+
+    var options, encrypted;
+
+options = {
+    message: openpgp.message.fromBinary(new Uint8Array([0x01, 0x01, 0x01])), // input as Message object
+    passwords: ['secret stuff'],                                             // multiple passwords possible
+    armor: false                                                             // don't ASCII armor (for Uint8Array output)
+};
+
+openpgp.encrypt(options).then(function(ciphertext) {
+    encrypted = ciphertext.message.packets.write(); // get raw encrypted packets as Uint8Array
+    console.log(encrypted);
+});
+
     
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
