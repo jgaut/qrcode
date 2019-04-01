@@ -5,8 +5,6 @@ import awsmobile from './aws-exports';
 import QRCode from 'qrcode.react';
 
 Amplify.configure(awsmobile);
-
-const qrcodeValue = "";
       
 class Profile extends Component {
 
@@ -19,8 +17,10 @@ class Profile extends Component {
 	    };
 
   const { params } = this.props.match;
+  const uuid = params.uuid;
+  const key = params.key;
 
-  fetch("https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+params.uuid+".json")
+  fetch("https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+uuid+".json")
     .then(response => response.json())
       .then(data => {
         //console.log("data :" + JSON.stringify(data));
@@ -29,7 +29,6 @@ class Profile extends Component {
         this.setState({age:data.age});
       })
       .catch(error => {console.log(error);});
-
  	}
 
   render() {
