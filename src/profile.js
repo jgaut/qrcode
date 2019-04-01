@@ -56,7 +56,7 @@ class Profile extends Component {
         fetch(result)
           .then(response => response.json())
             .then(data => {
-              //console.log("data :" + JSON.stringify(data));
+              console.log("data :" + JSON.stringify(data));
               this.setState({nom:data.nom});
               this.setState({prenom:data.prenom});
               this.setState({age:data.age});
