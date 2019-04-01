@@ -11,11 +11,14 @@ class SignInConfirm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      email:'',
       code:''
     };
     
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
+    this.state.email = this.props.location.state.email;
 
   }
 
@@ -32,6 +35,21 @@ class SignInConfirm extends Component {
   }
 
   onSubmit(){
+    Auth.confirmSignUp(
+          this.state.username,
+          this.state.code, {
+          // Optional. Force user confirmation irrespective of existing alias. By default set to True.
+          forceAliasCreation: true
+        }).then((data) => {
+          console.log('data');
+          console.log(data);
+          navigate('App', {number: Math.random()});
+        }).catch((err) => {
+          console.log('err');
+            console.log(err);
+            this.setState({ err: err.message || err || ''});
+        });
+      }}>
     this.props.history.push('/')
   }
 
@@ -46,6 +64,7 @@ class SignInConfirm extends Component {
           </label>               
           <br></br>
           <button onClick={this.onSubmit}>Validate</button>
+          <label>{this.state.err}</label>
         </header>
       </div>
     );
