@@ -52,7 +52,7 @@ class SignInUp extends Component {
         Auth.signIn({
             email, // Required, the username
             password,// Optional, the password
-            attributes: {
+            UserAttributes: {
               email: email,
             },
         }).then((user) => {
