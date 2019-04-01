@@ -38,6 +38,10 @@ class Profile extends Component {
   }
 
   Save(){
+    Storage.put('test.txt', 'Hello')
+    .then (result => console.log(result)) // {key: "test.txt"}
+    .catch(err => console.log(err));
+    
     Storage.put(this.state.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
