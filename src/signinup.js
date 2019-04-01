@@ -28,7 +28,11 @@ class SignInUp extends Component {
   }
 
   onSubmit(){
-    this.props.history.push('/signinconfirm')
+    this.props.history.push({
+      pathname: '/signinconfirm',
+      search: '',
+      state: { email: this.state.email }
+    });
   }
 
   render() {
