@@ -33,22 +33,20 @@ class Profile extends Component {
       this.Load();
     })
     .catch(err => console.log(err));
-
-    var code = new Mnemonic(Mnemonic.Words.FRENCH);
-    console.log(code.toString());
     
  	}
 
   Load(){
     //console.log("load");
-    var tmp = ls.get(this.sub);
-    if(tmp=="" || tmp==undefined){
-      console.log("add new local storage");
-      ls.set(this.sub, 'blablabla');
-    }else{
-      console.log("local storage exist");
-      console.log('tmp : ' + tmp);
+    var code = ls.get(this.sub);
+    if(!Mnemonic.isValid(code)){
+      console.log("need to generate a new mnemonic");
+      //this.props.history.push('/bip39');
+      //console.log(code.toString());
+      ls.set(this.sub, new Mnemonic(Mnemonic.Words.FRENCH));
     }
+    code = ls.get(this.sub);
+    console.log('mnemonic code : ' + code);
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
