@@ -20,7 +20,7 @@ class Profile extends Component {
     bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
 }).then(user => {
   user2=JSON.stringify(user);
-  console.log(user2.clientId);:
+  console.log(user2.clientId);
 })
 .catch(err => console.log(err));
 
