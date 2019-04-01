@@ -11,7 +11,7 @@ class Profile extends Component {
 	      nom: '',
 	      prenom: '',
 	      age: '',
-        user:{},
+        sub:'',
 	    };
 	    
 	    this.handleChange = this.handleChange.bind(this);
@@ -20,8 +20,8 @@ class Profile extends Component {
       Auth.currentAuthenticatedUser({
     bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
 }).then(user => {
-  //this.state.sub = user.attributes.sub;
-  console.log(this.state.sub);
+  this.state.sub = user.attributes.sub;
+  //console.log(this.state.sub);
  
 })
 .catch(err => console.log(err));
