@@ -86,7 +86,7 @@ class Profile extends Component {
   render() {
     var qrcodeValue = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.state.sub+".json";
     console.log(qrcodeValue);
-    var size = 256;
+    var size = 512;
     return (
     	<div>
     	<h1>My profile</h1><br></br>
