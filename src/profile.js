@@ -35,7 +35,7 @@ class Profile extends Component {
  	}
 
   Load(){
-    console.log("load");
+    //console.log("load");
     var tmp = ls.get(this.sub);
     if(tmp=="" || tmp==undefined){
       console.log("add new local storage");
@@ -99,7 +99,7 @@ class Profile extends Component {
   }
 
   render() {
-    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+this.sub;
+    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+this.sub/"mykey";
     console.log(qrcodeValue);
     var size = 512;
     return (
