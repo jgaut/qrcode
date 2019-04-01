@@ -36,6 +36,7 @@ class Profile extends Component {
 
     var code = new Mnemonic(Mnemonic.Words.FRENCH);
     console.log(code.toString());
+    
  	}
 
   Load(){
