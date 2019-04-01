@@ -48,7 +48,7 @@ class SignInUp extends Component {
         // You can pass an object which has the username, password and validationData which is sent to a PreAuthentication Lambda trigger
         Auth.signIn({
             this.state.email, // Required, the username
-            this.state.password, // Optional, the password
+            this.state.password // Optional, the password
         }).then((user) => {
           console.log(user);
           this.props.history.push('/');
@@ -66,15 +66,13 @@ class SignInUp extends Component {
             this.setState({ err: err.message || err || ''});
             //this.setState({errColor: '#000000'}); 
           }
-          }
-        );
+        });
       }else{
           //this.setState({errColor: '#000000'}); 
           this.setState({ err: err.message || err || ''});
 
       }
-    }
-    );
+    });
 
   }
  
