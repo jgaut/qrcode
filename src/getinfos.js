@@ -16,9 +16,8 @@ class Profile extends Component {
 	      nom: '',
 	      prenom: '',
 	      age: '',
-        sub:'',
 	    };
-      
+
   const { params } = this.props.match;
 
   fetch("https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+params.uuid+".json")
