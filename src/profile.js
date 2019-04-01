@@ -38,9 +38,11 @@ class Profile extends Component {
 
   Load(){
     //console.log("load");
+    ls.set(this.sub, "");
     var code = ls.get(this.sub);
-     console.log("mnemonic code : " + code);
-    if(!Mnemonic.isValid(code)||true){
+    console.log("mnemonic code : " + code);
+    
+    if(!Mnemonic.isValid(code)){
       console.log("need to generate a new mnemonic");
       //this.props.history.push('/bip39');
       //console.log(code.toString());
