@@ -29,12 +29,21 @@ class Profile extends Component {
  	}
 
 	LogOut(){
-		Auth.signOut()
-		.then((data) => {
-	    	this.props.history.push('/');
-	    })
-	  	.catch(err => console.log(err));  
-	}
+    Auth.signOut()
+    .then((data) => {
+        this.props.history.push('/');
+      })
+      .catch(err => console.log(err));  
+  }
+
+  Save(){
+    Storage.put(this.state.sub+".json", JSON.stringify(this.state), {
+        level: 'public',
+        contentType: 'text/plain'
+      })
+      .then (result => {console.log(result);}})
+      .catch(err => console.log(err));  
+  }
 
   handleChange(event) {
     //console.log(event.target);
@@ -56,7 +65,7 @@ class Profile extends Component {
       		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange}/><br></br>
       		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange}/><br></br>
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange}/><br></br>
-      		<button onClick={this.LogOut}>Logout</button>
+      		<button onClick={this.Save}>Save</button> <button onClick={this.LogOut}>Logout</button>
 		</div>
     );
       
