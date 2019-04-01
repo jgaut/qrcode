@@ -8,7 +8,8 @@ class SignInUp extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      err: ''
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +34,11 @@ class SignInUp extends Component {
     Auth.signUp(this.state.email, this.state.password)
     .then((data) => {
       console.log(data);
-      navigate('SignUpConfirm', {username: data.user.username});
+      this.props.history.push({
+        pathname: '/signinconfirm',
+        search: '',
+        state: { email: this.state.email }
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -42,35 +47,35 @@ class SignInUp extends Component {
         // For advanced usage
         // You can pass an object which has the username, password and validationData which is sent to a PreAuthentication Lambda trigger
         Auth.signIn({
-            username, // Required, the username
-            password, // Optional, the password
+            this.state.email, // Required, the username
+            this.state.password, // Optional, the password
         }).then((user) => {
           console.log(user);
-          navigate('App', {number: Math.random()});
+          this.props.history.push('/');
           }
         )
         .catch((err) => {
           console.log(err);
           if(err && err.code && typeof err.code != 'undefined' && err.code == 'UserNotConfirmedException'){
-            navigate('SignUpConfirm', {username: this.state.email});
+            this.props.history.push({
+              pathname: '/signinconfirm',
+              search: '',
+              state: { email: this.state.email }
+            });
           }else{
             this.setState({ err: err.message || err || ''});
-            this.setState({errColor: '#000000'}); 
+            //this.setState({errColor: '#000000'}); 
           }
           }
         );
       }else{
-          this.setState({errColor: '#000000'}); 
+          //this.setState({errColor: '#000000'}); 
           this.setState({ err: err.message || err || ''});
 
       }
     }
     );
-    this.props.history.push({
-      pathname: '/signinconfirm',
-      search: '',
-      state: { email: this.state.email }
-    });
+
   }
  
   render() {
@@ -86,6 +91,7 @@ class SignInUp extends Component {
           </label>
           <br></br>
           <button onClick={this.onSubmit}>Validate</button>
+          <label>{this.state.err}</label>
         </header>
       </div>
     );      
