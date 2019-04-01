@@ -3,6 +3,7 @@ import './App.css';
 import Amplify, { Auth, Storage } from 'aws-amplify';
 import awsmobile from './aws-exports';
 import QRCode from 'qrcode.react';
+import ls from 'local-storage';
 
 Amplify.configure(awsmobile);
       
