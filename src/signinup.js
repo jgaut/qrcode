@@ -35,7 +35,7 @@ class SignInUp extends Component {
       state: { email: this.state.email }
     });
   }
-
+ 
   render() {
     return (
       <div className="App">
