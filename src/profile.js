@@ -3,7 +3,12 @@ import './App.css';
 
 class Profile extends Component {
 
-  componentWillMount(){  
+  componentWillMount(){
+  	this.state = {
+  		nom:'',
+  		prenom:'',
+  		age:''
+  	}  
   }
 
   handleChange(event) {
