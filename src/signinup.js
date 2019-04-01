@@ -40,16 +40,15 @@ class SignInUp extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          
+          <label>
+            Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
+          </label>
+          <br></br>
             <label>
-              Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
-            </label>
-            <br></br>
-              <label>
-              Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-            </label>
-            <br></br>
-            <button onClick={this.onSubmit}>Validate</button>
+            Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+          </label>
+          <br></br>
+          <button onClick={this.onSubmit}>Validate</button>
         </header>
       </div>
     );      
