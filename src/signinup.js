@@ -31,10 +31,11 @@ class SignInUp extends Component {
 
   onSubmit(){
 
+    var username = this.state.email;
     var email = this.state.email;
     var password = this.state.password;
 
-    Auth.signUp({email, password, attributes:{email}})
+    Auth.signUp({username, password, attributes:{email}})
     .then((data) => {
       console.log(data);
       this.props.history.push({
@@ -50,7 +51,7 @@ class SignInUp extends Component {
         // For advanced usage
         // You can pass an object which has the username, password and validationData which is sent to a PreAuthentication Lambda trigger
         Auth.signIn({
-            email, // Required, the username
+            username, // Required, the username
             password,// Optional, the password
             
         }).then((user) => {
