@@ -17,6 +17,8 @@ class Profile extends Component {
         sub:'',
 	    };
 	    
+      this.ischange=false;
+
 	    this.handleChange = this.handleChange.bind(this);
 	    this.LogOut = this.LogOut.bind(this);
       this.Save = this.Save.bind(this);
@@ -62,13 +64,16 @@ class Profile extends Component {
   }
 
   Save(){
+    if(this.ischange){
     console.log("Save my data !");
     Storage.put(this.state.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
       })
       .then (result => {console.log(result);})
-      .catch(err => console.log(err));  
+      .catch(err => console.log(err));
+    this.ischange=false;
+    }  
   }
 
   handleChange(event) {
@@ -81,6 +86,8 @@ class Profile extends Component {
     this.setState({
       [name]: value
     });
+
+    this.ischange=true;
   }
 
   render() {
