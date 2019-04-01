@@ -7,6 +7,7 @@ import SignInConfirm from './signinconfirm';
 import NoAuth from './noauth';
 import Profile from './profile';
 import GetInfos from './getinfos';
+import Bip39 from './bip39';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 
 // retrieve temporary AWS credentials and sign requests
@@ -25,6 +26,7 @@ class App extends Component {
             <Route exact path="/signinconfirm" component={SignInConfirm} />
             <Route exact path="/noauth" component={NoAuth} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/bip39" component={Bip39} />
             <Route path="/getinfos/:uuid/:key" component={GetInfos} />
             <Route path='/' render={() => (<Redirect to="/noauth" />)}/> 
           </Switch>
