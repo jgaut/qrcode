@@ -3,13 +3,21 @@ import './App.css';
 
 class Profile extends Component {
 
-  componentWillMount(){
-  	this.state = {
-  		nom:'',
-  		prenom:'',
-  		age:''
-  	}  
+	  constructor(props) {
+    super(props);
+    this.state = {
+      nom: '',
+      prenom: '',
+      age: ''
+    };
+    
+    this.handleChange = this.handleChange.bind(this);
+    //this.onSubmit = this.onSubmit.bind(this);
+
   }
+
+	componentWillMount(){  
+	}
 
   handleChange(event) {
     //console.log(event.target);
