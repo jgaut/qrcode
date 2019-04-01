@@ -16,11 +16,11 @@ class Profile extends Component {
 	    this.handleChange = this.handleChange.bind(this);
 	    this.LogOut = this.LogOut.bind(this);
 
-      let user = Auth.currentAuthenticatedUser();
+      Auth.currentAuthenticatedUser({
+    bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+}).then(user => console.log(JSON.stringify(user)))
+.catch(err => console.log(err));
 
-      
-
-      console.log(JSON.stringify(user));
  	}
 
 	LogOut(){
