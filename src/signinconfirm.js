@@ -36,7 +36,6 @@ class SignInConfirm extends Component {
 
   onSubmit(){
 
-    var email = this.state.email;
     var username = this.state.email;
     var code = this.state.code;
 
