@@ -18,6 +18,7 @@ class Profile extends Component {
       age: '',
     };
 
+    this.code = '';
     this.sub = '';
     this.ischange=false;
 
@@ -37,18 +38,16 @@ class Profile extends Component {
  	}
 
   Load(){
-    //console.log("load");
-    var code = ls.get(this.sub);
     
-    if(!Mnemonic.isValid(code)){
+    if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
       //this.props.history.push('/bip39');
       //console.log(code.toString());
       var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
       ls.set(this.sub, tmpCode.toString());
     }
-    code = ls.get(this.sub);
-    console.log("mnemonic code : " + code);
+    this.code = ls.get(this.sub);
+    console.log("mnemonic code : " + this.code);
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
@@ -104,7 +103,7 @@ class Profile extends Component {
   }
 
   render() {
-    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+this.sub+"/mykey";
+    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+this.sub+"/"+this.code;
     console.log(qrcodeValue);
     var size = 512;
     return (
