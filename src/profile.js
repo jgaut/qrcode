@@ -39,6 +39,7 @@ class Profile extends Component {
   Load(){
     //console.log("load");
     var code = ls.get(this.sub);
+     console.log("mnemonic code : " + code);
     if(!Mnemonic.isValid(code)){
       console.log("need to generate a new mnemonic");
       //this.props.history.push('/bip39');
@@ -47,7 +48,7 @@ class Profile extends Component {
       ls.set(this.sub, tmpCode.toString);
     }
     code = ls.get(this.sub);
-    console.log('mnemonic code : ' + code);
+    console.log("mnemonic code : " + code);
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
