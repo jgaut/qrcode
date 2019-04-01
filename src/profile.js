@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Auth, Storage } from 'aws-amplify';
+import Amplify, { Auth, Storage } from 'aws-amplify';
+import awsmobile from './aws-exports';
+
+Amplify.configure(awsmobile);
 
 class Profile extends Component {
 
@@ -37,10 +40,6 @@ class Profile extends Component {
   }
 
   Save(){
-    Storage.put('test.txt', 'Hello')
-    .then (result => console.log(result)) // {key: "test.txt"}
-    .catch(err => console.log(err));
-
     Storage.put(this.state.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
