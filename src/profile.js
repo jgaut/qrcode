@@ -16,11 +16,11 @@ class Profile extends Component {
 	    this.handleChange = this.handleChange.bind(this);
 	    this.LogOut = this.LogOut.bind(this);
 
-      let user = await Auth.currentAuthenticatedUser();
+      let user = Auth.currentAuthenticatedUser();
 
-      const { attributes } = user;
+      
 
-      console.log(JSON.stringify(attributes));
+      console.log(JSON.stringify(user));
  	}
 
 	LogOut(){
