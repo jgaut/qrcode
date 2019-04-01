@@ -16,6 +16,7 @@ class Profile extends Component {
 	    
 	    this.handleChange = this.handleChange.bind(this);
 	    this.LogOut = this.LogOut.bind(this);
+      this.Save = this.Save.bind(this);
 
       Auth.currentAuthenticatedUser({
     bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
