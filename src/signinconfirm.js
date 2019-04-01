@@ -43,14 +43,14 @@ class SignInConfirm extends Component {
         }).then((data) => {
           console.log('data');
           console.log(data);
-          navigate('App', {number: Math.random()});
+          this.props.history.push('/');
         }).catch((err) => {
           console.log('err');
             console.log(err);
             this.setState({ err: err.message || err || ''});
         });
       }}>
-    this.props.history.push('/')
+    
   }
 
   render() {
