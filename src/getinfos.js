@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Amplify, { Auth, Storage } from 'aws-amplify';
-import awsmobile from './aws-exports';
-import QRCode from 'qrcode.react';
+import { Storage } from 'aws-amplify';
 
-
-Amplify.configure(awsmobile);
-      
 class Profile extends Component {
 
 	constructor(props) {
