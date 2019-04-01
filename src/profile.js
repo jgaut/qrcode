@@ -37,7 +37,7 @@ class Profile extends Component {
   Load(){
     console.log("load");
     var tmp = ls.get(this.sub);
-    if(tmp=""){
+    if(tmp==""){
       console.log("add new local storage");
       ls.set(this.sub, 'blablabla');
     }else{
