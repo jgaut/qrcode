@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Auth from '@aws-amplify/auth';
+import Storage from '@aws-amplify/storage';
 
 class Profile extends Component {
 
@@ -15,6 +16,11 @@ class Profile extends Component {
 	    this.handleChange = this.handleChange.bind(this);
 	    this.LogOut = this.LogOut.bind(this);
 
+      let user = await Auth.currentAuthenticatedUser();
+
+      const { attributes } = user;
+
+      console.log(JSON.stringify(attributes));
  	}
 
 	LogOut(){
