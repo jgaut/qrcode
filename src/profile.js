@@ -10,9 +10,10 @@ class Profile extends Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	      nom: '',
-	      prenom: '',
-	      age: '',
+        data: {
+  	      nom: '',
+  	      prenom: '',
+  	      age: ''},
         sub:'',
 	    };
 	    
@@ -56,7 +57,7 @@ class Profile extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      data[name]: value
     });
   }
 
