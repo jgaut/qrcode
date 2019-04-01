@@ -65,7 +65,7 @@ class SignInConfirm extends Component {
             Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
           </label>               
           <br></br>
-          <button onClick={this.onSubmit}>Sign In /Sign Up</button>
+          <button onClick={this.onSubmit}>Validate</button>
           <label>{this.state.err}</label>
         </header>
       </div>
