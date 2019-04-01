@@ -43,7 +43,8 @@ class Profile extends Component {
       console.log("need to generate a new mnemonic");
       //this.props.history.push('/bip39');
       //console.log(code.toString());
-      ls.set(this.sub, new Mnemonic(Mnemonic.Words.FRENCH));
+      var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
+      ls.set(this.sub, tmpCode.toString);
     }
     code = ls.get(this.sub);
     console.log('mnemonic code : ' + code);
