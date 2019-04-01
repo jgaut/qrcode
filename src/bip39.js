@@ -14,23 +14,6 @@ class Bip39 extends Component {
     super(props);
     this.state = {
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.LogOut = this.LogOut.bind(this);
-    this.Save = this.Save.bind(this);
-    this.Load = this.Load.bind(this);
-
-    Auth.currentAuthenticatedUser({bypassCache: false})
-    .then(user => {
-      this.sub = user.attributes.sub;
-      console.log(this.sub);
-      this.Load();
-    })
-    .catch(err => console.log(err));
-
-    var code = new Mnemonic(Mnemonic.Words.FRENCH);
-    console.log(code.toString());
-    
  	}
 
   Save(){
@@ -69,7 +52,6 @@ class Bip39 extends Component {
       		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<button onClick={this.LogOut}>Logout</button><br></br>
-          <QRCode value={qrcodeValue} size={size} />
 		</div>
     );
       
