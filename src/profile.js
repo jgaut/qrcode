@@ -84,15 +84,15 @@ class Profile extends Component {
   }
 
   render() {
-
+    var qrcodeValue = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.state.sub+".json";
     return (
     	<div>
     	<h1>My profile</h1><br></br>
       		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
-      		<button onClick={this.LogOut}>Logout</button>
-          <QRCode value="http://facebook.github.io/react/" />
+      		<button onClick={this.LogOut}>Logout</button><br></br>
+          <QRCode value={qrcodeValue} />
 		</div>
     );
       
