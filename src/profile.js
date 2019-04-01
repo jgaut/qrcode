@@ -5,7 +5,9 @@ import awsmobile from './aws-exports';
 import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
-import * as openpgp from 'react-native-openpgp';
+var openpgp = require('openpgp'); // use as CommonJS, AMD, ES6 module or via window.openpgp
+
+openpgp.initWorker({ path:'openpgp.worker.js' }) 
 
 Amplify.configure(awsmobile);
 
@@ -41,32 +43,17 @@ class Profile extends Component {
   Load(){
 
     var options, encrypted;
- 
+
 options = {
-  data: 'Hello, World, ok ?',      // input as String
-  passwords: ['secret stuff'] // multiple passwords possible
+    message: openpgp.message.fromBinary(new Uint8Array([0x01, 0x01, 0x01])), // input as Message object
+    passwords: ['secret stuff'],                                             // multiple passwords possible
+    armor: false                                                             // don't ASCII armor (for Uint8Array output)
 };
- 
-openpgp.encrypt(options)
-  .then((ciphertext) => {
-    encrypted = ciphertext.data; // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
-  })
-  .catch((error) => {
-    console.log("Something went wrong: " + error);
-  });
-  
-options = {
-  message: openpgp.readMessage(encrypted), // parse armored message
-  password: 'secret stuff'                         // decrypt with password
-};
- 
-openpgp.decrypt(options)
-  .then((plaintext) => {
-    return plaintext.data; // 'Hello, World!'
-  })
-  .catch((error) => {
-    console.log("Something went wrong: " + error);
-  });
+
+openpgp.encrypt(options).then(function(ciphertext) {
+    encrypted = ciphertext.message.packets.write(); // get raw encrypted packets as Uint8Array
+    console.log(encrypted);
+});
 
     
     if(!Mnemonic.isValid(ls.get(this.sub))){
