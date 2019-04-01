@@ -4,6 +4,7 @@ import Amplify, { Auth, Storage } from 'aws-amplify';
 import awsmobile from './aws-exports';
 import QRCode from 'qrcode.react';
 import ls from 'local-storage';
+import Mnemonic from 'bitcore-mnemonic';
 
 Amplify.configure(awsmobile);
 
@@ -33,6 +34,8 @@ class Profile extends Component {
     })
     .catch(err => console.log(err));
 
+    var code = new Mnemonic(Mnemonic.Words.SPANISH);
+    console.log(code.toString());
  	}
 
   Load(){
