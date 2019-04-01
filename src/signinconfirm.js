@@ -35,7 +35,7 @@ class SignInConfirm extends Component {
     });
   }
 
-  onSubmit = () => {
+  onSubmit(){
     this.props.history.push('/')
   }
 
