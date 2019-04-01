@@ -89,7 +89,7 @@ class Profile extends Component {
     return (
     	<div>
     	<h1>My profile</h1><br></br>
-      		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange}/><br></br>
+      		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onBlur={this.handleChange}/><br></br>
       		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange}/><br></br>
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange}/><br></br>
       		<button onClick={this.LogOut}>Logout</button>
