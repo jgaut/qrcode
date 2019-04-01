@@ -34,7 +34,7 @@ class SignInUp extends Component {
     var email = this.state.email;
     var password = this.state.password;
 
-    Auth.signUp(email, password)
+    Auth.signUp(email, password, attributes:{email})
     .then((data) => {
       console.log(data);
       this.props.history.push({
@@ -52,9 +52,7 @@ class SignInUp extends Component {
         Auth.signIn({
             email, // Required, the username
             password,// Optional, the password
-            UserAttributes: {
-              email: email,
-            },
+            
         }).then((user) => {
           console.log(user);
           this.props.history.push('/');
