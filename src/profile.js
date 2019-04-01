@@ -40,6 +40,7 @@ class Profile extends Component {
       console.log("add new local storage");
       ls.set(this.sub, 'blablabla');
     }else{
+      console.log("local storage exist");
       console.log('tmp : ' + tmp);
     }
 
