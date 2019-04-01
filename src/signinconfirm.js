@@ -35,9 +35,14 @@ class SignInConfirm extends Component {
   }
 
   onSubmit(){
+
+    var email = this.state.email;
+    var username = this.state.email;
+    var code = this.state.code;
+
     Auth.confirmSignUp(
-          this.state.username,
-          this.state.code, {
+          username,
+          code, {
           // Optional. Force user confirmation irrespective of existing alias. By default set to True.
           forceAliasCreation: true
         }).then((data) => {
