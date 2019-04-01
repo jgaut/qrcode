@@ -34,6 +34,15 @@ class Profile extends Component {
  	}
 
   Load(){
+
+    var tmp = ls.get(this.sub);
+    if(tmp=""){
+      console.log("add new local storage");
+      ls.set(this.sub, 'blablabla');
+    }else{
+      console.log('tmp : ' + tmp);
+    }
+
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
         //console.log('get result'+result);
