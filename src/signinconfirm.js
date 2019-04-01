@@ -15,7 +15,7 @@ class SignInConfirm extends Component {
     };
     
     this.handleChange = this.handleChange.bind(this);
-    //this.handleSubmit = this.handleValidateCodeSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
   }
 
