@@ -45,7 +45,8 @@ class Profile extends Component {
       //this.props.history.push('/bip39');
       //console.log(code.toString());
       var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
-      ls.set(this.sub, tmpCode.toString);
+      ls.set(this.sub, tmpCode.toString());
+      console.log("mnemonic code : " + tmpCode.toString());
     }
     code = ls.get(this.sub);
     console.log("mnemonic code : " + code);
