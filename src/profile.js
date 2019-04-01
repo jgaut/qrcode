@@ -38,9 +38,7 @@ class Profile extends Component {
 
   Load(){
     //console.log("load");
-    ls.set(this.sub, "");
     var code = ls.get(this.sub);
-    console.log("mnemonic code : " + code);
     
     if(!Mnemonic.isValid(code)){
       console.log("need to generate a new mnemonic");
@@ -48,7 +46,6 @@ class Profile extends Component {
       //console.log(code.toString());
       var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
       ls.set(this.sub, tmpCode.toString());
-      console.log("mnemonic code : " + tmpCode.toString());
     }
     code = ls.get(this.sub);
     console.log("mnemonic code : " + code);
