@@ -20,7 +20,7 @@ class Profile extends Component {
     };
 
 
-    openpgp.initWorker({ path:'openpgp.worker.min.js' });
+    openpgp.initWorker({ path:'openpgp.worker.js' });
 
     this.code = '';
     this.sub = '';
