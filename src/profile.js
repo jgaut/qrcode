@@ -56,9 +56,9 @@ class Profile extends Component {
 
     openpgp.encrypt(options).then(async function(ciphertext) {
         encrypted = ciphertext.message.packets.write();
-        console.log(encrypted); // get raw encrypted packets as Uint8Array
+        //console.log(encrypted); // get raw encrypted packets as Uint8Array
         var string = new TextDecoder("utf-8").decode(encrypted);
-        console.log(string);
+        //console.log(string);
         return string;
     });
 
@@ -77,9 +77,9 @@ class Profile extends Component {
       };
 
       openpgp.decrypt(options).then(function(plaintext) {
-          console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
+          //console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
           var string = new TextDecoder("utf-8").decode(plaintext.data);
-          console.log(string);
+          //console.log(string);
           return string;
       });
 
