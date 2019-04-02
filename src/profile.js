@@ -152,9 +152,10 @@ class Profile extends Component {
     //console.log("Save my data !");
     var dataTmp = {...this.state};
     console.log("dataTmp :" + JSON.stringify(dataTmp));
-    for (var key in dataTmp) {
-      var tmp = dataTmp[key];
-      dataTmp[key] = await this.encodePgp(tmp, this.code);
+    for (var key in this.state) {
+      this.setState({
+        [key]: await this.encodePgp(this.state[key], this.code)
+      });
     }
     //console.log(dataTmp);
     //console.log(this.state);
@@ -163,7 +164,7 @@ class Profile extends Component {
         level: 'public',
         contentType: 'text/plain'
       })
-      .then (result => {console.log(result);})
+      .then (result => {console.log(result); this.state = dataTmp;})
       .catch(err => console.log(err));
     this.ischange=false;
     }  
