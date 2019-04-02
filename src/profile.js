@@ -43,43 +43,55 @@ class Profile extends Component {
     
  	}
 
-  async testPGP(){
+  async encodePgp(message, code){
 
-    var message = "la maison est belle...";
-    var uint8array = new TextEncoder("utf-8").encode(message);
-var options, encrypted;
-
-options = {
-    message: openpgp.message.fromText(message), // input as Message object
-    passwords: ['secret stuff'],                                             // multiple passwords possible
-    armor: false                                                             // don't ASCII armor (for Uint8Array output)
-};
-
-openpgp.encrypt(options).then(async function(ciphertext) {
-    encrypted = ciphertext.message.packets.write();
-    console.log(encrypted); // get raw encrypted packets as Uint8Array
-    var string = new TextDecoder("utf-8").decode(encrypted);
-    console.log(string);
+    //var uint8array = new TextEncoder("utf-8").encode(message);
+    var options, encrypted;
 
     options = {
-    message: await openpgp.message.read(encrypted), // parse encrypted bytes
-    passwords: ['secret stuff'],              // decrypt with password
-    format: 'binary'                          // output as Uint8Array
-};
+        message: openpgp.message.fromText(message), // input as Message object
+        passwords: [code],                                             // multiple passwords possible
+        armor: false                                                             // don't ASCII armor (for Uint8Array output)
+    };
 
-openpgp.decrypt(options).then(function(plaintext) {
-    console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
-    var string = new TextDecoder("utf-8").decode(plaintext.data);
-    console.log(string);
-});
-});
+    openpgp.encrypt(options).then(async function(ciphertext) {
+        encrypted = ciphertext.message.packets.write();
+        //console.log(encrypted); // get raw encrypted packets as Uint8Array
+        var string = new TextDecoder("utf-8").decode(encrypted);
+        //console.log(string);
+        return string;
+    });
+
+  }
+
+    async decodePgp(message, code){
+
+    
+    var uint8array = new TextEncoder("utf-8").encode(message);
+    var options;
+
+    options = {
+      message: await openpgp.message.read(uint8array), // parse encrypted bytes
+      passwords: [code],              // decrypt with password
+      format: 'binary'                          // output as Uint8Array
+    };
+
+    openpgp.decrypt(options).then(function(plaintext) {
+        //console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
+        var string = new TextDecoder("utf-8").decode(plaintext.data);
+        //console.log(string);
+        return string;
+    });
 
   }
 
   Load(){
     
-    this.testPGP();
+    var tmp = encodePgp("la maison est belle et oui !", this.code);
+    console.log(tmp);
 
+    tmp = decodePgp(tmp, this.code);
+    console.log(tmp);
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
