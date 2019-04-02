@@ -25,6 +25,7 @@ class Profile extends Component {
         this.setState({nom:data.nom});
         this.setState({prenom:data.prenom});
         this.setState({age:data.age});
+        this.setState({notes:data.notes});
       })
       .catch(error => {console.log(error);});
  	}
@@ -33,10 +34,11 @@ class Profile extends Component {
     return (
     	<div>
     	<h1>My profile</h1><br></br>
-      		<label>Nom : {this.state.nom}</label><br></br>
-      		<label>Prénom : {this.state.prenom}</label><br></br>
-      		<label>Age : {this.state.age}</label><br></br>
-          <label>Notes : {this.state.notes}</label><br></br>
+      		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} readonly/><br></br>
+          <label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} readonly/><br></br>
+          <label>Age</label> <input type="text" name="age" value={this.state.age} readonly/><br></br>
+          <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} readonly/><br></br>
+          
 		</div>
     );
       
