@@ -124,6 +124,7 @@ class Profile extends Component {
                   age: '',
                   notes:'',
                 };
+                console.log("data :" + JSON.stringify(this.state) + " -- "+this.state.length);
               }
               /*
               this.setState({nom:data.nom});
