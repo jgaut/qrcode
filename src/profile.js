@@ -78,7 +78,7 @@ class Profile extends Component {
               //console.log("data :" + JSON.stringify(data));
               for (var key in data) {
                 this.setState({
-                  [key]: data[key];
+                  [key]: data[key]
                 });
               }
               /*
