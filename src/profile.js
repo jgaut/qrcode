@@ -154,7 +154,7 @@ class Profile extends Component {
     console.log("dataTmp :" + JSON.stringify(dataTmp));
     for (var key in this.state) {
       this.setState({
-        [key]: this.state[key]
+        [key]: await this.encodePgp(this.state[key], this.code)
       });
     }
     //await this.encodePgp(this.state[key], this.code)
