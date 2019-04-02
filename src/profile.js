@@ -58,11 +58,26 @@ class Profile extends Component {
 
     openpgp.encrypt(options).then(function(ciphertext) {
       encrypted = ciphertext.message.packets.write(); // get raw encrypted packets as Uint8Array
-      var string = new TextDecoder("utf-8").decode(encrypted);
-      console.log(string);
     });
 
+
+    options = {
+      message: openpgp.readMessage(encrypted), // parse armored message
+      password: 'secret stuff'                         // decrypt with password
+    };
+     
+    openpgp.decrypt(options)
+      .then((plaintext) => {
+        console.log(plaintext.data); // 'Hello, World!'
+      })
+      .catch((error) => {
+        console.log("Something went wrong: " + error);
+      });
     
+
+    //var string = new TextDecoder("utf-8").decode(encrypted);
+    //console.log(string);
+
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
       //this.props.history.push('/bip39');
