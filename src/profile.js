@@ -7,8 +7,6 @@ import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import * as openpgp from 'openpgp'
 
-//const openpgp = require('openpgp');
-
 Amplify.configure(awsmobile);
 
 class Profile extends Component {
@@ -38,7 +36,6 @@ class Profile extends Component {
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
       this.sub = user.attributes.sub;
-      //console.log(this.sub);
       this.Load();
     })
     .catch(err => console.log(err));
@@ -60,9 +57,7 @@ class Profile extends Component {
 
     openpgp.encrypt(options).then((ciphertext)=> {
         encrypted = ciphertext.message.packets.write();
-        //console.log(encrypted); // get raw encrypted packets as Uint8Array
         var string = new TextDecoder("utf-8").decode(encrypted);
-        //console.log(string);
         this.setState({
           [key]: string
         });
@@ -80,13 +75,12 @@ class Profile extends Component {
       var options;
 
       options = {
-        message: await openpgp.message.read(uint8array), // parse encrypted bytes
-        passwords: [code],              // decrypt with password
-        format: 'binary'                          // output as Uint8Array
+        message: await openpgp.message.read(uint8array),
+        passwords: [code],
+        format: 'binary'
       };
 
       openpgp.decrypt(options).then((plaintext)=> {
-          //console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
           var string = new TextDecoder("utf-8").decode(plaintext.data);
           console.log("decode string : " + string);
           this.setState({
@@ -97,27 +91,16 @@ class Profile extends Component {
   }
 
   Load(){
-    
-    /*var tmp = this.encodePgp("la maison est belle et oui !", this.code);
-    console.log(tmp);
-
-    tmp = this.decodePgp(tmp, this.code);
-    console.log(tmp);*/
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
-      //this.props.history.push('/bip39');
-      //console.log(code.toString());
       var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
       ls.set(this.sub, tmpCode.toString());
     }
     this.code = ls.get(this.sub);
-    //console.log("mnemonic code : " + this.code);
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
-        //console.log('get result'+result);
-
         fetch(result)
           .then(response => response.json())
             .then(data => {
@@ -136,12 +119,6 @@ class Profile extends Component {
                 };
                 console.log("data :" + JSON.stringify(this.state) + " -- "+this.state.length);
               }
-              /*
-              this.setState({nom:data.nom});
-              this.setState({prenom:data.prenom});
-              this.setState({age:data.age});
-              this.setState({notes:data.notes});
-              */
             })
             .catch(error => {console.log(error);
           });
@@ -166,11 +143,9 @@ class Profile extends Component {
       var t = this.state[key];
       await this.encodePgp(key, t, this.code)
     }
-    //await this.encodePgp(this.state[key], this.code)
-    //console.log(dataTmp);
-    //console.log(this.state);
+
     console.log("this.state :" + JSON.stringify(this.state));
-    await Storage.put(this.sub+".json", JSON.stringify(this.state), {
+    Storage.put(this.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
       })
@@ -203,7 +178,6 @@ class Profile extends Component {
 
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
-    //console.log(qrcodeValue);
     var size = 512;
 
     return (
