@@ -62,17 +62,14 @@ class Profile extends Component {
 
 
     options = {
-      message: openpgp.readMessage(encrypted), // parse armored message
-      password: 'secret stuff'                         // decrypt with password
-    };
-     
-    openpgp.decrypt(options)
-      .then((plaintext) => {
-        console.log(plaintext.data); // 'Hello, World!'
-      })
-      .catch((error) => {
-        console.log("Something went wrong: " + error);
-      });
+    message: await openpgp.message.read(encrypted), // parse encrypted bytes
+    passwords: ['secret stuff'],              // decrypt with password
+    format: 'binary'                          // output as Uint8Array
+};
+
+openpgp.decrypt(options).then(function(plaintext) {
+    console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
+});
     
 
     //var string = new TextDecoder("utf-8").decode(encrypted);
