@@ -145,9 +145,9 @@ class Profile extends Component {
       var tmp = dataTmp[key];
       dataTmp[key] = await this.encodePgp(tmp, this.code);
     }
-    console.log(dataTmp);
-    console.log(this.state);
-
+    //console.log(dataTmp);
+    //console.log(this.state);
+    console.log("dataTmp :" + JSON.stringify(dataTmp));
     Storage.put(this.sub+".json", JSON.stringify(dataTmp), {
         level: 'public',
         contentType: 'text/plain'
