@@ -142,7 +142,7 @@ class Profile extends Component {
     //console.log("Save my data !");
     var dataTmp = new Map();
     for (var key in this.state) {
-      dataTmp.set({key:this.state[key]});
+      dataTmp.set({'key':this.state[key]});
     }
     console.log(dataTmp);
 
