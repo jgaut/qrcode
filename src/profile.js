@@ -79,6 +79,7 @@ class Profile extends Component {
               this.setState({nom:data.nom});
               this.setState({prenom:data.prenom});
               this.setState({age:data.age});
+              this.setState({notes:data.notes});
             })
             .catch(error => {console.log(error);
           });
