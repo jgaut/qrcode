@@ -65,7 +65,7 @@ options = {
 };
 
 openpgp.decrypt(options).then(function(plaintext) {
-    console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
+    //console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
 });
   }
 
