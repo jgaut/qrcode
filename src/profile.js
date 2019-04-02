@@ -113,8 +113,9 @@ class Profile extends Component {
               console.log("data :" + JSON.stringify(data) + " -- "+data.length);
               if(data.nom!=undefined){
                 for (var key in data) {
+                  var t = data[key];
                   this.setState({
-                    [key]: this.decodePgp(data[key], this.code)
+                    [key]: this.decodePgp(t, this.code)
                   });
                 }
               }else{
