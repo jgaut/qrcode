@@ -50,7 +50,7 @@ class Profile extends Component {
 var options, encrypted;
 
 options = {
-    message: openpgp.message.fromBinary(new Uint8Array([0x01, 0x01, 0x01])), // input as Message object
+    message: openpgp.message.fromText(message), // input as Message object
     passwords: ['secret stuff'],                                             // multiple passwords possible
     armor: false                                                             // don't ASCII armor (for Uint8Array output)
 };
@@ -61,11 +61,11 @@ openpgp.encrypt(options).then(function(ciphertext) {
 options = {
     message: await openpgp.message.read(encrypted), // parse encrypted bytes
     passwords: ['secret stuff'],              // decrypt with password
-    format: 'binary'                          // output as Uint8Array
+    format: 'text'                          // output as Uint8Array
 };
 
 openpgp.decrypt(options).then(function(plaintext) {
-    //console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
+    console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
 });
   }
 
