@@ -52,8 +52,7 @@ class Profile extends Component {
 
     options = {
       message: openpgp.message.fromBinary(uint8array), // input as Message object
-      passwords: ['secret stuff'],                                             // multiple passwords possible
-      armor: false                                                             // don't ASCII armor (for Uint8Array output)
+      passwords: 'secret stuff'                                                       // don't ASCII armor (for Uint8Array output)
     };
 
     openpgp.encrypt(options).then(function(ciphertext) {
