@@ -76,10 +76,17 @@ class Profile extends Component {
           .then(response => response.json())
             .then(data => {
               //console.log("data :" + JSON.stringify(data));
+              for (var key in data) {
+                this.setState({
+                  [key]: data[key];
+                });
+              }
+              /*
               this.setState({nom:data.nom});
               this.setState({prenom:data.prenom});
               this.setState({age:data.age});
               this.setState({notes:data.notes});
+              */
             })
             .catch(error => {console.log(error);
           });
