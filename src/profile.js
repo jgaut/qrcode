@@ -5,9 +5,7 @@ import awsmobile from './aws-exports';
 import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
-var openpgp = require('openpgp'); // use as CommonJS, AMD, ES6 module or via window.openpgp
-
-openpgp.initWorker({ path:'openpgp.worker.min.js' }) 
+const openpgp = require('openpgp');
 
 Amplify.configure(awsmobile);
 
@@ -20,6 +18,9 @@ class Profile extends Component {
       prenom: '',
       age: '',
     };
+
+
+    openpgp.initWorker({ path:'openpgp.worker.min.js' });
 
     this.code = '';
     this.sub = '';
