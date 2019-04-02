@@ -87,11 +87,11 @@ class Profile extends Component {
 
   Load(){
     
-    var tmp = this.encodePgp("la maison est belle et oui !", this.code);
+    /*var tmp = this.encodePgp("la maison est belle et oui !", this.code);
     console.log(tmp);
 
     tmp = this.decodePgp(tmp, this.code);
-    console.log(tmp);
+    console.log(tmp);*/
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
