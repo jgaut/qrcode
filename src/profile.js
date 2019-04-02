@@ -51,16 +51,19 @@ var options, encrypted;
 
 options = {
     message: openpgp.message.fromText(message), // input as Message object
-    passwords: [this.code],                                             // multiple passwords possible
+    passwords: ['secret stuff'],                                             // multiple passwords possible
     armor: false                                                             // don't ASCII armor (for Uint8Array output)
 };
 
 openpgp.encrypt(options).then(async function(ciphertext) {
     encrypted = ciphertext.message.packets.write();
     console.log(encrypted); // get raw encrypted packets as Uint8Array
+    var string = new TextDecoder("utf-8").decode(plaintext.data);
+    console.log(string);
+    
     options = {
     message: await openpgp.message.read(encrypted), // parse encrypted bytes
-    passwords: [this.code],              // decrypt with password
+    passwords: ['secret stuff'],              // decrypt with password
     format: 'binary'                          // output as Uint8Array
 };
 
