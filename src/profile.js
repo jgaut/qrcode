@@ -79,7 +79,7 @@ class Profile extends Component {
       openpgp.decrypt(options).then(function(plaintext) {
           //console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
           var string = new TextDecoder("utf-8").decode(plaintext.data);
-          //console.log(string);
+          console.log("decode string : " + string);
           return string;
       });
 
