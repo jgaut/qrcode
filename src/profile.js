@@ -168,7 +168,15 @@ class Profile extends Component {
         level: 'public',
         contentType: 'text/plain'
       })
-      .then (result => {console.log(result); this.state = dataTmp;})
+      .then (result => {
+        console.log(result);
+        for (var key in dataTmp) {
+          this.setState({
+            [key]: dataTmp[key]
+          });
+        }
+        this.state = dataTmp;
+      })
       .catch(err => console.log(err));
     this.ischange=false;
     }  
