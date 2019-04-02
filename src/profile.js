@@ -140,9 +140,9 @@ class Profile extends Component {
   Save(){
     if(this.ischange){
     //console.log("Save my data !");
-    var dataTmp = this.state;
+    var dataTmp = {...this.state};
     for (var key in dataTmp) {
-      dataTmp[key] = 0;
+      dataTmp[key] = Math.random();
     }
     console.log(dataTmp);
     console.log(this.state);
