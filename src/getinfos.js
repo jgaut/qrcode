@@ -38,7 +38,6 @@ class Profile extends Component {
           <label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} readonly/><br></br>
           <label>Age</label> <input type="text" name="age" value={this.state.age} readonly/><br></br>
           <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} readonly/><br></br>
-          
 		</div>
     );
       
