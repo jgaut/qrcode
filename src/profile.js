@@ -137,12 +137,12 @@ class Profile extends Component {
       .catch(err => console.log(err));  
   }
 
-  Save(){
+  async Save(){
     if(this.ischange){
     //console.log("Save my data !");
     var dataTmp = {...this.state};
     for (var key in dataTmp) {
-      dataTmp[key] = this.encodePgp(dataTmp[key], this.code);
+      dataTmp[key] = await this.encodePgp(dataTmp[key], this.code);
     }
     console.log(dataTmp);
     console.log(this.state);
