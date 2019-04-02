@@ -32,7 +32,8 @@ class Profile extends Component {
     this.LogOut = this.LogOut.bind(this);
     this.Save = this.Save.bind(this);
     this.Load = this.Load.bind(this);
-
+    this.encodePgp = this.encodePgp.bind(this);
+    this.decodePgp = this.decodePgp.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
