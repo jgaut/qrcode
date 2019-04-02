@@ -164,7 +164,7 @@ class Profile extends Component {
     //console.log(dataTmp);
     //console.log(this.state);
     console.log("this.state :" + JSON.stringify(this.state));
-    Storage.put(this.sub+".json", JSON.stringify(this.state), {
+    await Storage.put(this.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
       })
