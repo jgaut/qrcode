@@ -58,9 +58,9 @@ options = {
 openpgp.encrypt(options).then(async function(ciphertext) {
     encrypted = ciphertext.message.packets.write();
     console.log(encrypted); // get raw encrypted packets as Uint8Array
-    var string = new TextDecoder("utf-8").decode(plaintext.data);
+    var string = new TextDecoder("utf-8").decode(encrypted);
     console.log(string);
-    
+
     options = {
     message: await openpgp.message.read(encrypted), // parse encrypted bytes
     passwords: ['secret stuff'],              // decrypt with password
