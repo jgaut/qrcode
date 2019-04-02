@@ -141,7 +141,7 @@ class Profile extends Component {
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
           <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
           <button onClick={this.LogOut}>Logout</button><br></br>
-          <QRCode value={qrcodeValue} size={size} includeMargin=true level='H'/>
+          <QRCode value={qrcodeValue} size={size} includeMargin={true} level='H'/>
 		</div>
     );
       
