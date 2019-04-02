@@ -44,7 +44,7 @@ class Profile extends Component {
     
  	}
 
-  async encodePgp(message, code){
+  async encodePgp(key, message, code){
 
     var options, encrypted;
 
@@ -59,12 +59,14 @@ class Profile extends Component {
         //console.log(encrypted); // get raw encrypted packets as Uint8Array
         var string = new TextDecoder("utf-8").decode(encrypted);
         //console.log(string);
-        return string;
+        this.setState({
+          [key]: string
+        });
     });
 
   }
 
-    async decodePgp(message, code){
+    async decodePgp(key, message, code){
 
     
       var uint8array = new TextEncoder("utf-8").encode(message);
@@ -80,7 +82,9 @@ class Profile extends Component {
           //console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
           var string = new TextDecoder("utf-8").decode(plaintext.data);
           console.log("decode string : " + string);
-          return string;
+          this.setState({
+            [key]: string
+          });
       });
 
   }
@@ -114,9 +118,7 @@ class Profile extends Component {
               if(data.nom!=undefined){
                 for (var key in data) {
                   var t = data[key];
-                  this.setState({
-                    [key]: this.decodePgp(t, this.code)
-                  });
+                  this.decodePgp(key, t, this.code);
                 }
               }else{
                 this.state = {
@@ -155,9 +157,7 @@ class Profile extends Component {
     console.log("dataTmp :" + JSON.stringify(dataTmp));
     for (var key in this.state) {
       var t = this.state[key];
-      this.setState({
-        [key]: this.encodePgp(t, this.code)
-      });
+      this.encodePgp(key, t, this.code)
     }
     //await this.encodePgp(this.state[key], this.code)
     //console.log(dataTmp);
