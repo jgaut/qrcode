@@ -51,7 +51,7 @@ var options, encrypted;
 
 options = {
     message: openpgp.message.fromText(message), // input as Message object
-    passwords: ['secret stuff'],                                             // multiple passwords possible
+    passwords: [this.code],                                             // multiple passwords possible
     armor: false                                                             // don't ASCII armor (for Uint8Array output)
 };
 
@@ -60,7 +60,7 @@ openpgp.encrypt(options).then(async function(ciphertext) {
     console.log(encrypted); // get raw encrypted packets as Uint8Array
     options = {
     message: await openpgp.message.read(encrypted), // parse encrypted bytes
-    passwords: ['secret stuff'],              // decrypt with password
+    passwords: [this.code],              // decrypt with password
     format: 'binary'                          // output as Uint8Array
 };
 
