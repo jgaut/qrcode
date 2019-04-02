@@ -62,7 +62,7 @@ class Profile extends Component {
 
 
     options = {
-      message: openpgp.readMessage(encrypted), // parse armored message
+      message: encrypted, // parse armored message
       password: 'secret stuff'                         // decrypt with password
     };
      
