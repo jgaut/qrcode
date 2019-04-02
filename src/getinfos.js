@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Storage } from 'aws-amplify';
 
 class Profile extends Component {
 
