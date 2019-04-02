@@ -132,7 +132,7 @@ class Profile extends Component {
   myRender(){
     var myForm = '';
     for (var key in this.state) {
-      myForm = myForm + " " + "<label>"+key+"</label> <input type=\"text\" name=\""+key+"\" value={this.state."+key+"} onChange={this.handleChange} onBlur={this.Save}/><br></br>";
+      myForm = myForm + " " + <label>key</label> <input type=\"text\" name=\"key\" value={this.state.key} onChange={this.handleChange} onBlur={this.Save}/><br></br>;
     }
     return myForm;
   }
