@@ -111,7 +111,7 @@ class Profile extends Component {
           .then(response => response.json())
             .then(data => {
               console.log("data :" + JSON.stringify(data) + " -- "+data.length);
-              if(data.lastname!=undefined){
+              if(data.nom!=undefined){
                 for (var key in data) {
                   this.setState({
                     [key]: this.decodePgp(data[key], this.code)
