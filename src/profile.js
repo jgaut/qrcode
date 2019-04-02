@@ -154,12 +154,13 @@ class Profile extends Component {
     console.log("dataTmp :" + JSON.stringify(dataTmp));
     for (var key in this.state) {
       this.setState({
-        [key]: await this.encodePgp(this.state[key], this.code)
+        [key]: this.state[key]
       });
     }
+    //await this.encodePgp(this.state[key], this.code)
     //console.log(dataTmp);
     //console.log(this.state);
-    console.log("dataTmp :" + JSON.stringify(this.state));
+    console.log("this.state :" + JSON.stringify(this.state));
     Storage.put(this.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
