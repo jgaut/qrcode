@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import * as openpgp from 'openpgp';
+import * as openpgp from 'openpgp/openpgp.worker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
