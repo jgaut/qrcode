@@ -33,6 +33,7 @@ class Profile extends Component {
     this.Save = this.Save.bind(this);
     this.Load = this.Load.bind(this);
 
+
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
       this.sub = user.attributes.sub;
@@ -87,10 +88,10 @@ class Profile extends Component {
 
   Load(){
     
-    var tmp = encodePgp("la maison est belle et oui !", this.code);
+    var tmp = this.encodePgp("la maison est belle et oui !", this.code);
     console.log(tmp);
 
-    tmp = decodePgp(tmp, this.code);
+    tmp = this.decodePgp(tmp, this.code);
     console.log(tmp);
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
