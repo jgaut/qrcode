@@ -7,7 +7,7 @@ import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 var openpgp = require('openpgp'); // use as CommonJS, AMD, ES6 module or via window.openpgp
 
-openpgp.initWorker({ path:'openpgp.worker.js' }) 
+openpgp.initWorker({ path:'openpgp.worker.min.js' }) 
 
 Amplify.configure(awsmobile);
 
