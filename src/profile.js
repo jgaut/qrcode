@@ -50,7 +50,7 @@ class Profile extends Component {
 var options, encrypted;
 
 options = {
-    message: openpgp.message.fromText(message), // input as Message object
+    message: message, // input as Message object
     passwords: ['secret stuff'],                                             // multiple passwords possible
     armor: false                                                             // don't ASCII armor (for Uint8Array output)
 };
