@@ -152,7 +152,7 @@ class Profile extends Component {
         level: 'public',
         contentType: 'text/plain'
       })
-      .then (result => {/*console.log(result);*/})
+      .then (result => {console.log(result);})
       .catch(err => console.log(err));
     this.ischange=false;
     }  
