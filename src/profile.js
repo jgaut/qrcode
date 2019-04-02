@@ -140,9 +140,9 @@ class Profile extends Component {
   Save(){
     if(this.ischange){
     //console.log("Save my data !");
-    var dataTmp = {};
+    var dataTmp = new Map();
     for (var key in this.state) {
-      dataTmp.push({key:this.state[key]});
+      dataTmp.set({key:this.state[key]});
     }
     console.log(dataTmp);
 
