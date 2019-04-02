@@ -59,7 +59,7 @@ class Profile extends Component {
         console.log(encrypted); // get raw encrypted packets as Uint8Array
         var string = new TextDecoder("utf-8").decode(encrypted);
         console.log(string);
-        this.decodePgp(string, code);
+        decodePgp(string, code);
         return string;
     });
 
