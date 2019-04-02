@@ -142,7 +142,7 @@ class Profile extends Component {
     //console.log("Save my data !");
     var dataTmp = {...this.state};
     for (var key in dataTmp) {
-      dataTmp[key] = Math.random();
+      dataTmp[key] = encodePgp(dataTmp[key], this.code);
     }
     console.log(dataTmp);
     console.log(this.state);
