@@ -8,6 +8,7 @@
     "bitcore-lib": "^8.1.1",
     "bitcore-mnemonic": "^8.1.1",
     "local-storage": "^1.4.2",
+    "openpgp": "^4.4.10",
     "qrcode.react": "^0.9.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
