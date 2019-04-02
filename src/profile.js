@@ -43,8 +43,7 @@ class Profile extends Component {
     
  	}
 
-  Load(){
-
+  async testPGP(){
     var options, encrypted;
     var message = "la maison est belle...";
     var uint8array = new TextEncoder("utf-8").encode(message);
@@ -62,7 +61,7 @@ class Profile extends Component {
 
 
     options = {
-    message: openpgp.message.read(encrypted), // parse encrypted bytes
+    message: await openpgp.message.read(encrypted), // parse encrypted bytes
     passwords: ['secret stuff'],              // decrypt with password
     format: 'binary'                          // output as Uint8Array
 };
@@ -70,8 +69,11 @@ class Profile extends Component {
 openpgp.decrypt(options).then(function(plaintext) {
     console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
 });
-    
+  }
 
+  Load(){
+    
+    this.testPGP();
     //var string = new TextDecoder("utf-8").decode(encrypted);
     //console.log(string);
 
