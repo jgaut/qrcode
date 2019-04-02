@@ -35,7 +35,7 @@ class Profile extends Component {
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
       this.sub = user.attributes.sub;
-      console.log(this.sub);
+      //console.log(this.sub);
       this.Load();
     })
     .catch(err => console.log(err));
@@ -66,7 +66,7 @@ class Profile extends Component {
       ls.set(this.sub, tmpCode.toString());
     }
     this.code = ls.get(this.sub);
-    console.log("mnemonic code : " + this.code);
+    //console.log("mnemonic code : " + this.code);
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
@@ -75,7 +75,7 @@ class Profile extends Component {
         fetch(result)
           .then(response => response.json())
             .then(data => {
-              console.log("data :" + JSON.stringify(data));
+              //console.log("data :" + JSON.stringify(data));
               this.setState({nom:data.nom});
               this.setState({prenom:data.prenom});
               this.setState({age:data.age});
@@ -97,12 +97,12 @@ class Profile extends Component {
 
   Save(){
     if(this.ischange){
-    console.log("Save my data !");
+    //console.log("Save my data !");
     Storage.put(this.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
       })
-      .then (result => {console.log(result);})
+      .then (result => {/*console.log(result);*/})
       .catch(err => console.log(err));
     this.ischange=false;
     }  
@@ -124,7 +124,7 @@ class Profile extends Component {
 
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
-    console.log(qrcodeValue);
+    //console.log(qrcodeValue);
     var size = 512;
     return (
     	<div>
