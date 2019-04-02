@@ -141,7 +141,8 @@ class Profile extends Component {
     if(this.ischange){
     //console.log("Save my data !");
     var dataTmp = this.state.slice();
-
+    console.log(dataTmp);
+    
     Storage.put(this.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
