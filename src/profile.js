@@ -55,7 +55,7 @@ class Profile extends Component {
         armor: false
     };
 
-    openpgp.encrypt(options).then(async function(ciphertext) {
+    openpgp.encrypt(options).then(function(ciphertext) {
         encrypted = ciphertext.message.packets.write();
         //console.log(encrypted); // get raw encrypted packets as Uint8Array
         var string = new TextDecoder("utf-8").decode(encrypted);
