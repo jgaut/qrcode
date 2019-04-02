@@ -90,7 +90,7 @@ class Profile extends Component {
     var tmp = await this.encodePgp("la maison est belle et oui !", this.code);
     console.log(tmp);
 
-    tmp = this.decodePgp(tmp, this.code);
+    tmp = await this.decodePgp(tmp, this.code);
     console.log(tmp);
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
