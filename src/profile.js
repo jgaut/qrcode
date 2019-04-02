@@ -5,9 +5,9 @@ import awsmobile from './aws-exports';
 import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
-//import * as openpgp from 'openpgp'
+import * as openpgp from 'openpgp'
 
-const openpgp = require('openpgp');
+//const openpgp = require('openpgp');
 
 Amplify.configure(awsmobile);
 
