@@ -47,6 +47,9 @@ class Profile extends Component {
 
   async encodePgp(key, message, code){
 
+    if(message===""){
+      return;
+    }
     var options, encrypted;
 
     options = {
@@ -69,6 +72,9 @@ class Profile extends Component {
 
     async decodePgp(key, message, code){
 
+      if(message===""){
+        return;
+      }
     
       var uint8array = new TextEncoder("utf-8").encode(message);
       var options;
