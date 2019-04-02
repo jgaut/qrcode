@@ -110,7 +110,7 @@ class Profile extends Component {
         fetch(result)
           .then(response => response.json())
             .then(data => {
-              console.log("data :" + JSON.stringify(data));
+              console.log("data :" + JSON.stringify(data) + " -- "+data.length);
               if(data.length>0){
                 for (var key in data) {
                   this.setState({
