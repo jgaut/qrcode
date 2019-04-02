@@ -129,13 +129,6 @@ class Profile extends Component {
     this.ischange=true;
   }
 
-  myRender(){
-    var myForm = '';
-    for (var key in this.state) {
-      myForm += <div> <label>key</label> <input type="text" name=key value={this.state.key} onChange={this.handleChange} onBlur={this.Save}/><br></br></div>;
-    }
-    return myForm;
-  }
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     console.log(qrcodeValue);
@@ -144,7 +137,6 @@ class Profile extends Component {
     return (
     	<div>
     	<h1>My profile</h1><br></br>
-          {this.myRender()}
       		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
