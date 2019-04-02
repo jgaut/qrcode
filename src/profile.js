@@ -147,7 +147,7 @@ class Profile extends Component {
     console.log(dataTmp);
     console.log(this.state);
 
-    Storage.put(this.sub+".json", JSON.stringify(this.state), {
+    Storage.put(this.sub+".json", JSON.stringify(dataTmp), {
         level: 'public',
         contentType: 'text/plain'
       })
