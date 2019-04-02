@@ -156,7 +156,7 @@ class Profile extends Component {
     for (var key in this.state) {
       var t = this.state[key];
       this.setState({
-        [key]: await this.encodePgp(t, this.code)
+        [key]: this.encodePgp(t, this.code)
       });
     }
     //await this.encodePgp(this.state[key], this.code)
