@@ -22,10 +22,11 @@ class Profile extends Component {
     .then(response => response.json())
       .then(data => {
         //console.log("data :" + JSON.stringify(data));
-        this.setState({nom:data.nom});
-        this.setState({prenom:data.prenom});
-        this.setState({age:data.age});
-        this.setState({notes:data.notes});
+        for (var key in data) {
+          this.setState({
+            [key]: data[key]
+          });
+        }
       })
       .catch(error => {console.log(error);});
  	}
