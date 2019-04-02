@@ -116,7 +116,6 @@ class Profile extends Component {
   }
 
   handleChange(event) {
-    //console.log(event.target);
 
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -131,7 +130,7 @@ class Profile extends Component {
 
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
-    console.log(qrcodeValue);
+    //console.log(qrcodeValue);
     var size = 512;
 
     return (
@@ -142,7 +141,7 @@ class Profile extends Component {
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
           <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
           <button onClick={this.LogOut}>Logout</button><br></br>
-          <QRCode value={qrcodeValue} size={size} />
+          <QRCode value={qrcodeValue} size={size} includeMargin=true level='H'/>
 		</div>
     );
       
