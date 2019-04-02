@@ -113,7 +113,7 @@ class Profile extends Component {
               //console.log("data :" + JSON.stringify(data));
               for (var key in data) {
                 this.setState({
-                  [key]: data[key]
+                  [key]: this.decodePgp(data[key], this.code)
                 });
               }
               /*
@@ -142,7 +142,7 @@ class Profile extends Component {
     //console.log("Save my data !");
     var dataTmp = {...this.state};
     for (var key in dataTmp) {
-      dataTmp[key] = encodePgp(dataTmp[key], this.code);
+      dataTmp[key] = this.encodePgp(dataTmp[key], this.code);
     }
     console.log(dataTmp);
     console.log(this.state);
