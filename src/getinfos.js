@@ -37,6 +37,7 @@ class Profile extends Component {
       		<label>Nom : {this.state.nom}</label><br></br>
       		<label>Prénom : {this.state.prenom}</label><br></br>
       		<label>Age : {this.state.age}</label><br></br>
+          <label>Notes : {this.state.notes}</label><br></br>
 		</div>
     );
       
