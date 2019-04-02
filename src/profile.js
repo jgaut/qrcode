@@ -66,6 +66,8 @@ openpgp.encrypt(options).then(async function(ciphertext) {
 
 openpgp.decrypt(options).then(function(plaintext) {
     console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
+    var string = new TextDecoder("utf-8").decode(plaintext.data);
+    console.log(string);
 });
 });
 
@@ -74,8 +76,7 @@ openpgp.decrypt(options).then(function(plaintext) {
   Load(){
     
     this.testPGP();
-    //var string = new TextDecoder("utf-8").decode(encrypted);
-    //console.log(string);
+
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
