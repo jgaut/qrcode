@@ -140,9 +140,12 @@ class Profile extends Component {
   Save(){
     if(this.ischange){
     //console.log("Save my data !");
-    var dataTmp = this.state.slice();
+    var dataTmp = {};
+    for (var key in this.state) {
+      dataTmp.push({key:this.state[key]});
+    }
     console.log(dataTmp);
-    
+
     Storage.put(this.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
