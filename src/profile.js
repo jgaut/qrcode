@@ -87,10 +87,10 @@ class Profile extends Component {
 
   Load(){
     
-    var tmp = await this.encodePgp("la maison est belle et oui !", this.code);
+    var tmp = this.encodePgp("la maison est belle et oui !", this.code);
     console.log(tmp);
 
-    tmp = await this.decodePgp(tmp, this.code);
+    tmp = this.decodePgp(tmp, this.code);
     console.log(tmp);
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
@@ -141,7 +141,7 @@ class Profile extends Component {
     if(this.ischange){
     //console.log("Save my data !");
     var dataTmp = this.state.slice();
-    
+
     Storage.put(this.sub+".json", JSON.stringify(this.state), {
         level: 'public',
         contentType: 'text/plain'
