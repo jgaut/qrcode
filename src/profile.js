@@ -46,20 +46,19 @@ class Profile extends Component {
 
   async encodePgp(message, code){
 
-    //var uint8array = new TextEncoder("utf-8").encode(message);
     var options, encrypted;
 
     options = {
-        message: openpgp.message.fromText(message), // input as Message object
-        passwords: [code],                                             // multiple passwords possible
-        armor: false                                                             // don't ASCII armor (for Uint8Array output)
+        message: openpgp.message.fromText(message),
+        passwords: [code],
+        armor: false
     };
 
     openpgp.encrypt(options).then(async function(ciphertext) {
         encrypted = ciphertext.message.packets.write();
-        //console.log(encrypted); // get raw encrypted packets as Uint8Array
+        console.log(encrypted); // get raw encrypted packets as Uint8Array
         var string = new TextDecoder("utf-8").decode(encrypted);
-        //console.log(string);
+        console.log(string);
         return string;
     });
 
@@ -68,21 +67,21 @@ class Profile extends Component {
     async decodePgp(message, code){
 
     
-    var uint8array = new TextEncoder("utf-8").encode(message);
-    var options;
+      var uint8array = new TextEncoder("utf-8").encode(message);
+      var options;
 
-    options = {
-      message: await openpgp.message.read(uint8array), // parse encrypted bytes
-      passwords: [code],              // decrypt with password
-      format: 'binary'                          // output as Uint8Array
-    };
+      options = {
+        message: await openpgp.message.read(uint8array), // parse encrypted bytes
+        passwords: [code],              // decrypt with password
+        format: 'binary'                          // output as Uint8Array
+      };
 
-    openpgp.decrypt(options).then(function(plaintext) {
-        //console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
-        var string = new TextDecoder("utf-8").decode(plaintext.data);
-        //console.log(string);
-        return string;
-    });
+      openpgp.decrypt(options).then(function(plaintext) {
+          console.log(plaintext.data); // Uint8Array([0x01, 0x01, 0x01])
+          var string = new TextDecoder("utf-8").decode(plaintext.data);
+          console.log(string);
+          return string;
+      });
 
   }
 
