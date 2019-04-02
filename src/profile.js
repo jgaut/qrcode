@@ -44,23 +44,21 @@ class Profile extends Component {
  	}
 
   async testPGP(){
-    var options, encrypted;
+
     var message = "la maison est belle...";
     var uint8array = new TextEncoder("utf-8").encode(message);
-    
+var options, encrypted;
 
-    options = {
-      message: openpgp.message.fromBinary(uint8array), // input as Message object
-      passwords: ['secret stuff'],                                             // multiple passwords possible
-      armor: false                                                             // don't ASCII armor (for Uint8Array output)
-    };
+options = {
+    message: openpgp.message.fromBinary(new Uint8Array([0x01, 0x01, 0x01])), // input as Message object
+    passwords: ['secret stuff'],                                             // multiple passwords possible
+    armor: false                                                             // don't ASCII armor (for Uint8Array output)
+};
 
-    openpgp.encrypt(options).then(function(ciphertext) {
-      encrypted = ciphertext.message.packets.write(); // get raw encrypted packets as Uint8Array
-    });
-
-
-    options = {
+openpgp.encrypt(options).then(function(ciphertext) {
+    encrypted = ciphertext.message.packets.write(); // get raw encrypted packets as Uint8Array
+});
+options = {
     message: await openpgp.message.read(encrypted), // parse encrypted bytes
     passwords: ['secret stuff'],              // decrypt with password
     format: 'binary'                          // output as Uint8Array
