@@ -78,6 +78,8 @@ class Profile extends Component {
       var uint8array = new TextEncoder("utf-8").encode(message);
       var options;
 
+      console.log(key, message, code);
+
       options = {
         message: await openpgp.message.read(uint8array),
         passwords: [code],
