@@ -53,6 +53,8 @@ class Profile extends Component {
     }
     var options, encrypted;
 
+    console.log(key, message, code);
+    
     options = {
         message: openpgp.message.fromText(message),
         passwords: [code],
