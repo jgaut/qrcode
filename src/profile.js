@@ -147,7 +147,7 @@ class Profile extends Component {
       this.cpt=4;
       //console.log("Save my data !");
       this.copyState = {...this.state};
-      console.log("this.copyState :" + JSON.stringify(this.copyState));
+      //console.log("this.copyState :" + JSON.stringify(this.copyState));
       for (var key in this.state) {
         var t = this.state[key];
         this.encodePgp(key, t, this.code)
@@ -158,16 +158,16 @@ class Profile extends Component {
 
   async waitForSave(){
     if (this.cpt>0){
-      console.log("wait for cpt : " + this.cpt);
+      //console.log("wait for cpt : " + this.cpt);
       setTimeout(this.waitForSave, 1000);
     } else {
-      console.log("Save this.copyState :" + JSON.stringify(this.copyState));
-            Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
+      //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
+        Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
           level: 'public',
           contentType: 'text/plain'
         })
         .then (result => {
-          console.log(result);
+          //console.log(result);
         })
         .catch(err => console.log(err));
         this.ischange=false;
