@@ -155,7 +155,7 @@ class Profile extends Component {
   wait(){
     if (this.cpt>0){
       console.log("wait for cpt : " + this.cpt);
-      setTimeout(wait, 1000);
+      setTimeout(this.wait, 1000);
     } else {
             Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
           level: 'public',
