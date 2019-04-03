@@ -92,7 +92,7 @@ class Profile extends Component {
       console.log(message);
       //console.log(JSON.parse(message));
 
-      var uint8array = new TextEncoder("utf-8").encode(message);
+      var uint8array = new TextEncoder().encode(message);
       var options;
 
       console.log(key, uint8array, code);
