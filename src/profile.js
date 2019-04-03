@@ -66,39 +66,10 @@ class Profile extends Component {
 
     openpgp.encrypt(options).then(async (ciphertext) => {
         encrypted = ciphertext.message.packets.write();
-        console.log("encrypted :" + encrypted);
-        var tmp = JSON.stringify(encrypted).length;
-        console.log("encrypted :" + tmp);
-        console.log("encrypted :" + JSON.stringify(encrypted));
-        //var string = new TextDecoder("utf-8").decode(encrypted);
-        //console.log("string encode : " + string);
-        
-
         var decoder = new TextDecoder('utf8');
         var b64encoded = btoa(String.fromCharCode.apply(null, encrypted))
-        console.log(b64encoded);
-
         this.copyState[key]=b64encoded;
         this.cpt=this.cpt-1;
-
-        var u8_2 = new Uint8Array(atob(b64encoded).split("").map(function(c) {return c.charCodeAt(0); }));
-
-
-      //uint8array = new TextEncoder("utf-8").encode(string);
-
-      //console.log(key, string, code);
-      //console.log("encrypted :" + string);
-      
-      options = {
-        message: await openpgp.message.read(u8_2),
-        passwords: [code],
-        format: 'binary'
-      };
-
-      openpgp.decrypt(options).then((plaintext)=> {
-          var string = new TextDecoder("utf-8").decode(plaintext.data);
-          console.log("decode string : " + string);
-      });
     });
 
   }
@@ -109,21 +80,8 @@ class Profile extends Component {
         return;
       }
       var u8_2 = new Uint8Array(atob(message).split("").map(function(c) {return c.charCodeAt(0); }));
-      
-      
-      //for (var key in message) {
-        //console.log(key, message[key]);
-        //uint8array.set(message[key], key);
-      //}
-
-      console.log(message);
-      //console.log(JSON.parse(message));
-
-      //var uint8array = new TextEncoder().encode(message);
       var options;
-
-      //console.log(key, uint8array, code);
-      console.log("encrypted :" + u8_2);
+      
       options = {
         message: await openpgp.message.read(u8_2),
         passwords: [code],
@@ -132,7 +90,7 @@ class Profile extends Component {
 
       openpgp.decrypt(options).then((plaintext)=> {
           var string = new TextDecoder("utf-8").decode(plaintext.data);
-          console.log("decode string : " + string);
+          //console.log("decode string : " + string);
           this.setState({
             [key]: string
           });
