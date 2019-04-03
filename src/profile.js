@@ -112,7 +112,7 @@ class Profile extends Component {
         fetch(result)
           .then(response => response.json())
             .then(data => {
-              console.log("data :" + JSON.stringify(data) + " -- "+data.length);
+              //console.log("data :" + JSON.stringify(data) + " -- "+data.length);
               if(data.nom!==undefined){
                 for (var key in data) {
                   var t = data[key];
@@ -125,7 +125,7 @@ class Profile extends Component {
                   age: '',
                   notes:'',
                 };
-                console.log("data :" + JSON.stringify(this.state) + " -- "+this.state.length);
+                //console.log("data :" + JSON.stringify(this.state) + " -- "+this.state.length);
               }
             })
             .catch(error => {console.log(error);
