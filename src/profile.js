@@ -80,10 +80,11 @@ class Profile extends Component {
       if(message===""){
         return;
       }
+      uint8array.set(message);
       var uint8array = new Uint8Array();
       for (var key in message) {
         console.log(key, message[key]);
-        uint8array.set([1]);
+        
       }
       //var uint8array = new TextEncoder("utf-8").encode(message);
       var options;
