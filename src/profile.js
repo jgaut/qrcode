@@ -170,7 +170,7 @@ class Profile extends Component {
   waitForSave(){
     if (this.cpt>0){
       console.log("wait for cpt : " + this.cpt);
-      setTimeout(this.wait, 1000);
+      setTimeout(this.waitForSave, 1000);
     } else {
       console.log("Save this.copyState :" + JSON.stringify(this.copyState));
             Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
