@@ -52,17 +52,19 @@ class Profile extends Component {
       return;
     }
     var options, encrypted;
+    var uint8array = new TextEncoder("utf-8").encode(message);
 
     console.log(key, message, code);
 
     options = {
-        message: openpgp.message.fromText(message),
+        message: openpgp.message.fromBinary(uint8array),
         passwords: [code],
         armor: false
     };
 
     openpgp.encrypt(options).then((ciphertext)=> {
         encrypted = ciphertext.message.packets.write();
+        console.log("encrypted :" + encrypted);
         var string = new TextDecoder("utf-8").decode(encrypted);
         console.log("string encode : " + string);
         this.copyState[key]=string;
@@ -77,14 +79,13 @@ class Profile extends Component {
         return;
       }
     
-      var uint8array = new TextEncoder("utf-8").encode(message);
+      //var uint8array = new TextEncoder("utf-8").encode(message);
       var options;
 
       console.log(key, message, code);
 
       options = {
-        //message: await openpgp.message.read(uint8array),
-        message: message,
+        message: await openpgp.message.read(message),
         passwords: [code],
         format: 'text'
       };
