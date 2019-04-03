@@ -65,10 +65,10 @@ class Profile extends Component {
     return (
     	<div>
     	<h1>My profile</h1><br></br>
-      		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} readonly/><br></br>
-          <label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} readonly/><br></br>
-          <label>Age</label> <input type="text" name="age" value={this.state.age} readonly/><br></br>
-          <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} readonly/><br></br>
+      		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} readOnly/><br></br>
+          <label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} readOnly/><br></br>
+          <label>Age</label> <input type="text" name="age" value={this.state.age} readOnly/><br></br>
+          <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} readOnly/><br></br>
 		</div>
     );
       
