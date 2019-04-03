@@ -74,10 +74,10 @@ class Profile extends Component {
         this.cpt=this.cpt-1;
 
 
-      uint8array = new TextEncoder("utf-8").encode(string);
+      //uint8array = new TextEncoder("utf-8").encode(string);
 
-      console.log(key, string, code);
-      console.log("encrypted :" + string);
+      //console.log(key, string, code);
+      //console.log("encrypted :" + string);
       
       options = {
         message: await openpgp.message.read(encrypted),
