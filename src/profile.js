@@ -173,7 +173,7 @@ class Profile extends Component {
       setTimeout(this.waitForSave, 1000);
     } else {
       console.log("Save this.copyState :" + JSON.stringify(this.copyState));
-            Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
+            Storage.put(this.sub+".json", this.copyState.toString, {
           level: 'public',
           contentType: 'text/plain'
         })
