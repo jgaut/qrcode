@@ -80,8 +80,8 @@ class Profile extends Component {
       if(message===""){
         return;
       }
-
-      var uint8array = new Uint8Array();
+      var buffer = new ArrayBuffer(300);
+      var uint8array = new Uint8Array(buffer);
       
       
       for (var key in message) {
