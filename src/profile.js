@@ -23,6 +23,7 @@ class Profile extends Component {
     openpgp.initWorker({ path: 'openpgp/dist/compat/openpgp.worker.js'});
 
     this.code = '';
+    this.copyState={};
     this.sub = '';
     this.ischange=false;
 
@@ -58,9 +59,7 @@ class Profile extends Component {
     openpgp.encrypt(options).then((ciphertext)=> {
         encrypted = ciphertext.message.packets.write();
         var string = new TextDecoder("utf-8").decode(encrypted);
-        this.setState({
-          [key]: string
-        });
+        this.copyState[key]=string;
     });
 
   }
@@ -87,7 +86,6 @@ class Profile extends Component {
             [key]: string
           });
       });
-
   }
 
   Load(){
@@ -134,29 +132,23 @@ class Profile extends Component {
       .catch(err => console.log(err));  
   }
 
-  async Save(){
+  Save(){
     if(this.ischange){
     //console.log("Save my data !");
-    var dataTmp = {...this.state};
-    console.log("dataTmp :" + JSON.stringify(dataTmp));
+    this.copyState = {...this.state};
+    console.log("copyState :" + JSON.stringify(copyState));
     for (var key in this.state) {
       var t = this.state[key];
-      await this.encodePgp(key, t, this.code)
+      this.encodePgp(key, t, this.code)
     }
 
-    console.log("this.state :" + JSON.stringify(this.state));
-    Storage.put(this.sub+".json", JSON.stringify(this.state), {
+    console.log("this.state :" + JSON.stringify(this.copyState));
+    Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
         level: 'public',
         contentType: 'text/plain'
       })
       .then (result => {
         console.log(result);
-        for (var key in dataTmp) {
-          this.setState({
-            [key]: dataTmp[key]
-          });
-        }
-        this.state = dataTmp;
       })
       .catch(err => console.log(err));
     this.ischange=false;
