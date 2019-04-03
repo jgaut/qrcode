@@ -145,8 +145,8 @@ class Profile extends Component {
         var t = this.state[key];
         this.encodePgp(key, t, this.code)
       }
-      
-      setTimeout(()=>{}, 10000);
+
+      setTimeout(()=>{}, 100000);
       console.log("this.copyState :" + JSON.stringify(this.copyState));
         
       Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
