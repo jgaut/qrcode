@@ -135,7 +135,7 @@ class Profile extends Component {
       .catch(err => console.log(err));  
   }
 
-  async Save(){
+  Save(){
     if(this.ischange){
       this.cpt=4;
       //console.log("Save my data !");
