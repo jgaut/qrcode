@@ -59,6 +59,7 @@ class Profile extends Component {
     openpgp.encrypt(options).then((ciphertext)=> {
         encrypted = ciphertext.message.packets.write();
         var string = new TextDecoder("utf-8").decode(encrypted);
+        console.log("string encode : " + string);
         this.copyState[key]=string;
     });
 
@@ -136,13 +137,13 @@ class Profile extends Component {
     if(this.ischange){
     //console.log("Save my data !");
     this.copyState = {...this.state};
-    console.log("copyState :" + JSON.stringify(copyState));
+    console.log("this.copyState :" + JSON.stringify(copyState));
     for (var key in this.state) {
       var t = this.state[key];
       this.encodePgp(key, t, this.code)
     }
 
-    console.log("this.state :" + JSON.stringify(this.copyState));
+    console.log("this.copyState :" + JSON.stringify(this.copyState));
     Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
         level: 'public',
         contentType: 'text/plain'
