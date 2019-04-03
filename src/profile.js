@@ -147,17 +147,18 @@ class Profile extends Component {
       }
 
       console.log("this.copyState :" + JSON.stringify(this.copyState));
-      while(this.cpt=0){
-        Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
-          level: 'public',
-          contentType: 'text/plain'
-        })
-        .then (result => {
-          console.log(result);
-        })
-        .catch(err => console.log(err));
-        this.ischange=false;
-      }  
+      while(this.cpt>0){
+        setTimeout(()=>{}), 1000);
+      }
+      Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
+        level: 'public',
+        contentType: 'text/plain'
+      })
+      .then (result => {
+        console.log(result);
+      })
+      .catch(err => console.log(err));
+      this.ischange=false;
     }
     
   }
