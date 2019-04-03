@@ -23,7 +23,7 @@ class Profile extends Component {
 
     openpgp.config.debug = true;
 
-    openpgp.initWorker({ path: 'openpgp/dist/compat/openpgp.worker.js'});
+    openpgp.initWorker({ path: '/openpgp/dist/compat/openpgp.worker.js'});
 
     this.code = '';
     this.copyState={};
