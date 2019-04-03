@@ -119,7 +119,7 @@ class Profile extends Component {
       var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
       ls.set(this.sub, tmpCode.toString());
     }
-    
+
     this.code = ls.get(this.sub);
 
     Storage.get(this.sub+'.json', {level: 'public'})
@@ -214,7 +214,8 @@ class Profile extends Component {
       		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
           <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
           <button onClick={this.LogOut}>Logout</button><br></br>
-          <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
+          <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
+          <label>{qrcodeValue}</label>
 		</div>
     );
       
