@@ -90,8 +90,8 @@ class Profile extends Component {
       //}
 
       console.log(message);
-      console.log(JSON.parse(message));
-      
+      //console.log(JSON.parse(message));
+
       var uint8array = new TextEncoder("utf-8").encode(message);
       var options;
 
