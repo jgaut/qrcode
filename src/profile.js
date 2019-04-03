@@ -36,7 +36,7 @@ class Profile extends Component {
     this.Load = this.Load.bind(this);
     this.encodePgp = this.encodePgp.bind(this);
     this.decodePgp = this.decodePgp.bind(this);
-    this.wait = this.wait.bind(this);
+    this.waitForSave = this.waitForSave.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -165,16 +165,16 @@ class Profile extends Component {
       }
 
       console.log("this.copyState :" + JSON.stringify(this.copyState));
-      this.wait();
+      this.waitForSave();
   }
 }
 
-  wait(){
+  waitForSave(){
     if (this.cpt>0){
       console.log("wait for cpt : " + this.cpt);
       setTimeout(this.wait, 1000);
     } else {
-            Storage.put(this.sub+".json", this.copyState, {
+            Storage.put(this.sub+".json", this.copyState.toString(), {
           level: 'public',
           contentType: 'text/plain'
         })
