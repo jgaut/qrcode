@@ -84,7 +84,7 @@ class Profile extends Component {
 
       options = {
         //message: await openpgp.message.read(uint8array),
-        message: await openpgp.message.read(message),
+        message: message,
         passwords: [code],
         format: 'text'
       };
