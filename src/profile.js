@@ -26,6 +26,7 @@ class Profile extends Component {
     this.copyState={};
     this.sub = '';
     this.ischange=false;
+    this.cpt=0;
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -61,6 +62,7 @@ class Profile extends Component {
         var string = new TextDecoder("utf-8").decode(encrypted);
         console.log("string encode : " + string);
         this.copyState[key]=string;
+        this.cpt=this.cpt-1;
     });
 
   }
@@ -135,25 +137,29 @@ class Profile extends Component {
 
   Save(){
     if(this.ischange){
-    //console.log("Save my data !");
-    this.copyState = {...this.state};
-    console.log("this.copyState :" + JSON.stringify(this.copyState));
-    for (var key in this.state) {
-      var t = this.state[key];
-      this.encodePgp(key, t, this.code)
-    }
+      this.cpt=4;
+      //console.log("Save my data !");
+      this.copyState = {...this.state};
+      console.log("this.copyState :" + JSON.stringify(this.copyState));
+      for (var key in this.state) {
+        var t = this.state[key];
+        this.encodePgp(key, t, this.code)
+      }
 
-    console.log("this.copyState :" + JSON.stringify(this.copyState));
-    Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
-        level: 'public',
-        contentType: 'text/plain'
-      })
-      .then (result => {
-        console.log(result);
-      })
-      .catch(err => console.log(err));
-    this.ischange=false;
-    }  
+      console.log("this.copyState :" + JSON.stringify(this.copyState));
+      while(this.cpt=0){
+        Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
+          level: 'public',
+          contentType: 'text/plain'
+        })
+        .then (result => {
+          console.log(result);
+        })
+        .catch(err => console.log(err));
+        this.ischange=false;
+      }  
+    }
+    
   }
 
   handleChange(event) {
