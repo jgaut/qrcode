@@ -16,8 +16,8 @@ class Profile extends Component {
   this.uuid = params.uuid;
   this.key = params.key;
 
-  console.log("uuid : " + this.uuid);
-  console.log("key : " + this.key);
+  //console.log("uuid : " + this.uuid);
+  //console.log("key : " + this.key);
   
   openpgp.config.debug = true;
 
