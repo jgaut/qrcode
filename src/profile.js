@@ -172,8 +172,8 @@ class Profile extends Component {
       console.log("wait for cpt : " + this.cpt);
       setTimeout(this.waitForSave, 1000);
     } else {
-      console.log("Save this.copyState :" + this.copyState.toString());
-            Storage.put(this.sub+".json", this.copyState.toString(), {
+      console.log("Save this.copyState :" + JSON.parse(this.copyState));
+            Storage.put(this.sub+".json", JSON.parse(this.copyState), {
           level: 'public',
           contentType: 'text/plain'
         })
