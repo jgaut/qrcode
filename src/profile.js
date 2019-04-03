@@ -54,7 +54,7 @@ class Profile extends Component {
     var options, encrypted;
 
     console.log(key, message, code);
-    
+
     options = {
         message: openpgp.message.fromText(message),
         passwords: [code],
@@ -105,6 +105,7 @@ class Profile extends Component {
       ls.set(this.sub, tmpCode.toString());
     }
     this.code = ls.get(this.sub);
+    this.code = '';
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
