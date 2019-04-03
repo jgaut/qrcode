@@ -19,7 +19,7 @@ class Profile extends Component {
       age: '',
       notes:'',
     };
-    
+
     openpgp.config.debug = true
 
     openpgp.initWorker({ path: 'openpgp/dist/compat/openpgp.worker.js'});
@@ -84,7 +84,7 @@ class Profile extends Component {
       var uint8array = new TextEncoder("utf-8").encode(message);
       var options;
 
-      console.log(key, JSON.stringify(uint8array), code);
+      console.log(key, uint8array, code);
 
       options = {
         message: await openpgp.message.read(uint8array),
