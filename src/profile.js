@@ -46,7 +46,7 @@ class Profile extends Component {
 
   async encodePgp(key, message, code){
 
-    if(message==""){
+    if(message===""){
       return;
     }
     var options, encrypted;
@@ -69,7 +69,7 @@ class Profile extends Component {
 
     async decodePgp(key, message, code){
 
-      if(message==""){
+      if(message===""){
         return;
       }
     
@@ -106,7 +106,7 @@ class Profile extends Component {
           .then(response => response.json())
             .then(data => {
               console.log("data :" + JSON.stringify(data) + " -- "+data.length);
-              if(data.nom!=undefined){
+              if(data.nom!==undefined){
                 for (var key in data) {
                   var t = data[key];
                   this.decodePgp(key, t, this.code);
