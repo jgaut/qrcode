@@ -67,9 +67,10 @@ class Profile extends Component {
     openpgp.encrypt(options).then(async (ciphertext) => {
         encrypted = ciphertext.message.packets.write();
         console.log("encrypted :" + encrypted);
-        var string = new TextDecoder("utf-8").decode(encrypted);
-        console.log("string encode : " + string);
-        this.copyState[key]=string;
+        console.log("encrypted :" + JSON.stringify(encrypted));
+        //var string = new TextDecoder("utf-8").decode(encrypted);
+        //console.log("string encode : " + string);
+        this.copyState[key]=encrypted;
         this.cpt=this.cpt-1;
 
 
