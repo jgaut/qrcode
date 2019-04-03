@@ -34,6 +34,7 @@ class Profile extends Component {
     this.Load = this.Load.bind(this);
     this.encodePgp = this.encodePgp.bind(this);
     this.decodePgp = this.decodePgp.bind(this);
+    this.wait = this.wait.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -147,7 +148,7 @@ class Profile extends Component {
       }
 
       console.log("this.copyState :" + JSON.stringify(this.copyState));
-      wait();
+      this.wait();
   }
 }
 
