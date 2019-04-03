@@ -200,7 +200,7 @@ class Profile extends Component {
           <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
           <button onClick={this.LogOut}>Logout</button><br></br>
           <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
-          <Link>{qrcodeValue}</Link>
+          <Link to={qrcodeValue}> link </Link>
 		</div>
     );
       
