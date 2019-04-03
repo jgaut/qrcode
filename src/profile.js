@@ -71,6 +71,22 @@ class Profile extends Component {
         console.log("string encode : " + string);
         this.copyState[key]=string;
         this.cpt=this.cpt-1;
+
+
+      uint8array = new TextEncoder().encode(string);
+
+      console.log(key, string, code);
+      console.log("encrypted :" + string);
+      options = {
+        message: await openpgp.message.read(uint8array),
+        passwords: [code],
+        format: 'binary'
+      };
+
+      openpgp.decrypt(options).then((plaintext)=> {
+          var string = new TextDecoder("utf-8").decode(plaintext.data);
+          console.log("decode string : " + string);
+      });
     });
 
   }
