@@ -164,7 +164,7 @@ class Profile extends Component {
         this.encodePgp(key, t, this.code)
       }
 
-      console.log("this.copyState :" + JSON.stringify(this.copyState));
+      
       this.waitForSave();
   }
 }
@@ -174,6 +174,7 @@ class Profile extends Component {
       console.log("wait for cpt : " + this.cpt);
       setTimeout(this.wait, 1000);
     } else {
+      console.log("this.copyState :" + JSON.stringify(this.copyState));
             Storage.put(this.sub+".json", this.copyState.toString(), {
           level: 'public',
           contentType: 'text/plain'
