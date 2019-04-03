@@ -79,6 +79,8 @@ class Profile extends Component {
         var b64encoded = btoa(String.fromCharCode.apply(null, encrypted))
         console.log(b64encoded);
 
+        var u8_2 = new Uint8Array(atob(b64encoded).split("").map(function(c) {return c.charCodeAt(0); }));
+
 
       //uint8array = new TextEncoder("utf-8").encode(string);
 
@@ -86,7 +88,7 @@ class Profile extends Component {
       //console.log("encrypted :" + string);
       
       options = {
-        message: await openpgp.message.read(encrypted),
+        message: await openpgp.message.read(u8_2),
         passwords: [code],
         format: 'binary'
       };
