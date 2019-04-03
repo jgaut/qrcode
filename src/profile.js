@@ -135,7 +135,7 @@ class Profile extends Component {
       .catch(err => console.log(err));  
   }
 
-  Save(){
+  async Save(){
     if(this.ischange){
       this.cpt=4;
       //console.log("Save my data !");
@@ -146,7 +146,11 @@ class Profile extends Component {
         this.encodePgp(key, t, this.code)
       }
 
-      setTimeout(()=>{}, 100000);
+      while(this.cpt>0){
+        console.log(this.cpt);
+        setTimeout(()=>{}, 100000);
+      }
+      
       console.log("this.copyState :" + JSON.stringify(this.copyState));
         
       Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
