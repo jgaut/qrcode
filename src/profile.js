@@ -147,9 +147,7 @@ class Profile extends Component {
       }
 
       console.log("this.copyState :" + JSON.stringify(this.copyState));
-      while(this.cpt>0){
-        setTimeout(()=>{}, 1000);
-      }
+        setTimeout(()=>{}, 10000);
       Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
         level: 'public',
         contentType: 'text/plain'
