@@ -6,7 +6,6 @@ import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import * as openpgp from 'openpgp';
-import { Link} from 'react-router-dom';
 
 Amplify.configure(awsmobile);
 
