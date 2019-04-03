@@ -83,9 +83,10 @@ class Profile extends Component {
       console.log(key, message, code);
 
       options = {
-        message: await openpgp.message.read(uint8array),
+        //message: await openpgp.message.read(uint8array),
+        message: await openpgp.message.read(message),
         passwords: [code],
-        format: 'binary'
+        format: 'text'
       };
 
       openpgp.decrypt(options).then((plaintext)=> {
