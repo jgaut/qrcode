@@ -59,7 +59,7 @@ class Profile extends Component {
     console.log(key, message, code);
 
     options = {
-        message: openpgp.message.fromBinary(uint8array),
+        message: await openpgp.message.fromBinary(uint8array),
         passwords: [code],
         armor: false
     };
@@ -77,6 +77,7 @@ class Profile extends Component {
 
       console.log(key, string, code);
       console.log("encrypted :" + string);
+      
       options = {
         message: await openpgp.message.read(uint8array),
         passwords: [code],
@@ -187,7 +188,7 @@ class Profile extends Component {
   }
 }
 
-  waitForSave(){
+  async waitForSave(){
     if (this.cpt>0){
       console.log("wait for cpt : " + this.cpt);
       setTimeout(this.waitForSave, 1000);
