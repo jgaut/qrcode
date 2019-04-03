@@ -56,7 +56,7 @@ class Profile extends Component {
     var options, encrypted;
     var uint8array = new TextEncoder("utf-8").encode(message);
 
-    console.log(key, message, code);
+    //console.log(key, message, code);
 
     options = {
         message: await openpgp.message.fromBinary(uint8array),
