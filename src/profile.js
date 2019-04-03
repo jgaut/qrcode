@@ -78,7 +78,7 @@ class Profile extends Component {
       console.log(key, string, code);
       console.log("encrypted :" + string);
       options = {
-        message: openpgp.message.read(uint8array),
+        message: await openpgp.message.read(uint8array),
         passwords: [code],
         format: 'binary'
       };
