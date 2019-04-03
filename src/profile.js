@@ -72,12 +72,14 @@ class Profile extends Component {
         console.log("encrypted :" + JSON.stringify(encrypted));
         //var string = new TextDecoder("utf-8").decode(encrypted);
         //console.log("string encode : " + string);
-        this.copyState[key]=encrypted;
-        this.cpt=this.cpt-1;
+        
 
         var decoder = new TextDecoder('utf8');
         var b64encoded = btoa(String.fromCharCode.apply(null, encrypted))
         console.log(b64encoded);
+
+        this.copyState[key]=b64encoded;
+        this.cpt=this.cpt-1;
 
         var u8_2 = new Uint8Array(atob(b64encoded).split("").map(function(c) {return c.charCodeAt(0); }));
 
@@ -106,8 +108,7 @@ class Profile extends Component {
       if(message===""){
         return;
       }
-      var buffer = new ArrayBuffer(300);
-      var uint8array = new Uint8Array(buffer);
+      var u8_2 = new Uint8Array(atob(message).split("").map(function(c) {return c.charCodeAt(0); }));
       
       
       //for (var key in message) {
@@ -118,13 +119,13 @@ class Profile extends Component {
       console.log(message);
       //console.log(JSON.parse(message));
 
-      var uint8array = new TextEncoder().encode(message);
+      //var uint8array = new TextEncoder().encode(message);
       var options;
 
-      console.log(key, uint8array, code);
-      console.log("encrypted :" + uint8array);
+      //console.log(key, uint8array, code);
+      console.log("encrypted :" + u8_2);
       options = {
-        message: await openpgp.message.read(uint8array),
+        message: await openpgp.message.read(u8_2),
         passwords: [code],
         format: 'binary'
       };
