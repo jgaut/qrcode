@@ -39,7 +39,7 @@ class Profile extends Component {
   }
 
   async decodePgp(key, message, code){
-    console.log(message);
+    //console.log(message);
     if(message===""){
       return;
     }
@@ -54,7 +54,7 @@ class Profile extends Component {
 
     openpgp.decrypt(options).then((plaintext)=> {
         var string = new TextDecoder("utf-8").decode(plaintext.data);
-        console.log("decode string : " + string);
+        //console.log("decode string : " + string);
         this.setState({
           [key]: string
         });
