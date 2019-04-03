@@ -48,6 +48,7 @@ class Profile extends Component {
   async encodePgp(key, message, code){
 
     if(message===""){
+      this.cpt=this.cpt-1;
       return;
     }
     var options, encrypted;
