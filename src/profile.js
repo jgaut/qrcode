@@ -75,6 +75,10 @@ class Profile extends Component {
         this.copyState[key]=encrypted;
         this.cpt=this.cpt-1;
 
+        var decoder = new TextDecoder('utf8');
+        var b64encoded = btoa(decoder.decode(encrypted));
+        console.log(b64encoded);
+
 
       //uint8array = new TextEncoder("utf-8").encode(string);
 
