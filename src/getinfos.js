@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import * as openpgp from 'openpgp'
 
 class Profile extends Component {
 
@@ -12,24 +13,53 @@ class Profile extends Component {
 	    };
 
   const { params } = this.props.match;
-  const uuid = params.uuid;
-  const key = params.key;
+  this.uuid = params.uuid;
+  this.key = params.key;
 
-  console.log("uuid : " + uuid);
-  console.log("key : " + key);
+  console.log("uuid : " + this.uuid);
+  console.log("key : " + this.key);
   
-  fetch("https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+uuid+".json")
+  openpgp.config.debug = true;
+
+  openpgp.initWorker({ path: 'openpgp/dist/compat/openpgp.worker.js'});
+
+  this.Load();
+ 	}
+
+  async Load(){
+    fetch("https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.uuid+".json")
     .then(response => response.json())
       .then(data => {
         //console.log("data :" + JSON.stringify(data));
-        for (var key in data) {
-          this.setState({
-            [key]: data[key]
-          });
+        for (var k in data) {
+          this.decodePgp(k, data[k], this.key);
         }
       })
       .catch(error => {console.log(error);});
- 	}
+  }
+
+  async decodePgp(key, message, code){
+
+    if(message===""){
+      return;
+    }
+    var u8_2 = new Uint8Array(atob(message).split("").map(function(c) {return c.charCodeAt(0); }));
+    var options;
+    
+    options = {
+      message: await openpgp.message.read(u8_2),
+      passwords: [code],
+      format: 'binary'
+    };
+
+    openpgp.decrypt(options).then((plaintext)=> {
+        var string = new TextDecoder("utf-8").decode(plaintext.data);
+        //console.log("decode string : " + string);
+        this.setState({
+          [key]: string
+        });
+    });
+  }
 
   render() {
     return (
