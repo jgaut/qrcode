@@ -20,7 +20,7 @@ class Profile extends Component {
       notes:'',
     };
 
-    openpgp.config.debug = true
+    openpgp.config.debug = true;
 
     openpgp.initWorker({ path: 'openpgp/dist/compat/openpgp.worker.js'});
 
@@ -95,7 +95,7 @@ class Profile extends Component {
             [key]: string
           });
       });
-  }
+    }
 
   Load(){
 
