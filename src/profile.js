@@ -76,7 +76,7 @@ class Profile extends Component {
         this.cpt=this.cpt-1;
 
         var decoder = new TextDecoder('utf8');
-        var b64encoded = btoa(decoder.decode(encrypted));
+        var b64encoded = btoa(String.fromCharCode.apply(null, encrypted))
         console.log(b64encoded);
 
 
