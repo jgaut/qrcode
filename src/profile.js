@@ -145,11 +145,11 @@ class Profile extends Component {
 
   async Save(){
     if(this.ischange){
-      this.cpt=4;
       //console.log("Save my data !");
       this.copyState = {...this.state};
       //console.log("this.copyState :" + JSON.stringify(this.copyState));
       for (var key in this.state) {
+        this.cpt++;
         var t = this.state[key];
         this.encodePgp(key, t, this.code)
       }
@@ -160,7 +160,7 @@ class Profile extends Component {
   async waitForSave(){
     if (this.cpt>0){
       //console.log("wait for cpt : " + this.cpt);
-      setTimeout(this.waitForSave, 1000);
+      setTimeout(this.waitForSave, 100);
     } else {
       //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
         Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
@@ -191,7 +191,7 @@ class Profile extends Component {
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     var size = 512;
-
+    var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
     return (
     	<div>
     	<h1>My profile</h1><br></br>
@@ -201,7 +201,13 @@ class Profile extends Component {
           <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
           <button onClick={this.LogOut}>Logout</button><br></br>
           <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
-          <Link to={qrcodeValue}> link </Link>
+          <Link to=> link </Link>
+          <a target="_BLANK" title="QRCode link" href={qrcodeValue}>
+            Lien contenu dans le QRCode ci-dessus
+          </a><br></br>
+          <a target="_BLANK" title="Data link" href={dataLink}>
+            Lien vers le fichier de données
+          </a><br></br>
 		</div>
     );
       
