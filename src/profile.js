@@ -65,9 +65,9 @@ class Profile extends Component {
     openpgp.encrypt(options).then((ciphertext)=> {
         encrypted = ciphertext.message.packets.write();
         console.log("encrypted :" + encrypted);
-        var string = new TextDecoder("utf-8").decode(encrypted);
-        console.log("string encode : " + string);
-        this.copyState[key]=string;
+        //var string = new TextDecoder("utf-8").decode(encrypted);
+        //console.log("string encode : " + string);
+        this.copyState[key]=encrypted;
         this.cpt=this.cpt-1;
     });
 
@@ -87,7 +87,7 @@ class Profile extends Component {
       options = {
         message: await openpgp.message.read(message),
         passwords: [code],
-        format: 'text'
+        format: 'binary'
       };
 
       openpgp.decrypt(options).then((plaintext)=> {
