@@ -174,7 +174,7 @@ class Profile extends Component {
       console.log("wait for cpt : " + this.cpt);
       setTimeout(this.wait, 1000);
     } else {
-            Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
+            Storage.put(this.sub+".json", this.copyState, {
           level: 'public',
           contentType: 'text/plain'
         })
