@@ -119,8 +119,8 @@ class Profile extends Component {
       var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
       ls.set(this.sub, tmpCode.toString());
     }
+    
     this.code = ls.get(this.sub);
-    this.code = '';
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
