@@ -39,7 +39,7 @@ class Profile extends Component {
   }
 
   async decodePgp(key, message, code){
-
+    console.log(message);
     if(message===""){
       return;
     }
