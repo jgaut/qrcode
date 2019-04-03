@@ -73,7 +73,7 @@ class Profile extends Component {
         this.cpt=this.cpt-1;
 
 
-      uint8array = new TextEncoder().encode(string);
+      uint8array = new TextEncoder("utf-8").encode(string);
 
       console.log(key, string, code);
       console.log("encrypted :" + string);
