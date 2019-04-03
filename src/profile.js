@@ -146,24 +146,26 @@ class Profile extends Component {
         this.encodePgp(key, t, this.code)
       }
 
-      while(this.cpt>0){
-        console.log(this.cpt);
-        setTimeout(()=>{}, 100000);
-      }
-      
       console.log("this.copyState :" + JSON.stringify(this.copyState));
-        
-      Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
-        level: 'public',
-        contentType: 'text/plain'
-      })
-      .then (result => {
-        console.log(result);
-      })
-      .catch(err => console.log(err));
-      this.ischange=false;
-    }
-    
+      wait();
+  }
+}
+
+  wait(){
+    if (this.cpt>0){
+      console.log("wait for cpt : " + this.cpt);
+      setTimeout(wait, 1000);
+    } else {
+            Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
+          level: 'public',
+          contentType: 'text/plain'
+        })
+        .then (result => {
+          console.log(result);
+        })
+        .catch(err => console.log(err));
+        this.ischange=false;
+      }
   }
 
   handleChange(event) {
