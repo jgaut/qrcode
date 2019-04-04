@@ -107,6 +107,7 @@ class Profile extends Component {
     }
 
     this.code = ls.get(this.sub);
+    this.setState({code:this.code});
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
@@ -201,7 +202,7 @@ class Profile extends Component {
         <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
         <button onClick={this.LogOut}>Logout</button><br></br>
         <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
-        <label>{this.code}</label><br></br>
+        <label>{this.state.code}</label><br></br>
         <a target="_BLANK" title="QRCode link" href={qrcodeValue}>
           Lien contenu dans le QRCode ci-dessus
         </a><br></br>
