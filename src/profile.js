@@ -161,16 +161,16 @@ class Profile extends Component {
       setTimeout(this.waitForSave, 100);
     } else {
       //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
-        Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
-          level: 'public',
-          contentType: 'text/plain'
-        })
-        .then (result => {
-          //console.log(result);
-        })
-        .catch(err => console.log(err));
-        this.ischange=false;
-      }
+      Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
+        level: 'public',
+        contentType: 'text/plain'
+      })
+      .then (result => {
+        //console.log(result);
+      })
+      .catch(err => console.log(err));
+      this.ischange=false;
+    }
   }
 
   handleChange(event) {
@@ -193,19 +193,19 @@ class Profile extends Component {
     return (
     	<div>
     	<h1>My profile</h1><br></br>
-      		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
-      		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
-      		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
-          <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
-          <button onClick={this.LogOut}>Logout</button><br></br>
-          <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
-          
-          <a target="_BLANK" title="QRCode link" href={qrcodeValue}>
-            Lien contenu dans le QRCode ci-dessus
-          </a><br></br>
-          <a target="_BLANK" title="Data link" href={dataLink}>
-            Lien vers le fichier de données
-          </a><br></br>
+    		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
+    		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
+    		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
+        <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
+        <button onClick={this.LogOut}>Logout</button><br></br>
+        <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
+        
+        <a target="_BLANK" title="QRCode link" href={qrcodeValue}>
+          Lien contenu dans le QRCode ci-dessus
+        </a><br></br>
+        <a target="_BLANK" title="Data link" href={dataLink}>
+          Lien vers le fichier de données
+        </a><br></br>
 		</div>
     );
       
