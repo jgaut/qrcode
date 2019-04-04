@@ -66,7 +66,7 @@ class Profile extends Component {
 
     openpgp.encrypt(options).then(async (ciphertext) => {
         encrypted = ciphertext.message.packets.write();
-        var b64encoded = btoa(String.fromCharCode.apply(null, encrypted))
+        var b64encoded = btoa(String.fromCharCode.apply(null, encrypted));
         this.copyState[key]=b64encoded;
         this.cpt=this.cpt-1;
     });
