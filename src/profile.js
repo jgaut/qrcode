@@ -152,8 +152,8 @@ class Profile extends Component {
         this.encodePgp(key, t, this.code)
       }
       this.waitForSave();
+    }
   }
-}
 
   async waitForSave(){
     if (this.cpt>0){
