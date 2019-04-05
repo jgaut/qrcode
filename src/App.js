@@ -7,6 +7,7 @@ import SignInConfirm from './signinconfirm';
 import NoAuth from './noauth';
 import Profile from './profile';
 import Bip39 from './bip39';
+import GetInfos from './getinfos';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 
 // retrieve temporary AWS credentials and sign requests
