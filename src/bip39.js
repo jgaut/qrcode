@@ -26,8 +26,9 @@ class Bip39 extends Component {
     .catch(err => console.log(err));
 
     this.handleChange = this.handleChange.bind(this);
+    this.Generate = this.Generate.bind(this);
     this.Validate = this.Validate.bind(this);
-    
+
  	}
 
   Validate(){
@@ -49,10 +50,9 @@ class Bip39 extends Component {
 
   }
 
-
   Generate(){
     console.log("need to generate a new mnemonic");
-    this.state({newKey:new Mnemonic(Mnemonic.Words.FRENCH)});
+    this.state({newKey: new Mnemonic(Mnemonic.Words.FRENCH)});
   }
 
   render() {
@@ -62,7 +62,9 @@ class Bip39 extends Component {
     	<h1>Master Key</h1><br></br>
       		<label>Actual key</label> <label>{this.state.actualKey}</label><br></br>
       		<label>New key</label> <input type="text" name="newKey" value={this.state.newKey} onChange={this.handleChange}/><br></br>
+          <button onClick={this.Generate}>Generate</button><br></br>
       		<button onClick={this.Validate}>Validate</button><br></br>
+
 		</div>
     );
       
