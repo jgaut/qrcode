@@ -28,8 +28,13 @@ class Bip39 extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.Generate = this.Generate.bind(this);
     this.Validate = this.Validate.bind(this);
+    this.Cancel = this.Cancel.bind(this);
 
  	}
+
+  Cancel(){
+    this.props.history.push('/');
+  }
 
   Validate(){
     console.log("Change my master key");
@@ -64,7 +69,7 @@ class Bip39 extends Component {
       		<label>New key</label> <input type="text" name="newKey" value={this.state.newKey} onChange={this.handleChange}/><br></br>
           <button onClick={this.Generate}>Generate</button><br></br>
       		<button onClick={this.Validate}>Validate</button><br></br>
-          <button onClick={this.props.history.push('/')}>Cancel</button><br></br>
+          <button onClick={this.Cancel}>Cancel</button><br></br>
 
 		</div>
     );
