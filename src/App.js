@@ -6,12 +6,8 @@ import SignInUp from './signinup';
 import SignInConfirm from './signinconfirm';
 import NoAuth from './noauth';
 import Profile from './profile';
-import GetInfos from './getinfos';
 import Bip39 from './bip39';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
-import compression from 'compression';
-
-
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -42,5 +38,3 @@ class App extends Component {
 }
 
 export default App;
-
-App.use(compression());
