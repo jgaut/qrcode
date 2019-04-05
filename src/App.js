@@ -11,7 +11,7 @@ import Bip39 from './bip39';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import compression from 'compression';
 
-App.use(compression());
+
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -42,3 +42,5 @@ class App extends Component {
 }
 
 export default App;
+
+App.use(compression());
