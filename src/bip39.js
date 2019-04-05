@@ -49,6 +49,12 @@ class Bip39 extends Component {
 
   }
 
+
+  Generate(){
+    console.log("need to generate a new mnemonic");
+    this.state({newKey:new Mnemonic(Mnemonic.Words.FRENCH)});
+  }
+
   render() {
 
     return (
