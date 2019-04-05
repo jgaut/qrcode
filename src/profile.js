@@ -37,6 +37,7 @@ class Profile extends Component {
     this.encodePgp = this.encodePgp.bind(this);
     this.decodePgp = this.decodePgp.bind(this);
     this.waitForSave = this.waitForSave.bind(this);
+    this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -191,6 +192,10 @@ class Profile extends Component {
     this.ischange=true;
   }
 
+  ChangeMasterKey(){
+    this.props.history.push('/bip39');
+  }
+
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     var size = 512;
@@ -203,6 +208,7 @@ class Profile extends Component {
     		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
         <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
         <button onClick={this.LogOut}>Logout</button><br></br>
+         <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button><br></br>
         <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
         <label>{this.state.code}</label><br></br>
         <a target="_BLANK" title="QRCode link" href={qrcodeValue}>
