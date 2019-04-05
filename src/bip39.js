@@ -52,7 +52,7 @@ class Bip39 extends Component {
 
   Generate(){
     console.log("need to generate a new mnemonic");
-    this.state({newKey: new Mnemonic(Mnemonic.Words.FRENCH)});
+    this.setState({newKey: new Mnemonic(Mnemonic.Words.FRENCH)});
   }
 
   render() {
@@ -64,6 +64,7 @@ class Bip39 extends Component {
       		<label>New key</label> <input type="text" name="newKey" value={this.state.newKey} onChange={this.handleChange}/><br></br>
           <button onClick={this.Generate}>Generate</button><br></br>
       		<button onClick={this.Validate}>Validate</button><br></br>
+          <button onClick={this.props.history.push('/')}>Cancel</button><br></br>
 
 		</div>
     );
