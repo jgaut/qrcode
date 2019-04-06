@@ -9,7 +9,10 @@ class SignInUp extends Component {
     this.state = {
       email: '',
       password: '',
-      err: ''
+      err: '',
+      hName: Math.random(),
+      hType:'hidden',
+      hValue:'',
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -30,7 +33,10 @@ class SignInUp extends Component {
   }
 
   onSubmit(){
-
+    if(this.state.hValue!==""){
+      return;
+    }
+    
     var username = this.state.email;
     var email = this.state.email;
     var password = this.state.password;
@@ -93,6 +99,7 @@ class SignInUp extends Component {
             Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
           </label>
           <br></br>
+          <input name={this.state.hName} type={this.state.hType} value={this.state.hValue}/>
           <button onClick={this.onSubmit}>Sign In - Sign Up</button>
           <label>{this.state.err}</label>
         </header>
