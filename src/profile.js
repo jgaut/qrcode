@@ -39,9 +39,10 @@ class Profile extends Component {
     this.waitForSave = this.waitForSave.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
 
-    await Auth.currentAuthenticatedUser({bypassCache: false})
+    Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
       this.sub = user.attributes.sub;
+      this.forceUpdate();
       this.Load();
     })
     .catch(err => console.log(err));
@@ -210,7 +211,7 @@ class Profile extends Component {
         <button onClick={this.LogOut}>Logout</button><br></br>
          <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button><br></br>
         <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
-        <label>{this.state.code}</label><br></br>
+        <label>{this.code}</label><br></br>
         <a target="_BLANK" title="QRCode link" href={qrcodeValue}>
           Lien contenu dans le QRCode ci-dessus
         </a><br></br>
