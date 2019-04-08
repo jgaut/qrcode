@@ -17,6 +17,7 @@ class Profile extends Component {
       nom: '',
       prenom: '',
       age: '',
+      gs:'',
       notes:'',
     };
 
@@ -38,6 +39,7 @@ class Profile extends Component {
     this.decodePgp = this.decodePgp.bind(this);
     this.waitForSave = this.waitForSave.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
+    this.loadForm = this.loadForm.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -198,6 +200,16 @@ class Profile extends Component {
     this.props.history.push('/bip39');
   }
 
+  loadForm(tab){
+    var tmp;
+    for (var key in tab) {
+        tmp = <label>{key} :: {tab[key]}</label>;
+      }
+
+
+    return tmp;
+  }
+
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     var size = 512;
@@ -208,6 +220,7 @@ class Profile extends Component {
     		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
     		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
     		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
+        <label>Groupe sangin</label> <input type="text" name="gs" value={this.state.gs} onChange={this.handleChange} onBlur={this.Save}/><br></br>
         <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/><br></br>
         <button onClick={this.LogOut}>Logout</button><br></br>
          <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button><br></br>
@@ -219,6 +232,7 @@ class Profile extends Component {
         <a target="_BLANK" title="Data link" href={dataLink}>
           Lien vers le fichier de données
         </a><br></br>
+        {this.loadForm()}
 		</div>
     );
       
