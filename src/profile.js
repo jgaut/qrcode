@@ -208,6 +208,7 @@ class Profile extends Component {
 
 
     return tmp;
+
   }
 
   render() {
@@ -232,7 +233,7 @@ class Profile extends Component {
         <a target="_BLANK" title="Data link" href={dataLink}>
           Lien vers le fichier de données
         </a><br></br>
-        {this.loadForm()}
+        {this.loadForm}
 		</div>
     );
       
