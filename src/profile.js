@@ -203,7 +203,8 @@ class Profile extends Component {
   loadForm(tab){
     var tmp;
     for (var key in tab) {
-        tmp = <label>{key} :: {tab[key]}</label>;
+      console.log(key, tab[key]);
+      tmp = <label>{key} :: {tab[key]}</label>;
       }
 
 
