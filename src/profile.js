@@ -39,7 +39,7 @@ class Profile extends Component {
     this.waitForSave = this.waitForSave.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
 
-    Auth.currentAuthenticatedUser({bypassCache: false})
+    await Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
       this.sub = user.attributes.sub;
       this.Load();
@@ -110,7 +110,7 @@ class Profile extends Component {
     }
 
     this.code = ls.get(this.sub);
-    this.setState({code:this.code});
+    //this.setState({code:this.code});
 
     Storage.get(this.sub+'.json', {level: 'public'})
       .then(result => {
