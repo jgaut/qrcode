@@ -205,7 +205,7 @@ class Profile extends Component {
     var tmp='';
     for (var key in tab) {
       console.log(key, tab[key]);
-      var tmp2 = ReactDOM.render(<label>{key} :: {tab[key]}</label>);
+      var tmp2 = render(<label>{key} :: {tab[key]}</label>);
       tmp = tmp + "<br></br> " +tmp2;
       }
 
