@@ -206,13 +206,13 @@ class Profile extends Component {
     var tmp='';
     for (var key in tab) {
       console.log(key, tab[key]);
-      var tmp2 = ReactDOM.render(<label>{key} :: {tab[key]}</label>, document.getElementById(Math.random()));
+      var tmp2 = <label>{key} :: {tab[key]}</label>;
       tmp = tmp + "<br></br> " +tmp2;
       }
 
 
     this.XX=tmp;
-
+    return tmp;
   }
 
   render() {
