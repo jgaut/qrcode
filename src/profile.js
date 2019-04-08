@@ -205,7 +205,8 @@ class Profile extends Component {
     var tmp;
     for (var key in tab) {
       console.log(key, tab[key]);
-      tmp = <label>{key} :: {tab[key]}</label>;
+      var tmp2 = <label>{key} :: {tab[key]}</label>;
+      tmp = tmp + " " +tmp2;
       }
 
 
