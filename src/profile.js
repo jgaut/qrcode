@@ -30,6 +30,7 @@ class Profile extends Component {
     this.sub = '';
     this.ischange=false;
     this.cpt=0;
+    this.XX='';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -208,7 +209,7 @@ class Profile extends Component {
       }
 
 
-    return tmp;
+    this.XX=tmp;
 
   }
 
@@ -234,7 +235,7 @@ class Profile extends Component {
         <a target="_BLANK" title="Data link" href={dataLink}>
           Lien vers le fichier de données
         </a><br></br>
-        {this.loadForm}
+        {this.XX}
 		</div>
     );
       
