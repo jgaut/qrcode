@@ -150,10 +150,11 @@ class Profile extends Component {
 
   async Save(){
     if(this.ischange){
-      //console.log("Save my data !");
+      console.log("Save my data !");
       this.copyState = {...this.state};
       //console.log("this.copyState :" + JSON.stringify(this.copyState));
       for (var key in this.state) {
+        console.log(key, this.state[key]);
         this.cpt++;
         var t = this.state[key];
         this.encodePgp(key, t, this.code)
