@@ -62,7 +62,7 @@ class SignInUp extends Component {
             
         }).then((user) => {
           console.log(user);
-          this.props.history.push('/');
+          this.props.history.push('/', {p:this.state.password});
           }
         )
         .catch((err) => {
