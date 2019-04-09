@@ -218,7 +218,7 @@ class Profile extends Component {
     var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
     
     const dynamic = () => {
-      return <label> ok </label>;
+      return (<label> okkkkkkkkk </label>);
 
     }
 
