@@ -37,7 +37,7 @@ class Bip39 extends Component {
     .then((user) => {}
     ).catch((err) => {
       console.log("err : "+ err);
-      this.props.history.push('/signinup');
+      this.props.history.push('/');
       }
     )  
   }
