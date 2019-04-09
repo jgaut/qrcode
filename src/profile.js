@@ -221,6 +221,7 @@ class Profile extends Component {
 
       var tmp = <label> ok </label>;
       tmp += <label> ok </label>;
+       console.log(tmp);
       return tmp;
 
     }
