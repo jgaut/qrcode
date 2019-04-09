@@ -216,10 +216,9 @@ class Profile extends Component {
     // Create an empty array that will hold the final JSX output.
     let buffer = []
 
-    buffer.push(<div>A</div>);
-    buffer.push(<div>B</div>);
-    buffer.push(<div>C</div>);
-
+    for (var key in itemArray) {
+      buffer.push(<div>key :: itemArray[key]</div>);
+    }
 
     // And return the buffer for display inside the render() function
     return (
