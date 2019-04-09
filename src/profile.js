@@ -219,8 +219,8 @@ class Profile extends Component {
     
     const dynamic = () => {
 
-      var tmp = <label> ok <label>;
-      tmp = tmp + <label> ok <label>;
+      var tmp = <label> ok </label>;
+      tmp += <label> ok </label>;
       return tmp;
 
     }
