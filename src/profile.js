@@ -222,6 +222,9 @@ class Profile extends Component {
 
     }
 
+    const dynamic2 = <label> okkkkkkkkk </label>;
+
+
     return (
     	<div>
     	<h1>My profile</h1><br></br>
@@ -297,6 +300,7 @@ class Profile extends Component {
         </td>
       </tr>
       <dynamic/>
+      <dynamic2/>
 		</div>
     );
       
