@@ -217,7 +217,15 @@ class Profile extends Component {
     let buffer = []
 
     for (var key in itemArray) {
-      buffer.push(<div>{key} :: itemArray[key]</div>);
+      buffer.push(
+        <tr>
+        <td align="left">
+        <label>{key}</label> 
+        </td>
+        <td>
+        <input type="text" name="nom" value={this.state[key]} onChange={this.handleChange} onBlur={this.Save}/>
+        </td>
+        </tr>
     }
 
     // And return the buffer for display inside the render() function
