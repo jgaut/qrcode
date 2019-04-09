@@ -40,7 +40,6 @@ class Profile extends Component {
     this.decodePgp = this.decodePgp.bind(this);
     this.waitForSave = this.waitForSave.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
-    this.loadForm = this.loadForm.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
