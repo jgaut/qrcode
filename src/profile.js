@@ -30,7 +30,6 @@ class Profile extends Component {
     this.sub = '';
     this.ischange=false;
     this.cpt=0;
-    this.XX='';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
