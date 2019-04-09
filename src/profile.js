@@ -220,7 +220,7 @@ class Profile extends Component {
     	<div>
     	<h1>My profile</h1><br></br>
       <tr>
-        <td valign="top">
+        <td valign="top" align="center" width="50%">
 
     		<tr>
         <td>
@@ -277,7 +277,7 @@ class Profile extends Component {
         </tr>
 
         </td>
-        <td valign="top">
+        <td valign="top" align="center" width="50%">
 
         <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
         <label>{this.code}</label><br></br>
@@ -287,7 +287,7 @@ class Profile extends Component {
         <a target="_BLANK" title="Data link" href={dataLink}>
           Lien vers le fichier de données
         </a><br></br>
-        
+
         </td>
       </tr>
 		</div>
