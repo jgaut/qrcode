@@ -225,7 +225,7 @@ class Profile extends Component {
         <td>
         <input type="text" name="nom" value={this.state[key]} onChange={this.handleChange} onBlur={this.Save}/>
         </td>
-        </tr>
+        </tr>);
     }
 
     // And return the buffer for display inside the render() function
