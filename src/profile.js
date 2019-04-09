@@ -217,7 +217,7 @@ class Profile extends Component {
     let buffer = []
 
     for (var key in itemArray) {
-      buffer.push(<div>key :: itemArray[key]</div>);
+      buffer.push(<div>{key} :: itemArray[key]</div>);
     }
 
     // And return the buffer for display inside the render() function
