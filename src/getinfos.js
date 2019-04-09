@@ -58,14 +58,41 @@ class Profile extends Component {
     });
   }
 
+  processItems(itemArray) {
+    // Create an empty array that will hold the final JSX output.
+    let buffer = []
+
+    for (var key in itemArray) {
+      buffer.push(
+        <tr>
+        <td align="left">
+        <label>{key}</label> 
+        </td>
+        <td>
+        <input type="text" name={key} value={this.state[key]} readOnly/>
+        </td>
+        </tr>);
+    }
+
+    // And return the buffer for display inside the render() function
+    return (
+        <div className="container flex center">
+            {buffer}
+        </div>
+    );
+  }
+
   render() {
     return (
     	<div>
     	<h1>My profile</h1><br></br>
-      		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} readOnly/><br></br>
-          <label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} readOnly/><br></br>
-          <label>Age</label> <input type="text" name="age" value={this.state.age} readOnly/><br></br>
-          <label>Notes</label> <textarea name="notes" rows="5" value={this.state.notes} readOnly/><br></br>
+      <tr>
+        <td valign="top" align="center" width="100%">
+        {this.processItems(this.state)}
+
+       </td>
+      </tr>
+
 		</div>
     );
       
