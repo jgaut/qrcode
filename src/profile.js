@@ -223,7 +223,7 @@ class Profile extends Component {
         <td valign="top" align="center" width="50%">
 
     		<tr>
-        <td>
+        <td align="left">
         <label>Nom</label> 
         </td>
         <td>
@@ -232,7 +232,7 @@ class Profile extends Component {
         </tr>
 
         <tr>
-        <td>
+        <td align="left">
         <label>Prénom</label> 
         </td>
         <td>
@@ -241,7 +241,7 @@ class Profile extends Component {
         </tr>
 
         <tr>
-        <td>
+        <td align="left">
         <label>Age</label> 
         </td>
         <td>
@@ -250,7 +250,7 @@ class Profile extends Component {
         </tr>
 
         <tr>
-        <td>
+        <td align="left">
         <label>Groupe sangin</label> 
         </td>
         <td>
@@ -259,7 +259,7 @@ class Profile extends Component {
         </tr>
 
         <tr>
-        <td>
+        <td align="left">
         <label>Notes</label>
         </td>
         <td>
