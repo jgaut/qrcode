@@ -246,51 +246,8 @@ class Profile extends Component {
     	<h1>My profile</h1><br></br>
       <tr>
         <td valign="top" align="center" width="50%">
+        {this.processItems(this.state)}
 
-    		<tr>
-        <td align="left">
-        <label>Nom</label> 
-        </td>
-        <td>
-        <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange} onBlur={this.Save}/>
-    		</td>
-        </tr>
-
-        <tr>
-        <td align="left">
-        <label>Prénom</label> 
-        </td>
-        <td>
-        <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/>
-    		</td>
-        </tr>
-
-        <tr>
-        <td align="left">
-        <label>Age</label> 
-        </td>
-        <td>
-        <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/>
-        </td>
-        </tr>
-
-        <tr>
-        <td align="left">
-        <label>Groupe sangin</label> 
-        </td>
-        <td>
-        <input type="text" name="gs" value={this.state.gs} onChange={this.handleChange} onBlur={this.Save}/>
-        </td>
-        </tr>
-
-        <tr>
-        <td align="left">
-        <label>Notes</label>
-        </td>
-        <td>
-        <textarea name="notes" rows="5" value={this.state.notes} onChange={this.handleChange} onBlur={this.Save}/>
-        </td>
-        </tr>
 
         <tr>
         <td>
@@ -315,7 +272,7 @@ class Profile extends Component {
 
         </td>
       </tr>
-      {this.processItems(this.state)}
+      
 		</div>
     );
       
