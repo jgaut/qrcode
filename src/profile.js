@@ -211,19 +211,6 @@ class Profile extends Component {
     this.props.history.push('/bip39');
   }
 
-  loadForm(tab){
-    var tmp='';
-    for (var key in tab) {
-      console.log(key, tab[key]);
-      tmp += <label>{key} :: {tab[key]}</label>;
-      //tmp = tmp + "<br></br> " +tmp2;
-      }
-
-
-    
-    return tmp;
-  }
-
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     var size = 512;
@@ -248,7 +235,6 @@ class Profile extends Component {
         <a target="_BLANK" title="Data link" href={dataLink}>
           Lien vers le fichier de données
         </a><br></br>
-        {this.loadForm(this.state)}
 		</div>
     );
       
