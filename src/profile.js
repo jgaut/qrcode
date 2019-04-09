@@ -247,8 +247,6 @@ class Profile extends Component {
       <tr>
         <td valign="top" align="center" width="50%">
         {this.processItems(this.state)}
-
-
         <tr>
         <td>
         <button onClick={this.LogOut}>Logout</button>
