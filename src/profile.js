@@ -223,7 +223,7 @@ class Profile extends Component {
         <label>{key}</label> 
         </td>
         <td>
-        <input type="text" name="nom" value={this.state[key]} onChange={this.handleChange} onBlur={this.Save}/>
+        <input type="text" name={key} value={this.state[key]} onChange={this.handleChange} onBlur={this.Save}/>
         </td>
         </tr>);
     }
