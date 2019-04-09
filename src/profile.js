@@ -40,6 +40,8 @@ class Profile extends Component {
     this.decodePgp = this.decodePgp.bind(this);
     this.waitForSave = this.waitForSave.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
+    this.processItems = this.processItems.bind(this);
+    
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -210,24 +212,27 @@ class Profile extends Component {
     this.props.history.push('/bip39');
   }
 
+  processItems(itemArray) {
+    // Create an empty array that will hold the final JSX output.
+    let buffer = []
 
+    buffer.push(<div>A</div>);
+    buffer.push(<div>B</div>);
+    buffer.push(<div>C</div>);
+
+
+    // And return the buffer for display inside the render() function
+    return (
+        <div className"container flex center">
+            {buffer}
+        </div>
+    );
+  }
 
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     var size = 512;
     var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
-    
-    const dynamic = () => {
-
-      var tmp = <label> ok </label>;
-      tmp += <label> ok </label>;
-       console.log(tmp);
-      return tmp;
-
-    }
-
-    const dynamic2 = <label> okkkkkkkkk </label>;
-
 
     return (
     	<div>
@@ -303,9 +308,7 @@ class Profile extends Component {
 
         </td>
       </tr>
-      {dynamic}
-      <dynamic/>
-      <dynamic2/>
+      {this.processItems(this.state)}
 		</div>
     );
       
