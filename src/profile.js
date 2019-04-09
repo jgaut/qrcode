@@ -220,7 +220,7 @@ class Profile extends Component {
     	<div>
     	<h1>My profile</h1><br></br>
       <tr>
-        <td valign="bottom">
+        <td valign="top">
     		<label>Nom</label> <input type="text" name="nom" value={this.state.nom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
     		<label>Prénom</label> <input type="text" name="prenom" value={this.state.prenom} onChange={this.handleChange} onBlur={this.Save}/><br></br>
     		<label>Age</label> <input type="text" name="age" value={this.state.age} onChange={this.handleChange} onBlur={this.Save}/><br></br>
@@ -229,7 +229,7 @@ class Profile extends Component {
         <button onClick={this.LogOut}>Logout</button><br></br>
         <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button><br></br>
         </td>
-        <td valign="bottom">
+        <td valign="top">
         <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
         <label>{this.code}</label><br></br>
         <a target="_BLANK" title="QRCode link" href={qrcodeValue}>
