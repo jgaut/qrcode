@@ -41,7 +41,7 @@ class Profile extends Component {
     this.waitForSave = this.waitForSave.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
     this.processItems = this.processItems.bind(this);
-    
+
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -223,7 +223,7 @@ class Profile extends Component {
 
     // And return the buffer for display inside the render() function
     return (
-        <div className"container flex center">
+        <div className="container flex center">
             {buffer}
         </div>
     );
