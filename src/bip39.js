@@ -34,10 +34,7 @@ class Bip39 extends Component {
 
   componentWillMount(){
     Auth.currentAuthenticatedUser({bypassCache: false})
-    .then((user) => {
-      console.log("user : " + user);
-      this.props.history.push('/profile');
-      }
+    .then((user) => {}
     ).catch((err) => {
       console.log("err : "+ err);
       this.props.history.push('/signinup');
