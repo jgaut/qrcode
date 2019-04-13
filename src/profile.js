@@ -267,6 +267,12 @@ class Profile extends Component {
         </td>
         </tr>
 
+        <tr>
+        <td>
+        {this.code}
+        </td>
+        </tr>
+
         </td>
       </tr>
       
