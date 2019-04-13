@@ -244,7 +244,7 @@ class Profile extends Component {
     	<div>
     	<h1>My profile</h1><br></br>
       <tr>
-        <td valign="top" align="center" width="50%">
+        <td valign="top" align="center" width="100%">
         {this.processItems(this.state)}
         <tr>
         <td>
@@ -255,18 +255,13 @@ class Profile extends Component {
         </td>
         </tr>
 
+        <tr>
+        <td>
+
+        <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
         </td>
-        <td valign="top" align="center" width="50%">
-
-        <QRCode value={qrcodeValue} size={size} includeMargin={true}/><br></br>
-        <label>{this.code}</label><br></br>
-        <a target="_BLANK" title="QRCode link" href={qrcodeValue}>
-          Lien contenu dans le QRCode ci-dessus
-        </a><br></br>
-        <a target="_BLANK" title="Data link" href={dataLink}>
-          Lien vers le fichier de données
-        </a><br></br>
-
+        </tr>
+    
         </td>
       </tr>
       
