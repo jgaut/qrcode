@@ -247,10 +247,10 @@ class Profile extends Component {
         <td valign="top" align="center" width="100%">
         {this.processItems(this.state)}
         <tr>
-        <td>
+        <td align="left">
         <button onClick={this.LogOut}>Logout</button>
         </td>
-        <td>
+        <td align="left">
         <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
         </td>
         </tr>
@@ -261,7 +261,7 @@ class Profile extends Component {
         <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
         </td>
         </tr>
-    
+
         </td>
       </tr>
       
