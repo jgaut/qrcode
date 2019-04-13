@@ -247,10 +247,10 @@ class Profile extends Component {
         <td valign="top" align="center" width="100%">
         {this.processItems(this.state)}
         <tr>
-        <td align="left">
+        <td align="center">
         <button onClick={this.LogOut}>Logout</button>
         </td>
-        <td align="left">
+        <td align="center">
         <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
         </td>
         </tr>
