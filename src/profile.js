@@ -213,7 +213,7 @@ class Profile extends Component {
     this.props.history.push('/bip39');
   }
   usernameAvailable(){
-    
+
   }
 
   processItems(itemArray) {
@@ -224,7 +224,7 @@ class Profile extends Component {
       console.log(key);
       buffer.push(
 
-        <Field name={Math.random()} validate={usernameAvailable}>
+        <Field name={Math.random()} validate={this.usernameAvailable}>
             {({ input, meta }) => (
               <div>
                 <label>Username</label>
