@@ -225,7 +225,7 @@ class Profile extends Component {
       console.log(key);
       buffer.push(
 
-        <Field key={Math.random()} validate={this.usernameAvailable}>
+        <Field name={Math.random()} validate={this.usernameAvailable}>
             {({ input, meta }) => (
               <div>
                 <label>{key}</label>
