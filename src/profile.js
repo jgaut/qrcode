@@ -222,7 +222,7 @@ class Profile extends Component {
         <div>
             <label>{key}</label> 
             <Field
-              name={key}
+              name={Math.random()}
               component="input"
               type="text"
               value={this.state[key]} 
