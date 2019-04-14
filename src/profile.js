@@ -220,16 +220,14 @@ class Profile extends Component {
     for (var key in itemArray) {
       console.log(key);
       buffer.push(
-        <div name={Math.random()}>
-            <label>{key}</label> 
+        <div>
+            <label>First Name</label>
             <Field
-              name={key}
+              name={Math.random()}
               component="input"
               type="text"
-              value={this.state[key]} 
-              onChange={this.handleChange} 
-              onBlur={this.Save}
-            /><br></br>
+              placeholder="First Name"
+            />
           </div>
    );
     }
@@ -269,7 +267,6 @@ class Profile extends Component {
               placeholder="First Name"
             />
           </div>
-          {this.processItems(this.state)}
           <div>
             <label>Last Name</label>
             <Field
