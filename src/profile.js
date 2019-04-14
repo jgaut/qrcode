@@ -229,7 +229,7 @@ class Profile extends Component {
             {({ input, meta }) => (
               <div>
                 <label>{key}</label>
-                <input {...input} name={key} type="text" placeholder="Username" value={this.state[key]} 
+                <input {...input} key={Math.random()} name={key} type="text" placeholder="Username" value={this.state[key]} 
               onChange={this.handleChange} 
               onBlur={this.Save}
               />
