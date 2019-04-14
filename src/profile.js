@@ -257,10 +257,9 @@ class Profile extends Component {
       Read Docs
     </a>
     <Form
-      onSubmit={onSubmit}
-      initialValues={{ stooge: 'larry', employed: false }}
+
       render={({ handleSubmit, form, submitting, pristine, values }) => (
-        <form onSubmit={handleSubmit}>
+        <form >
           <div>
             <label>First Name</label>
             <Field
