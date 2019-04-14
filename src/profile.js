@@ -219,10 +219,16 @@ class Profile extends Component {
 
     for (var key in itemArray) {
       buffer.push(
-<div>
+        <div>
             <label>{key}</label> 
- 
-            <input type="text" name={key} value={this.state[key]} onChange={this.handleChange} onBlur={this.Save}/>
+            <Field
+              name={key}
+              component="input"
+              type="text"
+              placeholder="Last Name"
+              value={this.state[key]} 
+              onChange={this.handleChange} 
+              onBlur={this.Save}/>
             </div>
    );
     }
@@ -269,6 +275,7 @@ const App = () => (
               placeholder="First Name"
             />
           </div>
+          {this.processItems(this.state)}
           <div>
             <label>Last Name</label>
             <Field
