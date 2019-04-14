@@ -218,14 +218,11 @@ class Profile extends Component {
 
     for (var key in itemArray) {
       buffer.push(
-        <Tr>
-          <Td>
+
             <label>{key}</label> 
-          </Td>
-          <Td>
+ 
             <input type="text" name={key} value={this.state[key]} onChange={this.handleChange} onBlur={this.Save}/>
-          </Td>
-        </Tr>);
+   );
     }
 
     // And return the buffer for display inside the render() function
