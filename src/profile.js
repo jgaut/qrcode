@@ -247,22 +247,14 @@ class Profile extends Component {
     	<div>
     	<h1>My profile</h1>
 
-<Table>
-  <Tbody>
+
     {this.processItems(this.state)}
-    <Tr>
-      <Td><button onClick={this.LogOut}>Logout</button></Td>
-      <Td><button onClick={this.ChangeMasterKey}>ChangeMasterKey</button></Td>
-    </Tr>
-      </Tbody>
-</Table>
-<Table>
-  <Tbody>
-    <Tr>
-      <Td><QRCode value={qrcodeValue} size={size} includeMargin={true}/></Td>
-    </Tr>
-  </Tbody>
-</Table>
+
+     <button onClick={this.LogOut}>Logout</button>
+      <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
+
+      <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
+
       <myProfile/>
 		</div>
     );
