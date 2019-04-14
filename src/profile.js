@@ -6,6 +6,8 @@ import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import * as openpgp from 'openpgp';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 Amplify.configure(awsmobile);
 
@@ -217,14 +219,14 @@ class Profile extends Component {
 
     for (var key in itemArray) {
       buffer.push(
-        <tr>
-        <td align="left">
-        <label>{key}</label> 
-        </td>
-        <td>
-        <input type="text" name={key} value={this.state[key]} onChange={this.handleChange} onBlur={this.Save}/>
-        </td>
-        </tr>);
+        <Tr>
+          <Td>
+            <label>{key}</label> 
+          </Td>
+          <Td>
+            <input type="text" name={key} value={this.state[key]} onChange={this.handleChange} onBlur={this.Save}/>
+          </Td>
+        </Tr>);
     }
 
     // And return the buffer for display inside the render() function
@@ -241,40 +243,31 @@ class Profile extends Component {
     var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
 
     return (
+
+
     	<div>
-    	<h1>My profile</h1><br></br>
-      <tr>
-        <td valign="top" align="center" width="100%">
-        {this.processItems(this.state)}
-        <tr>
-        <td align="center">
-        <button onClick={this.LogOut}>Logout</button>
-        </td>
-        <td align="center">
-        <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
-        </td>
-        </tr>
+    	<h1>My profile</h1>
 
-        <tr>
-        <td>
-        <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
-        </td>
-        </tr>
-
-        <tr>
-        <td>
-        {this.sub}
-        </td>
-        </tr>
-
-        <tr>
-        <td>
-        {this.code}
-        </td>
-        </tr>
-
-        </td>
-      </tr>
+<Table>
+  <Thead>
+  </Thead>
+  <Tbody>
+    {this.processItems(this.state)}
+    <Tr>
+      <Td><button onClick={this.LogOut}>Logout</button></Td>
+      <Td><button onClick={this.ChangeMasterKey}>ChangeMasterKey</button></Td>
+    </Tr>
+    <Tr>
+      <Td><QRCode value={qrcodeValue} size={size} includeMargin={true}/></Td>
+    </Tr>
+    <Tr>
+      <Td>{this.sub}</Td>
+    </Tr>
+    <Tr>
+      <Td>{this.code}</Td>
+    </Tr>
+  </Tbody>
+</Table>
       
 		</div>
     );
