@@ -261,7 +261,7 @@ class Profile extends Component {
 }
 
 const myProfile = () => (
-  <Styles>
+  
     <h1>🏁 React Final Form - Simple Example</h1>
     <a href="https://github.com/erikras/react-final-form#-react-final-form">
       Read Docs
@@ -270,7 +270,7 @@ const myProfile = () => (
       onSubmit={onSubmit}
       initialValues={{ stooge: 'larry', employed: false }}
       render={({ handleSubmit, form, submitting, pristine, values }) => (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={}>
           <div>
             <label>First Name</label>
             <Field
@@ -406,7 +406,7 @@ const myProfile = () => (
         </form>
       )}
     />
-  </Styles>
+  
 )
 
 export default Profile;
