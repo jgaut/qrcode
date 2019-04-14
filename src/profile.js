@@ -269,7 +269,6 @@ class Profile extends Component {
               placeholder="First Name"
             />
           </div>
-          {this.processItems(this.state)}
           <div>
             <label>Last Name</label>
             <Field
