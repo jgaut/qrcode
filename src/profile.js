@@ -263,7 +263,7 @@ class Profile extends Component {
 const myProfile = () => (
   
     <Form
-      onSubmit={onSubmit}
+      
       initialValues={{ stooge: 'larry', employed: false }}
       render={({ handleSubmit, form, submitting, pristine, values }) => (
         <form>
