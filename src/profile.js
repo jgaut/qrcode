@@ -243,19 +243,7 @@ class Profile extends Component {
     return (
 
 
-    	<div>
-    	<h1>My profile</h1>
-
-
-    {this.processItems(this.state)}
-
-     <button onClick={this.LogOut}>Logout</button>
-      <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
-
-      <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
-
-      <App/>
-		</div>
+    	<App/>
     );
       
   }
