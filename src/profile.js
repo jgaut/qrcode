@@ -245,6 +245,8 @@ class Profile extends Component {
     return (
 
 
+    	<div>
+    	<h1>My profile</h1>
 
 <Table>
   <Tbody>
@@ -253,6 +255,10 @@ class Profile extends Component {
       <Td><button onClick={this.LogOut}>Logout</button></Td>
       <Td><button onClick={this.ChangeMasterKey}>ChangeMasterKey</button></Td>
     </Tr>
+      </Tbody>
+</Table>
+<Table>
+  <Tbody>
     <Tr>
       <Td><QRCode value={qrcodeValue} size={size} includeMargin={true}/></Td>
     </Tr>
@@ -265,7 +271,7 @@ class Profile extends Component {
   </Tbody>
 </Table>
       
-
+		</div>
     );
       
   }
