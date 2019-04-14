@@ -257,19 +257,7 @@ class Profile extends Component {
     </Tr>
       </Tbody>
 </Table>
-<Table>
-  <Tbody>
-    <Tr>
-      <Td><QRCode value={qrcodeValue} size={size} includeMargin={true}/></Td>
-    </Tr>
-    <Tr>
-      <Td>{this.sub}</Td>
-    </Tr>
-    <Tr>
-      <Td>{this.code}</Td>
-    </Tr>
-  </Tbody>
-</Table>
+
       
 		</div>
     );
