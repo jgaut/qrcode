@@ -18,12 +18,7 @@ class Bip39 extends Component {
 
     this.sub='';
 
-    Auth.currentAuthenticatedUser({bypassCache: false})
-    .then(user => {
-      this.sub = user.attributes.sub;
-      this.state.actualKey=ls.get(this.sub);
-    })
-    .catch(err => console.log(err));
+    
 
     this.handleChange = this.handleChange.bind(this);
     this.Generate = this.Generate.bind(this);
@@ -40,6 +35,15 @@ class Bip39 extends Component {
       this.props.history.push('/');
       }
     )  
+  }
+
+  componentDidMount(){
+    Auth.currentAuthenticatedUser({bypassCache: false})
+    .then(user => {
+      this.sub = user.attributes.sub;
+      this.setState({actualKey:ls.get(this.sub)});
+    })
+    .catch(err => console.log(err));
   }
 
   Cancel(){
