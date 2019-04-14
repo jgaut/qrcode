@@ -223,7 +223,7 @@ class Profile extends Component {
         <div>
             <label>{key}</label> 
             <Field
-              name={key}
+              name={key+Math.random()}
               component="input"
               type="text"
               value={this.state[key]} 
@@ -269,6 +269,7 @@ class Profile extends Component {
               placeholder="First Name"
             />
           </div>
+          {this.processItems(this.state)}
           <div>
             <label>Last Name</label>
             <Field
