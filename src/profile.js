@@ -212,6 +212,9 @@ class Profile extends Component {
   ChangeMasterKey(){
     this.props.history.push('/bip39');
   }
+  usernameAvailable(){
+    
+  }
 
   processItems(itemArray) {
     // Create an empty array that will hold the final JSX output.
