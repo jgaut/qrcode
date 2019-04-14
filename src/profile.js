@@ -230,11 +230,11 @@ class Profile extends Component {
             {({ input, meta }) => (
               <div>
                 <label>{myKey}</label>
-                <input {...input} key={Math.random()} name={myKey} type="text" placeholder="Username" value={this.state[myKey]} 
+                <input {...input} key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} 
                
               
               />
-                {meta.error && meta.touched && <span>{meta.error}</span>}
+               
               </div>
             )}
           </Field>
