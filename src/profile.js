@@ -220,18 +220,21 @@ class Profile extends Component {
     for (var key in itemArray) {
       console.log(key);
       buffer.push(
-        <div key={Math.random()}>
-            <label>{key}</label> 
-            <Field
-            key={Math.random()}
-              name={key}
-              component="input"
-              type="text"
-              value={this.state[key]} 
+
+        <Field name={Math.random()} validate={usernameAvailable}>
+            {({ input, meta }) => (
+              <div>
+                <label>Username</label>
+                <input {...input} name={key} type="text" placeholder="Username" value={this.state[key]} 
               onChange={this.handleChange} 
               onBlur={this.Save}
-            /><br></br>
-          </div>
+              />
+                {meta.error && meta.touched && <span>{meta.error}</span>}
+              </div>
+            )}
+          </Field>
+
+        
    );
     }
 
