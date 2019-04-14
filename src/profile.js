@@ -254,7 +254,7 @@ class Profile extends Component {
 
       <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
 
-      <myProfile/>
+      <App/>
 		</div>
     );
       
