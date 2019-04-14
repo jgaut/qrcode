@@ -249,8 +249,6 @@ class Profile extends Component {
     	<h1>My profile</h1>
 
 <Table>
-  <Thead>
-  </Thead>
   <Tbody>
     {this.processItems(this.state)}
     <Tr>
