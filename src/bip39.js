@@ -37,15 +37,6 @@ class Bip39 extends Component {
     )  
   }
 
-  componentDidMount(){
-    Auth.currentAuthenticatedUser({bypassCache: false})
-    .then(user => {
-      this.sub = user.attributes.sub;
-      this.setState({actualKey:ls.get(this.sub)});
-    })
-    .catch(err => console.log(err));
-  }
-
   Cancel(){
     this.props.history.push('/');
   }
@@ -76,10 +67,17 @@ class Bip39 extends Component {
 
   render() {
 
+    Auth.currentAuthenticatedUser({bypassCache: false})
+    .then(user => {
+      this.sub = user.attributes.sub;
+      this.setState({actualKey:ls.get(this.sub)});
+    })
+    .catch(err => console.log(err));
+
     return (
     	<div>
     	<h1>Master Key</h1><br></br>
-      		<label>Actual key</label> <label>{this.state.actualKey}</label><br></br>
+      		<label>Actual key : </label> <label>{this.state.actualKey}</label><br></br>
       		<label>New key</label> <input type="text" name="newKey" value={this.state.newKey} onChange={this.handleChange}/><br></br>
           <button onClick={this.Generate}>Generate</button><br></br>
       		<button onClick={this.Validate}>Validate</button><br></br>
