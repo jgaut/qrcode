@@ -266,7 +266,7 @@ const myProfile = () => (
       onSubmit={onSubmit}
       initialValues={{ stooge: 'larry', employed: false }}
       render={({ handleSubmit, form, submitting, pristine, values }) => (
-        <form onSubmit={}>
+        <form>
           <div>
             <label>First Name</label>
             <Field
