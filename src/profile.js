@@ -222,7 +222,7 @@ class Profile extends Component {
         <div>
             <label>{key}</label> 
             <Field
-              name='X'
+              name={key}
               component="input"
               type="text"
               placeholder="Last Name"
@@ -241,21 +241,7 @@ class Profile extends Component {
     );
   }
 
-  render() {
-    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
-    var size = 256;
-    var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
-
-    return (
-
-
-    	<App/>
-    );
-      
-  }
-}
-
-const App = () => (
+  const App = () => (
   <Styles>
     <h1>🏁 React Final Form - Simple Example</h1>
     <a href="https://github.com/erikras/react-final-form#-react-final-form">
@@ -411,5 +397,21 @@ const onSubmit = async values => {
   await sleep(300)
   window.alert(JSON.stringify(values, 0, 2))
 }
+
+  render() {
+    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
+    var size = 256;
+    var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
+
+    return (
+
+
+    	<App/>
+    );
+      
+  }
+}
+
+
 
 export default Profile;
