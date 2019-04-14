@@ -225,10 +225,10 @@ class Profile extends Component {
       console.log(key);
       buffer.push(
 
-        <Field name={Math.random()} validate={this.usernameAvailable}>
+        <Field key={Math.random()} validate={this.usernameAvailable}>
             {({ input, meta }) => (
               <div>
-                <label>Username</label>
+                <label>{key}</label>
                 <input {...input} name={key} type="text" placeholder="Username" value={this.state[key]} 
               onChange={this.handleChange} 
               onBlur={this.Save}
