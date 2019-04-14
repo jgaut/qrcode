@@ -6,7 +6,8 @@ import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import * as openpgp from 'openpgp';
-import { Form, Field } from 'react-final-form'
+import { Form, Field } from 'react-final-form';
+import Styles from './Styles';
 
 Amplify.configure(awsmobile);
 
@@ -260,13 +261,17 @@ class Profile extends Component {
   }
 }
 
-const myProfile = () => (
-  
+const App = () => (
+  <Styles>
+    <h1>🏁 React Final Form - Simple Example</h1>
+    <a href="https://github.com/erikras/react-final-form#-react-final-form">
+      Read Docs
+    </a>
     <Form
-      
+      onSubmit={onSubmit}
       initialValues={{ stooge: 'larry', employed: false }}
       render={({ handleSubmit, form, submitting, pristine, values }) => (
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label>First Name</label>
             <Field
@@ -402,7 +407,7 @@ const myProfile = () => (
         </form>
       )}
     />
-  
+  </Styles>
 )
 
 export default Profile;
