@@ -245,8 +245,6 @@ class Profile extends Component {
     return (
 
 
-    	<div>
-    	<h1>My profile</h1>
 
 <Table>
   <Tbody>
@@ -267,7 +265,7 @@ class Profile extends Component {
   </Tbody>
 </Table>
       
-		</div>
+
     );
       
   }
