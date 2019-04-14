@@ -262,10 +262,6 @@ class Profile extends Component {
 
 const myProfile = () => (
   
-    <h1>🏁 React Final Form - Simple Example</h1>
-    <a href="https://github.com/erikras/react-final-form#-react-final-form">
-      Read Docs
-    </a>
     <Form
       onSubmit={onSubmit}
       initialValues={{ stooge: 'larry', employed: false }}
