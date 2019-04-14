@@ -219,7 +219,7 @@ class Profile extends Component {
     const usernameAvailable = ()=>{};
 
     // Create an empty array that will hold the final JSX output.
-    let buffer = []
+    let buffer = {};
 
     for (var key in itemArray) {
       console.log(key);
@@ -231,8 +231,6 @@ class Profile extends Component {
               <div>
                 <label>{myKey}</label>
                 <input {...input} key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} 
-               
-              
               />
                
               </div>
