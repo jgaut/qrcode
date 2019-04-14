@@ -225,7 +225,6 @@ class Profile extends Component {
               name={key}
               component="input"
               type="text"
-              placeholder="Last Name"
               value={this.state[key]} 
               onChange={this.handleChange} 
               onBlur={this.Save}/>
