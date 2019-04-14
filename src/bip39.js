@@ -80,7 +80,7 @@ class Bip39 extends Component {
     	<div>
     	<h1>Master Key</h1><br></br>
       		<label>Actual key : </label> <label>{this.state.actualKey}</label><br></br>
-      		<label>New key</label> <input type="text" name="newKey" size="300" value={this.state.newKey} onChange={this.handleChange}/><br></br>
+      		<label>New key</label> <input type="text" name="newKey" size="100" value={this.state.newKey} onChange={this.handleChange}/><br></br>
           <button onClick={this.Generate}>Generate</button><br></br>
       		<button onClick={this.Validate}>Validate</button><br></br>
           <button onClick={this.Cancel}>Cancel</button><br></br>
