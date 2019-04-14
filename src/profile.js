@@ -222,11 +222,13 @@ class Profile extends Component {
         <div>
             <label>{key}</label> 
             <Field
-              name={key}
+              name='X'
               component="input"
               type="text"
               placeholder="Last Name"
-              />
+              value={this.state[key]} 
+              onChange={this.handleChange} 
+              onBlur={this.Save}/>
             </div>
    );
     }
