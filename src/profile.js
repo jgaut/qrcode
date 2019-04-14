@@ -223,7 +223,7 @@ class Profile extends Component {
         <div key={Math.random()}>
             <label>{key}</label> 
             <Field
-              key={Math.random()}
+            key={Math.random()}
               name={key}
               component="input"
               type="text"
@@ -257,9 +257,10 @@ class Profile extends Component {
       Read Docs
     </a>
     <Form
-
+      onSubmit={onSubmit}
+      initialValues={{ stooge: 'larry', employed: false }}
       render={({ handleSubmit, form, submitting, pristine, values }) => (
-        <form >
+        <form onSubmit={handleSubmit}>
           <div>
             <label>First Name</label>
             <Field
