@@ -258,6 +258,7 @@ class Profile extends Component {
       initialValues={{ stooge: 'larry', employed: false }}
       render={({ handleSubmit, form, submitting, pristine, values }) => (
         <form onSubmit={handleSubmit}>
+        {this.processItems(this.state)}
           <div>
             <label>First Name</label>
             <Field
