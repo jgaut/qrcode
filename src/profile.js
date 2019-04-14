@@ -227,8 +227,9 @@ class Profile extends Component {
               type="text"
               value={this.state[key]} 
               onChange={this.handleChange} 
-              onBlur={this.Save}/>
-            </div>
+              onBlur={this.Save}
+            />
+          </div>
    );
     }
 
