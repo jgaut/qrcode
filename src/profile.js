@@ -220,10 +220,10 @@ class Profile extends Component {
     for (var key in itemArray) {
       console.log(key);
       buffer.push(
-        <div>
+        <div name={Math.random()}>
             <label>{key}</label> 
             <Field
-              name={key+Math.random()}
+              name={key}
               component="input"
               type="text"
               value={this.state[key]} 
