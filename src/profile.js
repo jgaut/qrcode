@@ -239,7 +239,7 @@ class Profile extends Component {
 
   render() {
     var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
-    var size = 512;
+    var size = 256;
     var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
 
     return (
@@ -257,7 +257,19 @@ class Profile extends Component {
     </Tr>
       </Tbody>
 </Table>
-
+<Table>
+  <Tbody>
+    <Tr>
+      <Td><QRCode value={qrcodeValue} size={size} includeMargin={true}/></Td>
+    </Tr>
+    <Tr>
+      <Td>{this.sub}</Td>
+    </Tr>
+    <Tr>
+      <Td>{this.code}</Td>
+    </Tr>
+  </Tbody>
+</Table>
       
 		</div>
     );
