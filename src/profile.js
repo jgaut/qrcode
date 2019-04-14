@@ -228,7 +228,7 @@ class Profile extends Component {
               value={this.state[key]} 
               onChange={this.handleChange} 
               onBlur={this.Save}
-            />
+            /><br/>
           </div>
    );
     }
