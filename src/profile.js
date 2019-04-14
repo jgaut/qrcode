@@ -230,7 +230,7 @@ class Profile extends Component {
             {({ input, meta }) => (
               <div>
                 <label>{myKey}</label>
-                <input {...input} name={myKey} type="text" placeholder="Username" value={this.state[key]} 
+                <input {...input} name={myKey} type="text" placeholder="Username" value={this.state[myKey]} 
               onChange={this.handleChange} 
               onBlur={this.Save}
               />
