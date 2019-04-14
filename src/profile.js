@@ -223,7 +223,7 @@ class Profile extends Component {
 
     for (var key in itemArray) {
       console.log(key);
-      var myKey = key;
+      let myKey = key;
       buffer.push(
 
         <Field name={Math.random()} validate={this.usernameAvailable}>
