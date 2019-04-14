@@ -226,11 +226,11 @@ class Profile extends Component {
       let myKey = key;
       buffer.push(
 
-        <Field name={Math.random()} validate={this.usernameAvailable}>
+        <Field name={myKey} validate={this.usernameAvailable}>
             {({ input, meta }) => (
               <div>
                 <label>{myKey}</label>
-                <input {...input} key={Math.random()} name={myKey} type="text" placeholder="Username" value={this.state[key]} 
+                <input {...input} name={myKey} type="text" placeholder="Username" value={this.state[key]} 
               onChange={this.handleChange} 
               onBlur={this.Save}
               />
