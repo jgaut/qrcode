@@ -221,8 +221,6 @@ class Profile extends Component {
 
   processItems(itemArray) {
 
-    const usernameAvailable = ()=>{};
-
     // Create an empty array that will hold the final JSX output.
     let buffer = [];
 
