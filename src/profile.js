@@ -275,10 +275,10 @@ class Profile extends Component {
     this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
 
     return (
-    <div style={marginLeft: "auto",
+    <div style={{marginLeft: "auto",
             marginRight: "auto",
             maxWidth: "900px",
-            padding: "1em"}>
+            padding: "1em"}}>
     <h1>Profile</h1>
     <Table>  	 
     {this.processItems(this.state)}
