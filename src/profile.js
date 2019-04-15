@@ -9,6 +9,9 @@ import * as openpgp from 'openpgp';
 import { Form, Field } from 'react-final-form';
 import Styles from './Styles';
 
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
+
 Amplify.configure(awsmobile);
 
 class Profile extends Component {
@@ -243,9 +246,7 @@ class Profile extends Component {
 
     // And return the buffer for display inside the render() function
     return (
-        <div className="container flex center">
             {buffer}
-        </div>
     );
   }
 
