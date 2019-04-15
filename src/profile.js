@@ -285,18 +285,11 @@ class Profile extends Component {
     this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
 
     return (
-    <div
-          
-        >
+    <div>
     <h1 style={{"textAlign": "center"}}>Profile</h1>
     <table>  	 
     {this.processItems(this.state)}
     
-    </table>
-    <table>
-          <tbody>
-     
-    </tbody>
     </table>
     </div>  
     );
