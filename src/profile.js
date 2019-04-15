@@ -256,6 +256,16 @@ class Profile extends Component {
       <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
       </td>
     </tr>
+     <tr>
+      <td colspan=2 style={{"textAlign": "center"}}>
+        <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
+      </td>
+      </tr>
+      <tr style={{"display":this.QRCodeVisibility}}>
+      <td colspan=2>
+      <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
+      </td>
+    </tr>
     </tbody>
     );
   }
@@ -282,17 +292,10 @@ class Profile extends Component {
     <table>  	 
     {this.processItems(this.state)}
     
-    
-      <tr>
-      <td style={{"textAlign": "center"}}>
-        <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
-      </td>
-      </tr>
-      <tr style={{"display":this.QRCodeVisibility}}>
-      <td>
-      <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
-      </td>
-    </tr>
+    </table>
+    <table>
+          <tbody>
+     
     </tbody>
     </table>
     </div>  
