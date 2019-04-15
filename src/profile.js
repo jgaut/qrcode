@@ -257,12 +257,12 @@ class Profile extends Component {
       </td>
     </tr>
      <tr>
-      <td colspan=2 style={{"textAlign": "center"}}>
+      <td colspan='2' style={{"textAlign": "center"}}>
         <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
       </td>
       </tr>
       <tr style={{"display":this.QRCodeVisibility}}>
-      <td colspan=2>
+      <td colspan='2'>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </td>
     </tr>
