@@ -34,6 +34,9 @@ class Profile extends Component {
     this.sub = '';
     this.ischange=false;
     this.cpt=0;
+    this.qrcodeValue = '';
+    this.qrcodesize = 256;
+    this.dataLink = '';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -258,7 +261,7 @@ class Profile extends Component {
     </Tr>
     <Tr>
       <Td>
-      <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
+      <QRCode value={this.qrcodeValue} size={this.size} includeMargin={true}/>
       </Td>
     </Tr>
     </Tbody>
@@ -268,9 +271,8 @@ class Profile extends Component {
 
 
   render() {
-    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
-    var size = 256;
-    var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
+    this.qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
+    this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
 
     return (
 
