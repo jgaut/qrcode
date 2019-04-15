@@ -173,7 +173,7 @@ class Profile extends Component {
       this.copyState = {...this.state};
       //console.log("this.copyState :" + JSON.stringify(this.copyState));
       for (var key in this.state) {
-        console.log(key, this.state[key]);
+        console.log(key, " => ", this.state[key]);
         this.cpt++;
         var t = this.state[key];
         this.encodePgp(key, t, this.code)
