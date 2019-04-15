@@ -6,8 +6,9 @@ import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import * as openpgp from 'openpgp';
-import { Form, Field } from 'react-final-form';
-import Styles from './Styles';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
+
 
 
 Amplify.configure(awsmobile);
@@ -227,16 +228,17 @@ class Profile extends Component {
       let myKey = key;
       buffer.push(
 
-        <Field key={Math.random()} name={myKey} validate={this.usernameAvailable}>
+        <Tr key={Math.random()} name={myKey} validate={this.usernameAvailable}>
             {({ input, meta }) => (
-              <div>
+              <Td>
                 <label>{myKey}</label>
-                <input {...input} key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} 
-              />
+              </Td>
+              <Td>
+                <input key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} />
                
-              </div>
+              </Td>
             )}
-          </Field>
+          </Tr>
 
         
    );
@@ -244,9 +246,9 @@ class Profile extends Component {
 
     // And return the buffer for display inside the render() function
     return (
-      <form>
+      <div>
             {buffer}
-      </form>
+      </div>
     );
   }
 
@@ -257,35 +259,13 @@ class Profile extends Component {
     var size = 256;
     var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
 
-    const App = () => (
-  <Styles>
-    <h1>🏁 React Final Form - Simple Example</h1>
-    <a href="https://github.com/erikras/react-final-form#-react-final-form">
-      Read Docs
-    </a>
-    <Form
-      onSubmit={onSubmit}
-      initialValues={{ stooge: 'larry', employed: false }}
-      render={({ handleSubmit, form, submitting, pristine, values }) => (
-       
-          {this.processItems(this.state)}
-          
-      )}
-    />
-  </Styles>
-);
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-const onSubmit = async values => {
-  await sleep(300)
-  window.alert(JSON.stringify(values, 0, 2))
-}
-
     return (
 
-
-    	<App/>
+      <Table>
+    <Tbody>    	 
+    {this.processItems(this.state)}
+    </Tbody>
+    </Table>  
     );
       
   }
