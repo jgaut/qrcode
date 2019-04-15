@@ -287,7 +287,7 @@ class Profile extends Component {
     <div
           
         >
-    <h1 style={{"text-align": "center"}}>Profile</h1>
+    <h1 style={{"textAlign": "center"}}>Profile</h1>
     <table style={{
             fontFamily:
               "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
