@@ -37,7 +37,7 @@ class Profile extends Component {
     this.qrcodeValue = '';
     this.qrcodesize = 400;
     this.dataLink = '';
-    this.QRCodeVisibility='';
+    this.QRCodeVisibility='none';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -267,10 +267,10 @@ class Profile extends Component {
   }
 
   ShowQRCode() {
-    if(this.QRCodeVisibility===""){
-      this.QRCodeVisibility={"display":"none"};
-    }else{
+    if(this.QRCodeVisibility==="none"){
       this.QRCodeVisibility="";
+    }else{
+      this.QRCodeVisibility="none";
     }
   }
 
@@ -307,7 +307,7 @@ class Profile extends Component {
       </td>
       </tr>
       <tr>
-      <td style={{"display":"none"}}>
+      <td style={{"display":this.QRCodeVisibility}}>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </td>
     </tr>
