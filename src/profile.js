@@ -237,7 +237,7 @@ class Profile extends Component {
                 <label>{myKey}</label>
               </td>
               <td>
-                <input key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} />
+                <input key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
                
               </td>
             
@@ -292,6 +292,9 @@ class Profile extends Component {
             padding: "1em"
           }}>
     <tr>
+      <td>
+        <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
+      </td>
       <td>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </td>
