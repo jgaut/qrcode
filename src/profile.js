@@ -281,7 +281,7 @@ class Profile extends Component {
               "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
             marginLeft: "auto",
             marginRight: "auto",
-            maxWidth: "400px",
+            maxWidth: "300px",
             padding: "1em"
           }}
         >
