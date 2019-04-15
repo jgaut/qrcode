@@ -111,7 +111,6 @@ class SignInUp extends Component {
         </header>
 
     
-    </table>
       </div>
     );      
   }
