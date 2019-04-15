@@ -211,6 +211,7 @@ class Profile extends Component {
       [name]: value
     });*/
     this.state[name]=value;
+    this.forceUpdate();
 
     this.ischange=true;
   }
