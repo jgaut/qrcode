@@ -303,13 +303,11 @@ class Profile extends Component {
               "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
             margin: "auto",
             maxWidth: "400px",
-            padding: "1em"
+            padding: "1em",
+            "display":this.QRCodeVisibility
           }}>
-    <tr>
-      
-      </tr>
-      <tr style={{"display":this.QRCodeVisibility}}>
-      <td >
+      <tr>
+      <td>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </td>
     </tr>
