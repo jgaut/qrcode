@@ -230,13 +230,12 @@ class Profile extends Component {
       let myKey = key;
       buffer.push(
 
-        <tr>
-            
+        <tr key={Math.random()}>
               <td>
                 <label>{myKey}</label>
               </td>
               <td>
-                <input key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
+                <input name={myKey} type="text" placeholder="" value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
                
               </td>
             
@@ -250,7 +249,7 @@ class Profile extends Component {
     return (
       <tbody>
             {buffer}
-            <tr>
+      <tr>
       <td>
       <button onClick={this.LogOut}>Logout</button>
       </td>
