@@ -212,7 +212,7 @@ class Profile extends Component {
     });*/
     this.state[name]=value;
     this.forceUpdate();
-    target.name.focus();
+    target.focus();
 
     this.ischange=true;
   }
