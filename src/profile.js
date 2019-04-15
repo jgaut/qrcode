@@ -268,7 +268,7 @@ class Profile extends Component {
 
   ShowQRCode() {
     if(this.QRCodeVisibility===""){
-      this.QRCodeVisibility="display:none;";
+      this.QRCodeVisibility={"display":"none"};
     }else{
       this.QRCodeVisibility="";
     }
