@@ -285,10 +285,10 @@ class Profile extends Component {
     {this.processItems(this.state)}
     
     </table>
-    <table >
+    <table>
           <tbody>
       <tr>
-      <td>
+      <td tyle={{"textAlign": "center"}}>
         <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
       </td>
       </tr>
