@@ -246,25 +246,9 @@ class Profile extends Component {
 
     // And return the buffer for display inside the render() function
     return (
-      <div>
+      <Tbody>
             {buffer}
-      </div>
-    );
-  }
-
-
-
-  render() {
-    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
-    var size = 256;
-    var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
-
-    return (
-
-    <Table>
-    <Tbody>    	 
-    {this.processItems(this.state)}
-    <Tr>
+            <Tr>
       <Td>
       <button onClick={this.LogOut}>Logout</button>
       </Td>
@@ -278,6 +262,21 @@ class Profile extends Component {
       </Td>
     </Tr>
     </Tbody>
+    );
+  }
+
+
+
+  render() {
+    var qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
+    var size = 256;
+    var dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
+
+    return (
+
+    <Table>  	 
+    {this.processItems(this.state)}
+    
     </Table>  
     );
       
