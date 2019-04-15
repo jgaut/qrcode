@@ -261,7 +261,7 @@ class Profile extends Component {
 
     return (
 
-      <Table>
+    <Table>
     <Tbody>    	 
     {this.processItems(this.state)}
     <Tr>
