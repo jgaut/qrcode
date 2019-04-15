@@ -239,7 +239,7 @@ class Profile extends Component {
                 <label>{myKey}</label>
               </td>
               <td>
-                <input key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
+                <input key={myKey} name={myKey} type="text" placeholder="" value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
                
               </td>
             
