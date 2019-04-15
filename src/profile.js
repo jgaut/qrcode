@@ -278,13 +278,19 @@ class Profile extends Component {
             fontFamily:
               "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
             margin: "auto",
-            maxWidth: "300px",
+            maxWidth: "400px",
             padding: "1em"
           }}>  	 
     {this.processItems(this.state)}
     
     </table>
-    <table>
+    <table style={{
+            fontFamily:
+              "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
+            margin: "auto",
+            maxWidth: "400px",
+            padding: "1em"
+          }}>
     <tr>
       <td>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
