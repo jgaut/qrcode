@@ -148,6 +148,7 @@ class Profile extends Component {
                   nom: '',
                   prenom: '',
                   age: '',
+                  gs: '',
                   notes:'',
                 };
                 //console.log("data :" + JSON.stringify(this.state) + " -- "+this.state.length);
