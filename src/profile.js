@@ -281,13 +281,7 @@ class Profile extends Component {
           
         >
     <h1 style={{"textAlign": "center"}}>Profile</h1>
-    <table style={{
-            fontFamily:
-              "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
-            margin: "auto",
-            maxWidth: "400px",
-            padding: "1em"
-          }}>  	 
+    <table>  	 
     {this.processItems(this.state)}
     
     </table>
