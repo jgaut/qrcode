@@ -306,11 +306,13 @@ class Profile extends Component {
             padding: "1em",
             "display":this.QRCodeVisibility
           }}>
+          <tbody>
       <tr>
       <td>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </td>
     </tr>
+    </tbody>
     </table>
     </div>  
     );
