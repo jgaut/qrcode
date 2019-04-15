@@ -89,7 +89,13 @@ class SignInUp extends Component {
  
   render() {
     return (
-      <div className="App">
+      <div style={{
+            fontFamily:
+              "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
+            margin: "auto",
+            maxWidth: "400px",
+            padding: "1em"
+          }}>
         <header className="App-header">
           <label>
             Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
@@ -103,6 +109,9 @@ class SignInUp extends Component {
           <button onClick={this.onSubmit}>Sign In - Sign Up</button>
           <label>{this.state.err}</label>
         </header>
+
+    
+    </table>
       </div>
     );      
   }
