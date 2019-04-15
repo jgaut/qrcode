@@ -272,6 +272,7 @@ class Profile extends Component {
     }else{
       this.QRCodeVisibility="none";
     }
+    this.forceUpdate();
   }
 
 
