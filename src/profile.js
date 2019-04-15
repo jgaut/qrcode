@@ -271,16 +271,16 @@ class Profile extends Component {
 
     return (
     <div
-          style={{
+          
+        >
+    <h1>Profile</h1>
+    <table style={{
             fontFamily:
               "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
             margin: "auto",
             maxWidth: "300px",
             padding: "1em"
-          }}
-        >
-    <h1>Profile</h1>
-    <table>  	 
+          }}>  	 
     {this.processItems(this.state)}
     
     </table>
