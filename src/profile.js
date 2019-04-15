@@ -307,7 +307,7 @@ class Profile extends Component {
       </td>
       </tr>
       <tr>
-      <td style={{this.QRCodeVisibility}}>
+      <td style={this.QRCodeVisibility}>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </td>
     </tr>
