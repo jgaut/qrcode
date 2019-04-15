@@ -291,14 +291,7 @@ class Profile extends Component {
     {this.processItems(this.state)}
     
     </table>
-    <table style={{
-            fontFamily:
-              "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
-            margin: "auto",
-            maxWidth: "400px",
-            padding: "1em",
-            
-          }}>
+    <table >
           <tbody>
       <tr>
       <td>
