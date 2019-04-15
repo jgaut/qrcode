@@ -231,17 +231,17 @@ class Profile extends Component {
       let myKey = key;
       buffer.push(
 
-        <Tr>
+        <tr>
             
-              <Td>
+              <td>
                 <label>{myKey}</label>
-              </Td>
-              <Td>
+              </td>
+              <td>
                 <input key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} />
                
-              </Td>
+              </td>
             
-          </Tr>
+          </tr>
 
         
    );
@@ -249,22 +249,22 @@ class Profile extends Component {
 
     // And return the buffer for display inside the render() function
     return (
-      <Tbody>
+      <tbody>
             {buffer}
-            <Tr>
-      <Td>
+            <tr>
+      <td>
       <button onClick={this.LogOut}>Logout</button>
-      </Td>
-      <Td>
+      </td>
+      <td>
       <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
-      </Td>
-    </Tr>
-    <Tr>
-      <Td>
+      </td>
+    </tr>
+    <tr>
+      <td>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
-      </Td>
-    </Tr>
-    </Tbody>
+      </td>
+    </tr>
+    </tbody>
     );
   }
 
@@ -286,10 +286,10 @@ class Profile extends Component {
           }}
         >
     <h1>Profile</h1>
-    <Table>  	 
+    <table>  	 
     {this.processItems(this.state)}
     
-    </Table>
+    </table>
     </div>  
     );
       
