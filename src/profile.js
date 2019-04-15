@@ -228,8 +228,8 @@ class Profile extends Component {
       let myKey = key;
       buffer.push(
 
-        <Tr key={Math.random()} name={myKey} validate={this.usernameAvailable}>
-            {({ input, meta }) => (
+        <Tr>
+            
               <Td>
                 <label>{myKey}</label>
               </Td>
@@ -237,7 +237,7 @@ class Profile extends Component {
                 <input key={Math.random()} name={myKey} type="text" placeholder="" value={this.state[myKey]} />
                
               </Td>
-            )}
+            
           </Tr>
 
         
