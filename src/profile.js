@@ -9,8 +9,6 @@ import * as openpgp from 'openpgp';
 import { Form, Field } from 'react-final-form';
 import Styles from './Styles';
 
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 Amplify.configure(awsmobile);
 
@@ -222,7 +220,7 @@ class Profile extends Component {
     const usernameAvailable = ()=>{};
 
     // Create an empty array that will hold the final JSX output.
-    let buffer = {};
+    let buffer = [];
 
     for (var key in itemArray) {
       console.log(key);
