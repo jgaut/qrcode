@@ -261,6 +261,9 @@ class Profile extends Component {
       <td>
       <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
       </td>
+      <td>
+        <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
+      </td>
     </tr>
     </tbody>
     );
@@ -303,9 +306,7 @@ class Profile extends Component {
             padding: "1em"
           }}>
     <tr>
-      <td>
-        <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
-      </td>
+      
       </tr>
       <tr style={{"display":this.QRCodeVisibility}}>
       <td >
