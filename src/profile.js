@@ -35,7 +35,7 @@ class Profile extends Component {
     this.ischange=false;
     this.cpt=0;
     this.qrcodeValue = '';
-    this.qrcodesize = 256;
+    this.qrcodesize = 400;
     this.dataLink = '';
 
     this.handleChange = this.handleChange.bind(this);
@@ -259,7 +259,11 @@ class Profile extends Component {
       <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
       </Td>
     </Tr>
-    
+    <Tr>
+      <Td>
+      <QRCode value={this.qrcodeValue} size={this.size} includeMargin={true}/>
+      </Td>
+    </Tr>
     </Tbody>
     );
   }
