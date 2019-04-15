@@ -206,9 +206,10 @@ class Profile extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
+    /*this.setState({
       [name]: value
-    });
+    });*/
+    this.state[name]=value;
 
     this.ischange=true;
   }
@@ -226,7 +227,7 @@ class Profile extends Component {
     let buffer = [];
 
     for (var key in itemArray) {
-      console.log(key);
+      //console.log(key);
       let myKey = key;
       buffer.push(
 
