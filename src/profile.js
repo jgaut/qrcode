@@ -6,10 +6,6 @@ import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import * as openpgp from 'openpgp';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
-
-
 
 Amplify.configure(awsmobile);
 
