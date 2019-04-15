@@ -207,12 +207,9 @@ class Profile extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    /*this.setState({
+    this.setState({
       [name]: value
-    });*/
-    this.state[name]=value;
-    this.forceUpdate();
-    target.focus();
+    });
 
     this.ischange=true;
   }
