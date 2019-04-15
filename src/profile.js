@@ -31,7 +31,7 @@ class Profile extends Component {
     this.ischange=false;
     this.cpt=0;
     this.qrcodeValue = '';
-    this.qrcodesize = 400;
+    this.qrcodesize = 350;
     this.dataLink = '';
     this.QRCodeVisibility='none';
 
