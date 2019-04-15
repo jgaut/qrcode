@@ -307,8 +307,8 @@ class Profile extends Component {
         <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
       </td>
       </tr>
-      <tr>
-      <td style={{"display":this.QRCodeVisibility}}>
+      <tr style={{"display":this.QRCodeVisibility}}>
+      <td >
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </td>
     </tr>
