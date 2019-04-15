@@ -274,8 +274,7 @@ class Profile extends Component {
           style={{
             fontFamily:
               "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
-            marginLeft: "auto",
-            marginRight: "auto",
+            margin: "auto",
             maxWidth: "300px",
             padding: "1em"
           }}
