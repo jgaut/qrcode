@@ -286,7 +286,7 @@ class Profile extends Component {
     <table>
           <tbody>
       <tr>
-      <td tyle={{"textAlign": "center"}}>
+      <td style={{"textAlign": "center"}}>
         <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
       </td>
       </tr>
