@@ -234,12 +234,12 @@ class Profile extends Component {
       let myKey = key;
       buffer.push(
 
-        <tr key={Math.random()}>
+        <tr key={myKey} >
               <td>
                 <label>{myKey}</label>
               </td>
               <td>
-                <input key={myKey} name={myKey} type="text" placeholder="" value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
+                <input name={myKey} type="text" placeholder="" value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
                
               </td>
             
