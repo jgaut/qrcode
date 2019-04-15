@@ -264,6 +264,19 @@ class Profile extends Component {
       <Table>
     <Tbody>    	 
     {this.processItems(this.state)}
+    <Tr>
+      <Td>
+      <button onClick={this.LogOut}>Logout</button>
+      </Td>
+      <Td>
+      <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
+      </Td>
+    </Tr>
+    <Tr>
+      <Td>
+      <QRCode value={qrcodeValue} size={size} includeMargin={true}/>
+      </Td>
+    </Tr>
     </Tbody>
     </Table>  
     );
