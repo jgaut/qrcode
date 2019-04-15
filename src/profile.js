@@ -37,6 +37,7 @@ class Profile extends Component {
     this.qrcodeValue = '';
     this.qrcodesize = 400;
     this.dataLink = '';
+    this.QRCodeVisibility='';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -47,6 +48,8 @@ class Profile extends Component {
     this.waitForSave = this.waitForSave.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
     this.processItems = this.processItems.bind(this);
+    this.ShowQRCode = this.ShowQRCode.bind(this);
+
 
 
     Auth.currentAuthenticatedUser({bypassCache: false})
@@ -263,6 +266,13 @@ class Profile extends Component {
     );
   }
 
+  ShowQRCode() {
+    if(this.QRCodeVisibility===""){
+      this.QRCodeVisibility="display:none;";
+    }else{
+      this.QRCodeVisibility="";
+    }
+  }
 
 
   render() {
@@ -293,9 +303,11 @@ class Profile extends Component {
           }}>
     <tr>
       <td>
-        <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
+        <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
       </td>
-      <td>
+      </tr>
+      <tr>
+      <td style={{this.QRCodeVisibility}}>
       <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </td>
     </tr>
