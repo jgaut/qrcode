@@ -259,11 +259,7 @@ class Profile extends Component {
       <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
       </Td>
     </Tr>
-    <Tr>
-      <Td>
-      <QRCode value={this.qrcodeValue} size={this.size} includeMargin={true}/>
-      </Td>
-    </Tr>
+    
     </Tbody>
     );
   }
