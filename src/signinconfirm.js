@@ -61,7 +61,8 @@ class SignInConfirm extends Component {
 
     <div>
     <h1 style={{"textAlign": "center"}}>Account validation</h1>
-    <table>    
+    <table> 
+    <tbody>    
       <tr>
           <td>
             <label>Email</label>
@@ -88,7 +89,7 @@ class SignInConfirm extends Component {
             <label>{this.state.err}</label>
           </td>
         </tr>
-    
+    </tbody> 
     </table>
     </div> 
     );
