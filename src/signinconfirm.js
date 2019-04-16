@@ -58,17 +58,39 @@ class SignInConfirm extends Component {
   render() {
     //console.log(JSON.stringify(this.state));
     return (
-      <div className="App">
-        <header className="App-header">
-          {this.props.location.state.email}
-          <label>
-            Validation code <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
-          </label>               
-          <br></br>
-          <button onClick={this.onSubmit}>Validate</button>
-          <label>{this.state.err}</label>
-        </header>
-      </div>
+
+       <div>
+    <h1 style={{"textAlign": "center"}}>Account validation</h1>
+    <table>    
+      <tr>
+          <td>
+            <label>Email</label>
+          </td>
+          <td>
+            {this.props.location.state.email}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Validation code</label>
+          </td>
+          <td>
+            <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'>
+            <button onClick={this.onSubmit}>Validate</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'>
+            <label>{this.state.err}</label>
+          </td>
+        </tr>
+    
+    </table>
+    </div> 
     );
   }
 }
