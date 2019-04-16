@@ -110,17 +110,17 @@ class SignInUp extends Component {
           </td>
         </tr>
         <tr>
-          <td colspan='2'>
+          <td colSpan='2'>
             <input name={this.state.hName} type={this.state.hType} value={this.state.hValue}/>
           </td>
         </tr>
         <tr>
-          <td colspan='2' style={{"textAlign": "center"}}>
+          <td colSpan='2' style={{"textAlign": "center"}}>
             <button onClick={this.onSubmit}>Sign In - Sign Up</button>
           </td>
         </tr>
         <tr>
-          <td colspan='2'>
+          <td colSpan='2'>
             <label>{this.state.err}</label>
           </td>
         </tr>
