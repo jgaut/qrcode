@@ -79,7 +79,8 @@ class Bip39 extends Component {
     return (
       <div>
     <h1 style={{"textAlign": "center"}}>Manage Master Key</h1>
-    <table>    
+    <table>
+    <tbody> 
       <tr>
           <td>
             <label>Actual key</label>
@@ -116,6 +117,7 @@ class Bip39 extends Component {
             <label>{this.state.err}</label>
           </td>
         </tr>
+      </tbody> 
     </table>
     </div> 
     );
