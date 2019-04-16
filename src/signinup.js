@@ -114,7 +114,7 @@ class SignInUp extends Component {
           </td>
         </tr>
         <tr>
-          <td colspan='2'>
+          <td colspan='2' style={{"textAlign": "center"}}>
             <button onClick={this.onSubmit}>Sign In - Sign Up</button>
           </td>
         </tr>
