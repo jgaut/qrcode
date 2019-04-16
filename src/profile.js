@@ -244,6 +244,7 @@ class Profile extends Component {
 
     // And return the buffer for display inside the render() function
     return (
+      <table>
       <tbody>
             {buffer}
       <tr>
@@ -265,6 +266,7 @@ class Profile extends Component {
       </td>
     </tr>
     </tbody>
+    </table>
     );
   }
 
@@ -285,10 +287,10 @@ class Profile extends Component {
     return (
     <div>
     <h1 style={{"textAlign": "center"}}>Profile</h1>
-    <table>  	 
+      	 
     {this.processItems(this.state)}
     
-    </table>
+    
     </div>  
     );
       
