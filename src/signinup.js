@@ -89,29 +89,44 @@ class SignInUp extends Component {
  
   render() {
     return (
-      <div style={{
-            fontFamily:
-              "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
-            margin: "auto",
-            maxWidth: "400px",
-            padding: "1em"
-          }}>
-        <header className="App-header">
-          <label>
-            Email <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
-          </label>
-          <br></br>
-            <label>
-            Password <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-          </label>
-          <br></br>
-          <input name={this.state.hName} type={this.state.hType} value={this.state.hValue}/>
-          <button onClick={this.onSubmit}>Sign In - Sign Up</button>
-          <label>{this.state.err}</label>
-        </header>
-
+      <div>
+    <h1 style={{"textAlign": "center"}}>Profile</h1>
+    <table>    
+      <tr>
+          <td>
+            <label>Email</label>
+          </td>
+          <td>
+            <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
+          </td>
+        </tr>
+                <tr>
+          <td>
+            <label>Password</label>
+          </td>
+          <td>
+            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'>
+            <input name={this.state.hName} type={this.state.hType} value={this.state.hValue}/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'>
+            <button onClick={this.onSubmit}>Sign In - Sign Up</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'>
+            <label>{this.state.err}</label>
+          </td>
+        </tr>
     
-      </div>
+    </table>
+    </div> 
+
     );      
   }
 }
