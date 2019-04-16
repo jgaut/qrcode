@@ -90,7 +90,7 @@ class SignInUp extends Component {
   render() {
     return (
       <div>
-    <h1 style={{"textAlign": "center"}}>Profile</h1>
+    <h1 style={{"textAlign": "center"}}>Connection</h1>
     <table>    
       <tr>
           <td>
