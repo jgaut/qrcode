@@ -18,8 +18,6 @@ class Bip39 extends Component {
 
     this.sub='';
 
-    
-
     this.handleChange = this.handleChange.bind(this);
     this.Generate = this.Generate.bind(this);
     this.Validate = this.Validate.bind(this);
