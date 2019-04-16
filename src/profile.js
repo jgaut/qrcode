@@ -239,8 +239,6 @@ class Profile extends Component {
               </td>
             
           </tr>
-
-        
    );
     }
 
