@@ -59,7 +59,7 @@ class SignInConfirm extends Component {
     //console.log(JSON.stringify(this.state));
     return (
 
-       <div>
+    <div>
     <h1 style={{"textAlign": "center"}}>Account validation</h1>
     <table>    
       <tr>
