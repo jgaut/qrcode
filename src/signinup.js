@@ -123,7 +123,6 @@ class SignInUp extends Component {
             <label>{this.state.err}</label>
           </td>
         </tr>
-    
     </table>
     </div> 
 
