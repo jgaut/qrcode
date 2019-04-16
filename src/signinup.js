@@ -91,7 +91,8 @@ class SignInUp extends Component {
     return (
     <div>
     <h1 style={{"textAlign": "center"}}>Account connection</h1>
-    <table className="App-table">    
+    <table>
+    <tbody>    
       <tr>
           <td>
             <label>Email</label>
@@ -123,6 +124,7 @@ class SignInUp extends Component {
             <label>{this.state.err}</label>
           </td>
         </tr>
+        </tbody>    
     </table>
     </div> 
 
