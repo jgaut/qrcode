@@ -89,7 +89,7 @@ class SignInUp extends Component {
  
   render() {
     return (
-      <div>
+    <div className="App">
     <h1 style={{"textAlign": "center"}}>Account connection</h1>
     <table>    
       <tr>
