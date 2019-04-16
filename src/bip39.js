@@ -77,15 +77,47 @@ class Bip39 extends Component {
   render() {
 
     return (
-    	<div>
-    	<h1>Master Key</h1><br></br>
-      		<label>Actual key : </label> <label>{this.state.actualKey}</label><br></br>
-      		<label>New key</label> <input type="text" name="newKey" size="80" value={this.state.newKey} onChange={this.handleChange}/><br></br>
-          <button onClick={this.Generate}>Generate</button><br></br>
-      		<button onClick={this.Validate}>Validate</button><br></br>
-          <button onClick={this.Cancel}>Cancel</button><br></br>
-
-		</div>
+      <div>
+    <h1 style={{"textAlign": "center"}}>Manage Master Key</h1>
+    <table>    
+      <tr>
+          <td>
+            <label>Actual key</label>
+          </td>
+          <td>
+            {this.state.actualKey}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>New key</label>
+          </td>
+          <td>
+            <input type="text" name="newKey" size="80" value={this.state.newKey} onChange={this.handleChange}/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2' style={{"textAlign": "center"}}>
+            <button onClick={this.Generate}>Generate</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2' style={{"textAlign": "center"}}>
+            <button onClick={this.Validate}>Validate</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2' style={{"textAlign": "center"}}>
+            <button onClick={this.Cancel}>Cancel</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan='2'>
+            <label>{this.state.err}</label>
+          </td>
+        </tr>
+    </table>
+    </div> 
     );
       
   }
