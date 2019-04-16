@@ -89,9 +89,9 @@ class SignInUp extends Component {
  
   render() {
     return (
-    <div className="App">
+    <div>
     <h1 style={{"textAlign": "center"}}>Account connection</h1>
-    <table>    
+    <table className="App-table">    
       <tr>
           <td>
             <label>Email</label>
