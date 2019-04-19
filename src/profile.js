@@ -119,7 +119,7 @@ class Profile extends Component {
           });
       }).catch(err => {
         console.log("erreur lors du déchiffrement : " +err);
-        this.err = "Erreur lors du déchiffrement : Veuillez vérifier votre master key."
+        this.err = "Erreur lors du déchiffrement : Veuillez vérifier votre master key.";
       });
     }
 
