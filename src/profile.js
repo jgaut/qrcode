@@ -286,7 +286,7 @@ class Profile extends Component {
   }
 
   handleFiles(event){
-    console.log(JSON.stringify(event.target));
+    console.log(JSON.stringify(event.files));
   }
 
 
