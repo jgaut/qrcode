@@ -249,7 +249,19 @@ class Profile extends Component {
     return (
       <table>
       <tbody>
-            {buffer}
+      <tr>
+      <td colSpan='2'>
+      <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" />
+      </td>
+      </tr>
+      <tr>
+      <td colSpan='2'>
+      <input type="file"
+       id="avatar" name="avatar"
+       accept="image/png, image/jpeg" onChange={this.handleFiles} />
+      </td>
+      </tr>
+      {buffer}
       <tr>
       <td>
       <button onClick={this.LogOut}>Logout</button>
@@ -315,10 +327,7 @@ class Profile extends Component {
     return (
     <div>
     <h1 style={{"textAlign": "center"}}>Profile</h1>
-    <img src={"data:image/png;base64,"+this.state.image} alt="Red dot" />
-    <input type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg" onChange={this.handleFiles} />
+
     {this.processItems(this.state)}
     
     
