@@ -230,6 +230,9 @@ class Profile extends Component {
     for (var key in itemArray) {
       //console.log(key);
       let myKey = key;
+      if(key === 'image'){
+
+      }else{
       buffer.push(
 
         <tr key={myKey} >
@@ -243,6 +246,7 @@ class Profile extends Component {
             
           </tr>
    );
+    }
     }
 
     // And return the buffer for display inside the render() function
@@ -305,7 +309,7 @@ class Profile extends Component {
       var img = ev.target.result.split("base64,");
       this.setState({image : img[1]});
       this.ischange=true;
-      this.Save();
+      await this.Save();
     }
 
   handleFiles(event){
@@ -316,8 +320,6 @@ class Profile extends Component {
     var fr = new FileReader();
     fr.readAsDataURL(file);
     fr.onloadend = this.setImage;
-
-
   }
 
 
