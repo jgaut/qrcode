@@ -305,6 +305,7 @@ class Profile extends Component {
       var img = ev.target.result.split("base64,");
       this.setState({image : img[1]});
       this.ischange=true;
+      this.Save();
     }
 
   handleFiles(event){
