@@ -311,6 +311,7 @@ class Profile extends Component {
         }
         if(fileInput) {
           console.log(event.target.files[0]);
+          this.err = event.target.files[0];
             Resizer.imageFileResizer(
                 event.target.files[0],
                 this.sizePict,
