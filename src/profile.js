@@ -50,7 +50,6 @@ class Profile extends Component {
     this.processItems = this.processItems.bind(this);
     this.ShowQRCode = this.ShowQRCode.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
-    this.setImage = this.setImage.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
