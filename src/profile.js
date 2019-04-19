@@ -37,7 +37,7 @@ class Profile extends Component {
     this.dataLink = '';
     this.QRCodeVisibility='none';
     this.err='';
-    this.sizePict=400;
+    this.sizePict=350;
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
