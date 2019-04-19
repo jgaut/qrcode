@@ -255,6 +255,11 @@ class Profile extends Component {
       <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
       </td>
     </tr>
+    <tr>
+      <td colspan='2' style={{"textAlign": "center", 'color':'red'}}>
+        <label>{this.err}</label>
+      </td>
+      </tr>
      <tr>
       <td colspan='2' style={{"textAlign": "center"}}>
         <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
