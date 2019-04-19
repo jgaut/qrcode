@@ -294,7 +294,10 @@ class Profile extends Component {
     return (
     <div>
     <h1 style={{"textAlign": "center"}}>Profile</h1>
-      	 
+    <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+    9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+    
     {this.processItems(this.state)}
     
     
