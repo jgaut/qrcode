@@ -286,10 +286,12 @@ class Profile extends Component {
   }
 
   handleFiles(event){
-    const files = Array.from(event.target.files);
-    console.log(files[0]);
+    const file = Array.from(event.target.files);
+    console.log(file[0]);
     //var src = URL.createObjectURL(event.target.files);
-
+    file = input.files[0];
+    fr = new FileReader();
+    fr.readAsDataURL(file);
   }
 
 
