@@ -295,6 +295,7 @@ class Profile extends Component {
     fr.readAsDataURL(file);
     console.log(fr);
     this.image = fr.result;
+    this.forceUpdate();
   }
 
 
