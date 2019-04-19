@@ -308,6 +308,8 @@ AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
   }
 }
 
-
+  handleFiles(event){
+    console.log(JSON.stringify(event));
+  }
 
 export default Profile;
