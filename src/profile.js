@@ -347,7 +347,8 @@ class Profile extends Component {
                 0,
                 uri => {
                     console.log(uri);
-                    this.setState({image : uri});
+                    var img = uri.split("base64,");
+                    this.setState({image : img[1]});
                     this.ischange=true;
                     this.Save();
                 },
