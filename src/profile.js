@@ -287,8 +287,8 @@ class Profile extends Component {
 
   handleFiles(event){
     const files = Array.from(event.target.files);
-    console.log(files);
-    var src = URL.createObjectURL(event.target.files);
+    console.log(files[0]);
+    //var src = URL.createObjectURL(event.target.files);
 
   }
 
