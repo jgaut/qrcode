@@ -251,7 +251,7 @@ class Profile extends Component {
       <tbody>
       <tr>
       <td colSpan='2'>
-      <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" style={{ width: '200px', height: '100px' }}/>
+      <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" style={{ width: '200px', height: '200px' }}/>
       </td>
       </tr>
       <tr>
