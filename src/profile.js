@@ -319,7 +319,7 @@ class Profile extends Component {
                 100,
                 0,
                 uri => {
-                    console.log(uri);
+                    //console.log(uri);
                     var img = uri.split("base64,");
                     this.setState({image : img[1]});
                     this.ischange=true;
