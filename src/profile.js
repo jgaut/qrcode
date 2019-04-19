@@ -119,6 +119,7 @@ class Profile extends Component {
           });
       }).catch(err => {
         console.log("erreur lors du déchiffrement : " +err);
+        this.err = "Erreur lors du déchiffrement : Veuillez vérifier votre master key."
       });
     }
 
@@ -258,7 +259,7 @@ class Profile extends Component {
     </tr>
     <tr>
       <td colspan='2' style={{"textAlign": "center", 'color':'red'}}>
-        <label>Erreur : {this.err}</label>
+        <label>{this.err}</label>
       </td>
       </tr>
      <tr>
