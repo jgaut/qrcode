@@ -285,6 +285,10 @@ class Profile extends Component {
     this.forceUpdate();
   }
 
+  handleFiles(event){
+    console.log(JSON.stringify(event));
+  }
+
 
   render() {
     this.qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
@@ -308,8 +312,6 @@ AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
   }
 }
 
-  handleFiles(event){
-    console.log(JSON.stringify(event));
-  }
+
 
 export default Profile;
