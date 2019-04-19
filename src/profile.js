@@ -34,6 +34,7 @@ class Profile extends Component {
     this.qrcodesize = 350;
     this.dataLink = '';
     this.QRCodeVisibility='none';
+    this.err='';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -257,7 +258,7 @@ class Profile extends Component {
     </tr>
     <tr>
       <td colspan='2' style={{"textAlign": "center", 'color':'red'}}>
-        <label>{this.err}</label>
+        <label>Erreur : {this.err}</label>
       </td>
       </tr>
      <tr>
