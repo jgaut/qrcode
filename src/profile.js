@@ -286,7 +286,7 @@ class Profile extends Component {
   }
 
   handleFiles(event){
-    const files = Array.from(e.target.files)
+    const files = Array.from(event.target.files)
     var file = event.target.files[0];
  
     console.log(JSON.stringify(file));
