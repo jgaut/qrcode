@@ -288,24 +288,22 @@ class Profile extends Component {
   }
 
   setImage(ev){
-      console.log(ev);
-      console.log(ev.target.result);
+      //console.log(ev);
+      //console.log(ev.target.result);
       var img = ev.target.result.split("base64,");
       this.setState({image : img[1]});
+      this.ischange=true;
     }
 
   handleFiles(event){
     var file = Array.from(event.target.files);
-    console.log(file[0]);
+    //console.log(file[0]);
     //var src = URL.createObjectURL(event.target.files);
     file = file[0];
     var fr = new FileReader();
     fr.readAsDataURL(file);
     fr.onloadend = this.setImage;
-    console.log(fr);
-    //console.log(fr.target.result);
-    //this.setState({image : fr.result});
-    //console.log(this.state.image);
+
 
   }
 
