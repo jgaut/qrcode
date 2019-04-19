@@ -6,6 +6,7 @@ import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import * as openpgp from 'openpgp';
+import Resizer from 'react-image-file-resizer';
 
 Amplify.configure(awsmobile);
 
@@ -306,6 +307,18 @@ class Profile extends Component {
   setImage(ev){
       //console.log(ev);
       //console.log(ev.target.result);
+      Resizer.imageFileResizer(
+                ev,
+                200,
+                200,
+                'JPEG',
+                100,
+                0,
+                uri => {
+                    console.log(uri)
+                },
+                'base64'
+            );
       var img = ev.target.result.split("base64,");
       this.setState({image : img[1]});
       this.ischange=true;
