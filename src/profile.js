@@ -293,10 +293,10 @@ class Profile extends Component {
     file = file[0];
     var fr = new FileReader();
     fr.readAsDataURL(file);
-    console.log(fr[0]);
-    console.log(fr['result']);
-    this.setState({image : fr.result});
-    console.log(this.state.image);
+    console.log(fr);
+    console.log(fr.result);
+    //this.setState({image : fr.result});
+    //console.log(this.state.image);
 
   }
 
