@@ -46,8 +46,7 @@ class Profile extends Component {
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
     this.processItems = this.processItems.bind(this);
     this.ShowQRCode = this.ShowQRCode.bind(this);
-
-
+    this.handleFiles = this.handleFiles.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -299,7 +298,7 @@ AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
     9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
     <input type="file"
        id="avatar" name="avatar"
-       accept="image/png, image/jpeg"/>
+       accept="image/png, image/jpeg" onChange={this.handleFiles} />
     {this.processItems(this.state)}
     
     
