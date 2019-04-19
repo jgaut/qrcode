@@ -286,7 +286,7 @@ class Profile extends Component {
   }
 
   handleFiles(event){
-    const files = Array.from(event.target.files[0]);
+    const files = Array.from(event.target.files);
     console.log(files);
 
 
