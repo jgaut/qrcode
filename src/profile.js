@@ -37,6 +37,7 @@ class Profile extends Component {
     this.dataLink = '';
     this.QRCodeVisibility='none';
     this.err='';
+    this.sizePict=300;
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -256,7 +257,7 @@ class Profile extends Component {
       <tbody>
       <tr>
       <td colSpan='2'>
-      <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" style={{ width: '200px', height: '200px' }}/>
+      <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" style={{ width: this.sizePict+'px', height: this.sizePict+'px' }}/>
       </td>
       </tr>
       <tr>
@@ -304,35 +305,7 @@ class Profile extends Component {
     this.forceUpdate();
   }
 
-  setImage(ev){
-      //console.log(ev);
-      //console.log(ev.target.result);
-      Resizer.imageFileResizer(
-                ev,
-                200,
-                200,
-                'JPEG',
-                100,
-                0,
-                uri => {
-                    console.log(uri)
-                },
-                'base64'
-            );
-      var img = ev.target.result.split("base64,");
-      this.setState({image : img[1]});
-      this.ischange=true;
-      this.Save();
-    }
-
   handleFiles(event){
-    //var file = Array.from(event.target.files);
-    //console.log(file[0]);
-    //var src = URL.createObjectURL(event.target.files);
-    //file = file[0];
-    //var fr = new FileReader();
-    //fr.readAsDataURL(file);
-    //fr.onloadend = this.setImage;
     var fileInput = false
         if(event.target.files[0]) {
             fileInput = true
@@ -340,8 +313,8 @@ class Profile extends Component {
         if(fileInput) {
             Resizer.imageFileResizer(
                 event.target.files[0],
-                300,
-                300,
+                this.sizePict,
+                this.sizePict,
                 'JPEG',
                 100,
                 0,
