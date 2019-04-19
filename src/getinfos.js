@@ -87,6 +87,11 @@ class Profile extends Component {
     	<div>
     	<h1>My profile</h1><br></br>
       <tr>
+      <td colSpan='2'>
+      <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" style={{ width: '200px', height: '200px' }}/>
+      </td>
+      </tr>
+      <tr>
         <td valign="top" align="center" width="100%">
         {this.processItems(this.state)}
 
