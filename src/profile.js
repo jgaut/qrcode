@@ -19,6 +19,7 @@ class Profile extends Component {
       age: '',
       gs:'',
       notes:'',
+      image:''
     };
 
     openpgp.config.debug = true;
@@ -35,7 +36,6 @@ class Profile extends Component {
     this.dataLink = '';
     this.QRCodeVisibility='none';
     this.err='';
-    this.image='';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
