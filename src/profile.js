@@ -295,7 +295,7 @@ class Profile extends Component {
     fr.readAsDataURL(file);
     fr.onloadend = function(ev){
       console.log(ev);
-      console.log(ev.result);
+      console.log(ev.target.result);
     }
     console.log(fr);
     //console.log(fr.target.result);
