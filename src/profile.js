@@ -48,6 +48,7 @@ class Profile extends Component {
     this.processItems = this.processItems.bind(this);
     this.ShowQRCode = this.ShowQRCode.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
+    this.setImage = this.setImage.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -286,6 +287,12 @@ class Profile extends Component {
     this.forceUpdate();
   }
 
+  setImage(ev){
+      console.log(ev);
+      console.log(ev.target.result);
+      this.setState({image : ev.target.result});
+    }
+
   handleFiles(event){
     var file = Array.from(event.target.files);
     console.log(file[0]);
@@ -293,11 +300,7 @@ class Profile extends Component {
     file = file[0];
     var fr = new FileReader();
     fr.readAsDataURL(file);
-    fr.onloadend = function(ev){
-      console.log(ev);
-      console.log(ev.target.result);
-      this.setState({image : ev.target.result});
-    }
+    fr.onloadend = this.setImage;
     console.log(fr);
     //console.log(fr.target.result);
     //this.setState({image : fr.result});
