@@ -247,7 +247,7 @@ class Profile extends Component {
 
     // And return the buffer for display inside the render() function
     return (
-      <table style={{margin:auto}}>
+      <table style={{margin:'auto'}}>
       <tbody>
       <tr>
       <td colSpan='2'>
