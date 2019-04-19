@@ -292,7 +292,7 @@ class Profile extends Component {
     file = file[0];
     var fr = new FileReader();
     fr.readAsDataURL(file);
-
+    console.log(fr);
   }
 
 
