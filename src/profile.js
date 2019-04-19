@@ -346,7 +346,10 @@ class Profile extends Component {
                 100,
                 0,
                 uri => {
-                    console.log(uri)
+                    console.log(uri);
+                    this.setState({image : uri});
+                    this.ischange=true;
+                    this.Save();
                 },
                 'base64'
             );
