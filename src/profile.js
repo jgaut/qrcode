@@ -303,7 +303,7 @@ class Profile extends Component {
     this.forceUpdate();
   }
 
-  setImage(ev){
+  async setImage(ev){
       //console.log(ev);
       //console.log(ev.target.result);
       var img = ev.target.result.split("base64,");
