@@ -255,7 +255,7 @@ class Profile extends Component {
       </td>
       </tr>
       <tr>
-      <td colSpan='2'>
+      <td colSpan='2' style={{"textAlign": "center"}}>
       <input type="file"
        id="avatar" name="avatar"
        accept="image/png, image/jpeg" onChange={this.handleFiles} />
