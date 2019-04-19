@@ -290,7 +290,8 @@ class Profile extends Component {
   setImage(ev){
       console.log(ev);
       console.log(ev.target.result);
-      this.setState({image : ev.target.result});
+      var img = ev.target.result.split("base64,");
+      this.setState({image : ev[1]});
     }
 
   handleFiles(event){
@@ -316,7 +317,7 @@ class Profile extends Component {
     return (
     <div>
     <h1 style={{"textAlign": "center"}}>Profile</h1>
-    <img src={this.state.image} alt="Red dot" />
+    <img src={"data:image/png;base64,"+this.state.image} alt="Red dot" />
     <input type="file"
        id="avatar" name="avatar"
        accept="image/png, image/jpeg" onChange={this.handleFiles} />
