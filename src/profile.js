@@ -294,8 +294,8 @@ class Profile extends Component {
     var fr = new FileReader();
     fr.readAsDataURL(file);
     console.log(fr);
-    this.image = fr.result;
-    this.forceUpdate();
+    this.setState({image : fr.result});
+
   }
 
 
@@ -306,7 +306,7 @@ class Profile extends Component {
     return (
     <div>
     <h1 style={{"textAlign": "center"}}>Profile</h1>
-    <img src={this.image} alt="Red dot" />
+    <img src={this.state.image} alt="Red dot" />
     <input type="file"
        id="avatar" name="avatar"
        accept="image/png, image/jpeg" onChange={this.handleFiles} />
