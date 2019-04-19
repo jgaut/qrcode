@@ -326,13 +326,31 @@ class Profile extends Component {
     }
 
   handleFiles(event){
-    var file = Array.from(event.target.files);
+    //var file = Array.from(event.target.files);
     //console.log(file[0]);
     //var src = URL.createObjectURL(event.target.files);
-    file = file[0];
-    var fr = new FileReader();
-    fr.readAsDataURL(file);
-    fr.onloadend = this.setImage;
+    //file = file[0];
+    //var fr = new FileReader();
+    //fr.readAsDataURL(file);
+    //fr.onloadend = this.setImage;
+    var fileInput = false
+        if(event.target.files[0]) {
+            fileInput = true
+        }
+        if(fileInput) {
+            Resizer.imageFileResizer(
+                event.target.files[0],
+                300,
+                300,
+                'JPEG',
+                100,
+                0,
+                uri => {
+                    console.log(uri)
+                },
+                'base64'
+            );
+        }
   }
 
 
