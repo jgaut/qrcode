@@ -35,6 +35,7 @@ class Profile extends Component {
     this.dataLink = '';
     this.QRCodeVisibility='none';
     this.err='';
+    this.image='';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -293,6 +294,7 @@ class Profile extends Component {
     var fr = new FileReader();
     fr.readAsDataURL(file);
     console.log(fr);
+    this.image = fr.result;
   }
 
 
@@ -303,9 +305,7 @@ class Profile extends Component {
     return (
     <div>
     <h1 style={{"textAlign": "center"}}>Profile</h1>
-    <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
-AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
-    9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+    <img src={this.image} alt="Red dot" />
     <input type="file"
        id="avatar" name="avatar"
        accept="image/png, image/jpeg" onChange={this.handleFiles} />
