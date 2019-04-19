@@ -296,6 +296,7 @@ class Profile extends Component {
     fr.onloadend = function(ev){
       console.log(ev);
       console.log(ev.target.result);
+      this.setState({image : ev.target.result});
     }
     console.log(fr);
     //console.log(fr.target.result);
