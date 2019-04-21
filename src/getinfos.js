@@ -15,6 +15,7 @@ class Profile extends Component {
   const { params } = this.props.match;
   this.uuid = params.uuid;
   this.key = params.key;
+  this.sizePict = 350;
   
   openpgp.config.debug = true;
 
@@ -85,13 +86,6 @@ class Profile extends Component {
       <tr>
       <td colSpan='2'>
       <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" style={{ width: this.sizePict+'px' }}/>
-      </td>
-      </tr>
-      <tr>
-      <td colSpan='2' style={{"textAlign": "center"}}>
-      <input type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg" onChange={this.handleFiles} />
       </td>
       </tr>
       {buffer}
