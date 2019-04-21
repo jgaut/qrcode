@@ -63,6 +63,9 @@ class Profile extends Component {
     let buffer = []
 
     for (var key in itemArray) {
+      if(key === 'image'){
+
+      }else{
       buffer.push(
         <tr>
         <td align="left">
@@ -73,12 +76,32 @@ class Profile extends Component {
         </td>
         </tr>);
     }
+  }
 
     // And return the buffer for display inside the render() function
     return (
-        <div className="container flex center">
-            {buffer}
-        </div>
+        <table style={{margin:'auto'}}>
+      <tbody>
+      <tr>
+      <td colSpan='2'>
+      <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" style={{ width: this.sizePict+'px' }}/>
+      </td>
+      </tr>
+      <tr>
+      <td colSpan='2' style={{"textAlign": "center"}}>
+      <input type="file"
+       id="avatar" name="avatar"
+       accept="image/png, image/jpeg" onChange={this.handleFiles} />
+      </td>
+      </tr>
+      {buffer}
+    <tr>
+      <td colSpan='2' style={{"textAlign": "center", 'color':'red'}}>
+        <label>{this.err}</label>
+      </td>
+      </tr>
+    </tbody>
+    </table>
     );
   }
 
