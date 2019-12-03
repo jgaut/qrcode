@@ -1,5 +1,5 @@
 {
-    "providers": {
+    "dev": {
         "awscloudformation": {
             "AuthRoleName": "amplify-qrcode-dev-221536-authRole",
             "UnauthRoleArn": "arn:aws:iam::589551891303:role/amplify-qrcode-dev-221536-unauthRole",
