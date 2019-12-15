@@ -141,7 +141,7 @@ class Profile extends Component {
         fetch(result)
           .then(response => response.json())
             .then(data => {
-              //console.log("data :" + JSON.stringify(data) + " -- "+data.length);
+              console.log("data :" + JSON.stringify(data) + " -- "+data.length);
               if(data.nom!==undefined){
                 for (var key in data) {
                   var t = data[key];
@@ -155,7 +155,7 @@ class Profile extends Component {
                   gs: '',
                   notes:'',
                 };
-                //console.log("data :" + JSON.stringify(this.state) + " -- "+this.state.length);
+                console.log("data :" + JSON.stringify(this.state) + " -- "+this.state.length);
               }
             })
             .catch(error => {console.log(error);
@@ -333,8 +333,8 @@ class Profile extends Component {
 
 
   render() {
-    this.qrcodeValue = "http://qrcode-20190329114756--hostingbucket.s3-website-eu-west-1.amazonaws.com/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
-    this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
+    this.qrcodeValue = awsmobile.aws_content_delivery_url+"/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
+    //this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
 
     return (
     <div>
