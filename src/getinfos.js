@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as openpgp from 'openpgp'
+import * as openpgp from 'openpgp';
+import awsmobile from './aws-exports';
 
 class Profile extends Component {
 
@@ -19,13 +20,13 @@ class Profile extends Component {
   
   openpgp.config.debug = true;
 
-  openpgp.initWorker({ path: '/openpgp/dist/compat/openpgp.worker.min.js'});
+  openpgp.initWorker({ path: '/openpgp/openpgp.worker.min.js'});
 
   this.Load();
  	}
 
   async Load(){
-    fetch("https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.uuid+".json")
+    fetch("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.uuid+".json")
     .then(response => response.json())
       .then(data => {
         //console.log("data :" + JSON.stringify(data));

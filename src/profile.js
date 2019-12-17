@@ -68,7 +68,8 @@ class Profile extends Component {
       console.log("err : "+ err);
       this.props.history.push('/');
       }
-    )  
+    );
+    
   }
 
   async encodePgp(key, message, code){
@@ -135,8 +136,8 @@ class Profile extends Component {
 
     this.code = ls.get(this.sub);
     //this.setState({code:this.code});
-
-    Storage.get(this.sub+'.json', {level: 'public'})
+    console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.sub+".json");
+    Storage.get(this.sub +'.json', {level: 'public'})
       .then(result => {
         fetch(result)
           .then(response => response.json())

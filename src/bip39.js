@@ -51,7 +51,7 @@ class Bip39 extends Component {
   Validate(){
     console.log("Change my master key");
     ls.set(this.sub, this.state.newKey);
-    this.props.history.push('/');
+    this.props.history.push('/profile', {action:"new_master_key", oldKey:this.state.actualKey});
   }
 
   handleChange(event) {
