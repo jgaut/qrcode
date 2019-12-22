@@ -7,6 +7,9 @@ import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import * as openpgp from 'openpgp';
 import Resizer from 'react-image-file-resizer';
+import {gzip, ungzip} from 'node-gzip';
+import sha512 from 'sha512';
+import arrayBufferToBuffer from 'arraybuffer-to-buffer';
 
 Amplify.configure(awsmobile);
 
@@ -25,7 +28,7 @@ class Profile extends Component {
 
     openpgp.config.debug = true;
 
-    openpgp.initWorker({ path: '/openpgp/dist/compat/openpgp.worker.min.js'});
+    openpgp.initWorker({ path: 'openpgp.worker.min.js'});
 
     this.code = '';
     this.copyState={};
@@ -38,6 +41,7 @@ class Profile extends Component {
     this.QRCodeVisibility='none';
     this.err='';
     this.sizePict=350;
+    this.hash='';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -126,7 +130,7 @@ class Profile extends Component {
       });
     }
 
-  Load(){
+  async Load(){
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
@@ -135,29 +139,42 @@ class Profile extends Component {
     }
 
     this.code = ls.get(this.sub);
-    //this.setState({code:this.code});
-    console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.sub+".json");
-    Storage.get(this.sub +'.json', {level: 'public'})
+    var hash = sha512(this.code);
+    this.hash = hash.toString('hex');
+    console.log('hash : ' + hash);
+    console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.sub+"_____"+this.hash+".json");
+    
+    await Storage.get(this.sub+"_____"+this.hash+'.json', {level: 'public'})
       .then(result => {
+        //console.log("result : " +result.toString());
         fetch(result)
-          .then(response => response.json())
+          .then(response =>response)
             .then(data => {
-              console.log("data :" + JSON.stringify(data) + " -- "+data.length);
-              if(data.nom!==undefined){
-                for (var key in data) {
-                  var t = data[key];
-                  this.decodePgp(key, t, this.code);
-                }
-              }else{
-                this.state = {
-                  nom: '',
-                  prenom: '',
-                  age: '',
-                  gs: '',
-                  notes:'',
-                };
-                console.log("data :" + JSON.stringify(this.state) + " -- "+this.state.length);
-              }
+              //Unzip
+              data.arrayBuffer()
+                .then(data=>{
+                  //console.log(arrayBufferToBuffer(data));
+                  ungzip(arrayBufferToBuffer(data))
+                    .then((data) => {
+                      console.log("data :" + data+ " -- "+data.length); 
+                      var myData = JSON.parse(data.toString());
+                      if(myData.nom!==undefined){
+                        for (var key in myData) {
+                          var t = myData[key];
+                          this.decodePgp(key, t, this.code);
+                        }
+                      }else{
+                        this.state = {
+                          nom: '',
+                          prenom: '',
+                          age: '',
+                          gs: '',
+                          notes:'',
+                        };
+                        console.log("NEW data :" + JSON.stringify(this.state) + " -- "+ this.state.length);
+                      }
+                    });
+                });              
             })
             .catch(error => {console.log(error);
           });
@@ -193,8 +210,10 @@ class Profile extends Component {
       //console.log("wait for cpt : " + this.cpt);
       setTimeout(this.waitForSave, 100);
     } else {
-      //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
-      Storage.put(this.sub+".json", JSON.stringify(this.copyState), {
+      console.log("Save this.copyState :" + JSON.stringify(this.copyState));
+      var compressed = await gzip(JSON.stringify(this.copyState));
+      console.log("compressed : "+compressed);
+      Storage.put(this.sub+"_____"+this.hash+".json", compressed, {
         level: 'public',
         contentType: 'text/plain'
       })
