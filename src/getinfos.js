@@ -20,7 +20,7 @@ class Profile extends Component {
   
   openpgp.config.debug = true;
 
-  openpgp.initWorker({ path: '/openpgp/openpgp.worker.min.js'});
+  openpgp.initWorker({ path: 'openpgp.worker.min.js'});
 
   this.Load();
  	}
