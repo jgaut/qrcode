@@ -1,6 +1,6 @@
 - name: amplify-cli-action
   on:
-  push:
+   push:
     branches:
     - master
   uses: ambientlight/amplify-cli-action@0.2.0
