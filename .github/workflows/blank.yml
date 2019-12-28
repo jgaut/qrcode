@@ -1,0 +1,19 @@
+- name: amplify-cli-action
+  uses: ambientlight/amplify-cli-action@0.2.0
+  with:
+    # the root project directory: use it if you amplify project is not this repo root directory
+    project_dir: # optional
+    # front-end source location where aws_exports.js will be generated
+    source_dir: # optional, default is src
+    # front-end artifacts deployment directory that gets uploaded to S3 during amplify publish
+    distribution_dir: # optional, default is dist
+    # a build command to run with amplify publish (to build front-end deployment artifacts)
+    build_command: # optional, default is npm run build
+    # amplify environment to use
+    amplify_env: dev
+    # amplify command: SUPPORTED: [configure, push, publish, status, add_env, delete_env]
+    amplify_command: publish
+    # version of amplify/cli used
+    amplify_cli_version: # optional
+    # deletion protection: explicitly set this to false if you want amplify delete to work
+    delete_lock: # optional, default is true
