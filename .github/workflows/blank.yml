@@ -1,4 +1,8 @@
 - name: amplify-cli-action
+  on:
+  push:
+    branches:
+    - master
   uses: ambientlight/amplify-cli-action@0.2.0
   with:
     # the root project directory: use it if you amplify project is not this repo root directory
