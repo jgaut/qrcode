@@ -39,7 +39,7 @@ jobs:
       uses: ambientlight/amplify-cli-action@0.2.0
       with:
         amplify_command: publish
-        amplify_env: prod
+        amplify_env: dev
         build_command: 'npm run build'
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
