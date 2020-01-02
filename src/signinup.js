@@ -1,6 +1,136 @@
 import React, { Component } from 'react';
 import './App.css';
 import Auth from '@aws-amplify/auth';
+import {
+  Formiz,
+  useForm,
+  useField
+} from '@formiz/core'
+
+// 1. Create a reusable field
+const MyField = (props) => {
+  const {
+    errorMessage,
+    id,
+    isValid,
+    isPristine,
+    isSubmitted,
+    resetKey,
+    setValue,
+    value,
+  } = useField(props)
+  const { label, type, required } = props
+  const [isFocused, setIsFocused] = React.useState(false);
+  const showError = !isValid && (!isPristine || isSubmitted)
+
+  return (
+    <div className={`demo-form-group ${(showError && !isFocused) ? 'is-error' : ''}`}>
+      <label
+        className="demo-label"
+        htmlFor={id}
+      >
+        { label }
+        {required && ' *'}
+      </label>
+      <input
+        key={resetKey}
+        id={id}
+        type={type || 'text'}
+        value={value || ''}
+        className="demo-input"
+        onChange={e => setValue(e.target.value)}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        aria-invalid={!isValid}
+        aria-describedby={!isValid ? `${id}-error` : null}
+      />
+      {showError && (
+        <div id={`${id}-error`} className="demo-form-feedback">
+          { errorMessage }
+        </div>
+      )}
+    </div>
+  )
+}
+
+
+// 2. Create a form with multi steps & fields
+const MyForm = () => {
+  const myForm = useForm()
+  const [isLoading, setIsLoading] = React.useState(false)
+  const submitForm = (values) => {
+    setIsLoading(true)
+    console.log(values.email);
+    Auth.signIn({username:values.email, password:values.password})
+    .then((data) => {
+      console.log("data :" +data);
+      /*this.props.history.push({
+        pathname: '/signinconfirm',
+        search: '',
+        state: { email: email }
+      });*/
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      console.log("err :" +err.code);
+      setIsLoading(false);
+    })
+
+
+
+    /*setTimeout(() => {
+      setIsLoading(false)
+      alert(JSON.stringify(values))
+      myForm.invalidateFields({
+        email: 'You can display an error after an API call',
+      })
+    }, 1000)*/
+  }
+  return (
+    <Formiz onValidSubmit={submitForm} connect={myForm}>
+      <form
+        noValidate
+        onSubmit={myForm.submit}
+        className="demo-form"
+        style={{ minHeight: '16rem' }}
+      >
+        <div className="demo-form__content">
+      
+            <MyField
+              name="email"
+              label="Email"
+              type="email"
+              required="Email is required"        
+            />
+          
+            <MyField
+              name="password"
+              label="Password"
+              type="password"
+            />
+
+        </div>
+
+        <div className="demo-form__footer">
+          <div
+            className="ml-auto"
+            style={{ minWidth: '6rem' }}
+          >
+            <button
+              className="demo-button is-full is-primary"
+              type="submit"
+              disabled={isLoading || (!myForm.isValid && myForm.isSubmitted)}
+            >
+              {isLoading ? 'Loading...' : 'Submit'}
+            </button>
+          </div>
+        </div>
+      </form>
+    </Formiz>
+  )
+}
+
+
 
 class SignInUp extends Component {
 
@@ -15,121 +145,17 @@ class SignInUp extends Component {
       hValue:'',
     };
     
-    this.handleChange = this.handleChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
+    //this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
-  handleChange(event) {
-    //console.log(event.target);
-
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
-
-  onSubmit(){
-    if(this.state.hValue!==""){
-      return;
-    }
-    
-    var username = this.state.email;
-    var email = this.state.email;
-    var password = this.state.password;
-
-    Auth.signUp({username, password, attributes:{email}})
-    .then((data) => {
-      console.log(data);
-      this.props.history.push({
-        pathname: '/signinconfirm',
-        search: '',
-        state: { email: email }
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      if(err && err.code && typeof err.code != 'undefined' && err.code === 'UsernameExistsException'){
-
-        // For advanced usage
-        // You can pass an object which has the username, password and validationData which is sent to a PreAuthentication Lambda trigger
-        Auth.signIn({
-            username, // Required, the username
-            password,// Optional, the password
-            
-        }).then((user) => {
-          console.log(user);
-          this.props.history.push('/', {p:this.state.password});
-          }
-        )
-        .catch((err) => {
-          console.log(err);
-          if(err && err.code && typeof err.code != 'undefined' && err.code === 'UserNotConfirmedException'){
-            this.props.history.push({
-              pathname: '/signinconfirm',
-              search: '',
-              state: { email: email }
-            });
-          }else{
-            this.setState({ err: err.message || err || ''});
-            //this.setState({errColor: '#000000'}); 
-          }
-        });
-      }else{
-          //this.setState({errColor: '#000000'}); 
-          this.setState({ err: err.message || err || ''});
-
-      }
-    });
-
-  }
- 
-  render() {
+  render(){
     return (
-    <div>
-    <h1 style={{"textAlign": "center"}}>Account connection</h1>
-    <table>
-    <tbody>    
-      <tr>
-          <td>
-            <label>Email</label>
-          </td>
-          <td>
-            <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
-          </td>
-        </tr>
-                <tr>
-          <td>
-            <label>Password</label>
-          </td>
-          <td>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-          </td>
-        </tr>
-        <tr>
-          <td colSpan='2'>
-            <input name={this.state.hName} type={this.state.hType} value={this.state.hValue}/>
-          </td>
-        </tr>
-        <tr>
-          <td colSpan='2' style={{"textAlign": "center"}}>
-            <button onClick={this.onSubmit}>Sign In - Sign Up</button>
-          </td>
-        </tr>
-        <tr>
-          <td colSpan='2'>
-            <label>{this.state.err}</label>
-          </td>
-        </tr>
-        </tbody>    
-    </table>
-    </div> 
-
-    );      
+  <MyForm />
+  )
   }
-}
 
+
+}
 export default SignInUp;

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@formiz/core": "^1.0.0-rc.3",
+    "@formiz/validations": "^1.0.0-rc.2",
     "arraybuffer-to-buffer": "0.0.7",
     "aws-amplify": "^1.2.4",
     "aws-amplify-react": "^2.5.4",
