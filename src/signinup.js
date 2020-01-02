@@ -63,7 +63,7 @@ class SignInUp extends Component {
   }
  
   render() {
-    return (
+    return ( 
  
     <div className="container">
       <form onSubmit={this.handleSubmit}>
