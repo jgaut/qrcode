@@ -54,6 +54,7 @@ class Profile extends Component {
     this.processItems = this.processItems.bind(this);
     this.ShowQRCode = this.ShowQRCode.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
+    this.DeletePicture = this.DeletePicture.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -192,16 +193,16 @@ class Profile extends Component {
 
   async Save(){
     if(this.ischange){
-      console.log("Save my data !");
+      console.log("Process to save data...");
       this.copyState = {...this.state};
       //console.log("this.copyState :" + JSON.stringify(this.copyState));
       for (var key in this.state) {
-        //console.log(key, " => ", this.state[key]);
+        console.log(key, " => ", this.state[key]);
         this.cpt++;
         var t = this.state[key];
-        this.encodePgp(key, t, this.code)
+        await this.encodePgp(key, t, this.code)
       }
-      this.waitForSave();
+    this.waitForSave();
     }
   }
 
@@ -210,15 +211,15 @@ class Profile extends Component {
       //console.log("wait for cpt : " + this.cpt);
       setTimeout(this.waitForSave, 100);
     } else {
-      console.log("Save this.copyState :" + JSON.stringify(this.copyState));
+      //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
       var compressed = await gzip(JSON.stringify(this.copyState));
-      console.log("compressed : "+compressed);
+      //console.log("compressed : "+compressed);
       Storage.put(this.sub+"_____"+this.hash+".json", compressed, {
         level: 'public',
         contentType: 'text/plain'
       })
       .then (result => {
-        //console.log(result);
+        console.log("Data saved");
       })
       .catch(err => console.log(err));
       this.ischange=false;
@@ -231,15 +232,16 @@ class Profile extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
-
+    this.setState({[name]: value});
     this.ischange=true;
   }
 
   ChangeMasterKey(){
     this.props.history.push('/bip39');
+  }
+
+  DeletePicture(){
+    this.setState({['image']: ''}, ()=>{this.ischange=true;this.Save();});
   }
   
 
@@ -252,66 +254,52 @@ class Profile extends Component {
       //console.log(key);
       let myKey = key;
       if(key === 'image'){
+        buffer.unshift(
+          <div className="row" key={myKey} style={{"textAlign": "center"}}>
+            <img src={"data:image/png;base64,"+this.state[myKey]} alt="Profile picture" style={this.state[myKey]===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
+            <br></br>
+             <input type="file"
+       id="avatar" name="avatar"
+       accept="image/png, image/jpeg" onChange={this.handleFiles} />
+       <button onClick={this.DeletePicture}>Delete picture</button>
+          </div>
 
+        );
       }else{
-      buffer.push(
-
-        <tr key={myKey} >
-              <td>
-                <label>{myKey}</label>
-              </td>
-              <td>
-                <input name={myKey} type="text" placeholder="" value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
-               
-              </td>
-            
-          </tr>
-   );
-    }
+        buffer.push(
+          <div className="row" key={myKey}>
+            <div className="col-25">
+              <label htmlFor={myKey}>{myKey}</label>
+            </div>
+            <div className="col-75">
+              <input type="text" id={myKey} name={myKey} placeholder={myKey} value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
+            </div>
+          </div>
+        );
+      }
     }
 
     // And return the buffer for display inside the render() function
     return (
-      <table style={{margin:'auto'}}>
-      <tbody>
-      <tr>
-      <td colSpan='2'>
-      <img src={"data:image/png;base64,"+this.state.image} alt="Profile picture" style={{ width: this.sizePict+'px' }}/>
-      </td>
-      </tr>
-      <tr>
-      <td colSpan='2' style={{"textAlign": "center"}}>
-      <input type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg" onChange={this.handleFiles} />
-      </td>
-      </tr>
+      <div className="container">
+      
       {buffer}
-      <tr>
-      <td>
-      <button onClick={this.LogOut}>Logout</button>
-      </td>
-      <td>
-      <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
-      </td>
-    </tr>
-    <tr>
-      <td colSpan='2' style={{"textAlign": "center", 'color':'red'}}>
+
+      <div className="row" style={{"textAlign": "center"}}>
+        <button onClick={this.LogOut}>Logout</button>
+        <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
+        <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>  
+      </div>
+      
+      <div className="row" style={{"display":this.QRCodeVisibility, "textAlign": "center"}}>
+        <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
+      </div>
+
+      <div className="row" style={{"textAlign": "center", color:'red'}}>
         <label>{this.err}</label>
-      </td>
-      </tr>
-     <tr>
-      <td colSpan='2' style={{"textAlign": "center"}}>
-        <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>
-      </td>
-      </tr>
-      <tr style={{"display":this.QRCodeVisibility}}>
-      <td colSpan='2'>
-      <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
-      </td>
-    </tr>
-    </tbody>
-    </table>
+      </div>
+  
+    </div>
     );
   }
 
