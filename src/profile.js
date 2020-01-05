@@ -5,12 +5,11 @@ import awsmobile from './aws-exports';
 import QRCode from 'qrcode.react';
 import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
-import * as openpgp from 'openpgp';
 import Resizer from 'react-image-file-resizer';
 import {gzip, ungzip} from 'node-gzip';
 import sha512 from 'sha512';
 import arrayBufferToBuffer from 'arraybuffer-to-buffer';
-import {encodePgp, decodePgp} from './tools.js';
+import {encodePgp, decodePgp, initTools} from './tools.js';
 
 Amplify.configure(awsmobile);
 
@@ -29,10 +28,6 @@ class Profile extends Component {
       image:''
     };
 
-    openpgp.config.debug = true;
-
-    openpgp.initWorker({ path: 'openpgp.worker.min.js'});
-
     this.code = '';
     this.copyState={};
     this.sub = '';
@@ -49,8 +44,6 @@ class Profile extends Component {
     this.Save = this.Save.bind(this);
     this.Load = this.Load.bind(this);
     this.loadAsync = this.loadAsync.bind(this);
-    //this.encodePgp = this.encodePgp.bind(this);
-    //this.decodePgp = this.decodePgp.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
     this.processItems = this.processItems.bind(this);
     this.ShowQRCode = this.ShowQRCode.bind(this);
@@ -65,9 +58,10 @@ class Profile extends Component {
     })
     .catch(err => console.log(err));
     
+    initTools();
  	}
 
-  componentWillMount(){
+  componentDidMount(){
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then((user) => {}
     ).catch((err) => {
@@ -89,8 +83,8 @@ class Profile extends Component {
     this.code = ls.get(this.sub);
     var hash = sha512(this.code);
     this.hash = hash.toString('hex');
-    console.log('hash : ' + hash);
-    console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.sub+"_____"+this.hash+".json");
+    //console.log('hash : ' + hash);
+    //console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.sub+"_____"+this.hash+".json");
     
     Storage.get(this.sub+"_____"+this.hash+'.json', {level: 'public'})
       .then(result => {
@@ -104,29 +98,29 @@ class Profile extends Component {
                   //console.log(arrayBufferToBuffer(data));
                   ungzip(arrayBufferToBuffer(data))
                     .then((data) => {
-                      console.log("data :" + data+ " -- "+data.length); 
+                      //console.log("data :" + data+ " -- "+data.length); 
                       var myData = JSON.parse(data.toString());
                       if(myData.nom!==undefined){
 
                         for (var key in this.minFields){
                           //console.log('add field : '+key +'==>'+myData[key]);
                           if(!myData[key]){
-                            console.log('add field : '+key +'==>'+myData[key]);
+                            //console.log('add field : '+key +'==>'+myData[key]);
                             myData[key]='';  
                           }
                         }
 
-                        for (var key in myData) {
+                        for (key in myData) {
                           this.loadAsync(key, myData[key]);
                         }
                       }else{
-                        this.state = {
-                          nom: '',
-                          prenom: '',
-                          age: '',
-                          gs: '',
-                          notes:'',
-                        };
+                        for (key in this.minFields){
+                          //console.log('add field : '+key +'==>'+myData[key]);
+                          if(!myData[key]){
+                            //console.log('add field : '+key +'==>'+myData[key]);
+                            myData[key]='';  
+                          }
+                        }
                         console.log("NEW data :" + JSON.stringify(this.state) + " -- "+ this.state.length);
                       }
                     });
@@ -139,7 +133,7 @@ class Profile extends Component {
   }
 
   async loadAsync(key, message){
-    console.log(message);
+    //console.log(message);
     this.setState({[key]: await decodePgp(message, this.code)});
   }
 
@@ -152,6 +146,10 @@ class Profile extends Component {
   }
 
   async Save(){
+
+    if(!this.ischange){
+      return;
+    }
     console.log("Process to save data...");
     this.copyState = {...this.state};
     //console.log("this.copyState :" + JSON.stringify(this.copyState));
@@ -172,6 +170,7 @@ class Profile extends Component {
     })
     .then (result => {
       console.log("Data saved");
+      this.ischange=false;
     })
     .catch(err => console.log(err));
   }
@@ -182,7 +181,7 @@ class Profile extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({[name]: value});
+    this.setState({[name]: value},()=>{this.ischange=true;});
   }
 
   ChangeMasterKey(){
@@ -190,7 +189,7 @@ class Profile extends Component {
   }
 
   DeletePicture(){
-    this.setState({['image']: ''}, ()=>{this.Save();});
+    this.setState({['image']: ''}, ()=>{this.ischange=true; this.Save();});
   }
   
 
@@ -205,7 +204,7 @@ class Profile extends Component {
       if(key === 'image'){
         buffer.unshift(
           <div className="row" key={myKey} style={{"textAlign": "center"}}>
-            <img src={"data:image/png;base64,"+this.state[myKey]} alt="Profile picture" style={this.state[myKey]===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
+            <img src={"data:image/png;base64,"+this.state[myKey]} alt="Profile picture" style={!this.state[myKey] || this.state[myKey]===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
             <br></br>
              <input type="file"
                     id="avatar" name="avatar"

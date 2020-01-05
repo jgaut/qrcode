@@ -21,7 +21,7 @@
     "sha512": "0.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cp node_modules/openpgp/dist/compat/openpgp.worker.min.js public/ && react-scripts start",
     "build": "cp node_modules/openpgp/dist/compat/openpgp.worker.min.js public/ && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

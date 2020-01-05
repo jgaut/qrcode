@@ -1,5 +1,11 @@
 import * as openpgp from 'openpgp';
 
+export const initTools = async() => {
+  //var openpgp = require('openpgp');
+  openpgp.config.debug = true;
+  //await openpgp.initWorker({ path: './openpgp.worker.min.js'});
+}
+
 export const encodePgp = async(message, code) => {
 
   if(message===""){
@@ -22,7 +28,7 @@ export const encodePgp = async(message, code) => {
       b64encoded = btoa(String.fromCharCode.apply(null, encrypted));
     }
   );
-  console.log('encodePgp : '+message+ ' --> '+b64encoded);
+  //console.log('encodePgp : '+message+ ' --> '+b64encoded);
   return b64encoded;
 }
 
