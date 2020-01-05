@@ -10,7 +10,7 @@
     "bitcore-mnemonic": "^8.13.2",
     "local-storage": "^1.4.2",
     "node-gzip": "^1.1.2",
-    "openpgp": "^4.7.1",
+    "openpgp": "^4.7.2",
     "qrcode.react": "^0.9.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
