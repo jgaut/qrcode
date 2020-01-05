@@ -10,6 +10,7 @@ import Resizer from 'react-image-file-resizer';
 import {gzip, ungzip} from 'node-gzip';
 import sha512 from 'sha512';
 import arrayBufferToBuffer from 'arraybuffer-to-buffer';
+import {encodePgp, decodePgp} from './tools.js';
 
 Amplify.configure(awsmobile);
 
@@ -17,7 +18,9 @@ class Profile extends Component {
 
 	constructor(props) {
     super(props);
-    this.state = {
+    this.state = {};
+
+    this.minFields = {
       nom: '',
       prenom: '',
       age: '',
@@ -34,22 +37,20 @@ class Profile extends Component {
     this.copyState={};
     this.sub = '';
     this.ischange=false;
-    this.cpt=0;
     this.qrcodeValue = '';
     this.qrcodesize = 350;
     this.dataLink = '';
     this.QRCodeVisibility='none';
     this.err='';
     this.sizePict=350;
-    this.hash='';
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
     this.Save = this.Save.bind(this);
     this.Load = this.Load.bind(this);
-    this.encodePgp = this.encodePgp.bind(this);
-    this.decodePgp = this.decodePgp.bind(this);
-    this.waitForSave = this.waitForSave.bind(this);
+    this.loadAsync = this.loadAsync.bind(this);
+    //this.encodePgp = this.encodePgp.bind(this);
+    //this.decodePgp = this.decodePgp.bind(this);
     this.ChangeMasterKey = this.ChangeMasterKey.bind(this);
     this.processItems = this.processItems.bind(this);
     this.ShowQRCode = this.ShowQRCode.bind(this);
@@ -75,61 +76,7 @@ class Profile extends Component {
       }
     );
     
-  }
-
-  async encodePgp(key, message, code){
-
-    if(message===""){
-      this.cpt=this.cpt-1;
-      return;
-    }
-    var options, encrypted;
-    var uint8array = new TextEncoder("utf-8").encode(message);
-
-    //console.log(key, message, code);
-
-    options = {
-        message: await openpgp.message.fromBinary(uint8array),
-        passwords: [code],
-        armor: false
-    };
-
-    openpgp.encrypt(options).then(
-      async (ciphertext) => {
-        encrypted = ciphertext.message.packets.write();
-        var b64encoded = btoa(String.fromCharCode.apply(null, encrypted));
-        this.copyState[key]=b64encoded;
-        this.cpt=this.cpt-1;
-      }
-    );
-
-  }
-
-    async decodePgp(key, message, code){
-
-      if(message===""){
-        return;
-      }
-      var u8_2 = new Uint8Array(atob(message).split("").map(function(c) {return c.charCodeAt(0); }));
-      var options;
-      
-      options = {
-        message: await openpgp.message.read(u8_2),
-        passwords: [code],
-        format: 'binary'
-      };
-
-      openpgp.decrypt(options).then((plaintext)=> {
-          var string = new TextDecoder("utf-8").decode(plaintext.data);
-          //console.log("decode string : " + string);
-          this.setState({
-            [key]: string
-          });
-      }).catch(err => {
-        console.log("erreur lors du déchiffrement : " +err);
-        this.err = "Erreur lors du déchiffrement : Veuillez vérifier votre master key.";
-      });
-    }
+  } 
 
   async Load(){
 
@@ -145,7 +92,7 @@ class Profile extends Component {
     console.log('hash : ' + hash);
     console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.sub+"_____"+this.hash+".json");
     
-    await Storage.get(this.sub+"_____"+this.hash+'.json', {level: 'public'})
+    Storage.get(this.sub+"_____"+this.hash+'.json', {level: 'public'})
       .then(result => {
         //console.log("result : " +result.toString());
         fetch(result)
@@ -160,9 +107,17 @@ class Profile extends Component {
                       console.log("data :" + data+ " -- "+data.length); 
                       var myData = JSON.parse(data.toString());
                       if(myData.nom!==undefined){
+
+                        for (var key in this.minFields){
+                          //console.log('add field : '+key +'==>'+myData[key]);
+                          if(!myData[key]){
+                            console.log('add field : '+key +'==>'+myData[key]);
+                            myData[key]='';  
+                          }
+                        }
+
                         for (var key in myData) {
-                          var t = myData[key];
-                          this.decodePgp(key, t, this.code);
+                          this.loadAsync(key, myData[key]);
                         }
                       }else{
                         this.state = {
@@ -183,6 +138,11 @@ class Profile extends Component {
       .catch(err => console.log(err));
   }
 
+  async loadAsync(key, message){
+    console.log(message);
+    this.setState({[key]: await decodePgp(message, this.code)});
+  }
+
 	LogOut(){
     Auth.signOut()
     .then((data) => {
@@ -192,38 +152,28 @@ class Profile extends Component {
   }
 
   async Save(){
-    if(this.ischange){
-      console.log("Process to save data...");
-      this.copyState = {...this.state};
-      //console.log("this.copyState :" + JSON.stringify(this.copyState));
-      for (var key in this.state) {
-        console.log(key, " => ", this.state[key]);
-        this.cpt++;
-        var t = this.state[key];
-        await this.encodePgp(key, t, this.code)
+    console.log("Process to save data...");
+    this.copyState = {...this.state};
+    //console.log("this.copyState :" + JSON.stringify(this.copyState));
+    for (var key in this.copyState) {
+      //console.log(key, " => ", this.copyState[key]);
+      if(this.copyState[key] && this.copyState[key]!==''){
+        //console.log(key, " => ", this.copyState[key]);
+        this.copyState[key] = await encodePgp(this.copyState[key], this.code);
       }
-    this.waitForSave();
+      
+      //console.log(key, " => ", this.copyState[key]);
     }
-  }
-
-  async waitForSave(){
-    if (this.cpt>0){
-      //console.log("wait for cpt : " + this.cpt);
-      setTimeout(this.waitForSave, 100);
-    } else {
-      //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
-      var compressed = await gzip(JSON.stringify(this.copyState));
-      //console.log("compressed : "+compressed);
-      Storage.put(this.sub+"_____"+this.hash+".json", compressed, {
-        level: 'public',
-        contentType: 'text/plain'
-      })
-      .then (result => {
-        console.log("Data saved");
-      })
-      .catch(err => console.log(err));
-      this.ischange=false;
-    }
+    //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
+    //console.log("compressed : "+compressed);
+    Storage.put(this.sub+"_____"+this.hash+".json", await gzip(JSON.stringify(this.copyState)), {
+      level: 'public',
+      contentType: 'text/plain'
+    })
+    .then (result => {
+      console.log("Data saved");
+    })
+    .catch(err => console.log(err));
   }
 
   handleChange(event) {
@@ -233,7 +183,6 @@ class Profile extends Component {
     const name = target.name;
 
     this.setState({[name]: value});
-    this.ischange=true;
   }
 
   ChangeMasterKey(){
@@ -241,7 +190,7 @@ class Profile extends Component {
   }
 
   DeletePicture(){
-    this.setState({['image']: ''}, ()=>{this.ischange=true;this.Save();});
+    this.setState({['image']: ''}, ()=>{this.Save();});
   }
   
 
@@ -259,8 +208,8 @@ class Profile extends Component {
             <img src={"data:image/png;base64,"+this.state[myKey]} alt="Profile picture" style={this.state[myKey]===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
             <br></br>
              <input type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg" onChange={this.handleFiles} />
+                    id="avatar" name="avatar"
+                    accept="image/png, image/jpeg" onChange={this.handleFiles} />
        <button onClick={this.DeletePicture}>Delete picture</button>
           </div>
 
@@ -346,17 +295,14 @@ class Profile extends Component {
 
     return (
     <div>
-    <h1 style={{"textAlign": "center"}}>Profile</h1>
-
-    {this.processItems(this.state)}
-    
-    
+      <div className="row" style={{"textAlign": "center"}}>
+        <h1>Profile</h1>
+      </div>
+      {this.processItems(this.state)}
     </div>  
     );
       
   }
 }
-
-
 
 export default Profile;
