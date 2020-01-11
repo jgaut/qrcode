@@ -53,6 +53,10 @@ class Profile extends Component {
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
       this.sub = user.attributes.sub;
+      //console.log(JSON.stringify(user));
+      this.file = 'data.json';
+      this.level = 'private' ;
+      console.log(user.identityId);
       this.forceUpdate();
       this.Load();
     })
@@ -86,12 +90,37 @@ class Profile extends Component {
     //console.log('hash : ' + hash);
     //console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.sub+"_____"+this.hash+".json");
     
-    Storage.get(this.sub+"_____"+this.hash+'.json', {level: 'public'})
+    /*Storage.list('', {level: 'public'})
+      .then(result => console.log(result))
+      .catch(err => console.log(err));
+    */
+
+    await Storage.get(this.file, {level: this.level})
       .then(result => {
-        //console.log("result : " +result.toString());
+        console.log("result : " +result.toString());
         fetch(result)
-          .then(response =>response)
+          .then(response =>
+          {
+            if (!response.ok) {
+              for (var key in this.minFields){
+                //console.log('add field : '+key +'==>'+myData[key]);
+                if(!this.state[key]){
+                  console.log('add field : '+key +'==>'+this.state[key]);
+                  this.setState({[key]:''});  
+                }
+              }
+            }
+            return response;})
             .then(data => {
+
+              console.log("myData : "+JSON.stringify(data));
+              
+              if(data===""){
+                console.log("data is empty");
+              }else{
+
+              }
+
               //Unzip
               data.arrayBuffer()
                 .then(data=>{
@@ -116,20 +145,22 @@ class Profile extends Component {
                       }else{
                         for (key in this.minFields){
                           //console.log('add field : '+key +'==>'+myData[key]);
-                          if(!myData[key]){
+                          
                             //console.log('add field : '+key +'==>'+myData[key]);
-                            myData[key]='';  
-                          }
+                            this.setState({[key]:''});  
+                          
                         }
                         console.log("NEW data :" + JSON.stringify(this.state) + " -- "+ this.state.length);
                       }
                     });
-                });              
+                })
+                .catch(error => {console.log(error)});              
             })
             .catch(error => {console.log(error);
-          });
+          })
+          .catch(error=>{console.log(error)});
       })
-      .catch(err => console.log(err));
+      .catch(error => console.log(error));
   }
 
   async loadAsync(key, message){
@@ -164,8 +195,8 @@ class Profile extends Component {
     }
     //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
     //console.log("compressed : "+compressed);
-    Storage.put(this.sub+"_____"+this.hash+".json", await gzip(JSON.stringify(this.copyState)), {
-      level: 'public',
+    Storage.put(this.file, await gzip(JSON.stringify(this.copyState)), {
+      level: this.level,
       contentType: 'text/plain'
     })
     .then (result => {
