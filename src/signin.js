@@ -14,7 +14,14 @@ class SignInUp extends Component {
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.signUp = this.signUp.bind(this);
 
+  }
+
+  signUp(){
+    this.props.history.push({
+          pathname: '/signup'
+        });
   }
 
   handleChange(event) {
@@ -31,6 +38,8 @@ class SignInUp extends Component {
 
   handleSubmit(event){
 
+    console.log(event);
+    console.log(event.target);
     var username = this.state.email;
     var password = this.state.password;
 
@@ -66,6 +75,9 @@ class SignInUp extends Component {
     return ( 
  
     <div className="container">
+      <div className="row">
+        <h2>Sign In</h2>
+      </div>
       <form onSubmit={this.handleSubmit}>
         
         <div className={this.state.error==='' ? 'hidden-label': 'row error-label'}>
@@ -94,6 +106,9 @@ class SignInUp extends Component {
           <input type="submit" value="Sign In"/>
         </div>
       </form>
+      <div className="row">
+        <button onClick={this.signUp}>Sign Up</button>
+      </div>
     </div>
 
 
