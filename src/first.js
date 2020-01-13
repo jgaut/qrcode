@@ -12,8 +12,7 @@ class Bip39 extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-      actualKey:'',
-      newKey:''
+      key:''
     };
 
     this.sub='';
