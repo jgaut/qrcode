@@ -235,7 +235,7 @@ class Profile extends Component {
       if(key === 'image'){
         buffer.unshift(
           <div className="row" key={myKey} style={{"textAlign": "center"}}>
-            <img src={"data:image/png;base64,"+this.state[myKey]} alt="Profile picture" style={!this.state[myKey] || this.state[myKey]===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
+            <img src={this.state[myKey] || this.state[myKey]===undefined?"":"data:image/png;base64,"+this.state[myKey]} alt="Profile picture" style={!this.state[myKey] || this.state[myKey]===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
             <br></br>
              <input type="file"
                     id="avatar" name="avatar"

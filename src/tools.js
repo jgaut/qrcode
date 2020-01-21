@@ -51,7 +51,8 @@ export const decodePgp = async (message, code) => {
     //console.log("decode string : " + string);
   }).catch(err => {
     //console.log("erreur lors du déchiffrement : " +err);
-    this.err = "Erreur lors du déchiffrement : Veuillez vérifier votre master key.";
+    console.log("Erreur lors du déchiffrement : Veuillez vérifier votre master key.");
+    return;
   });
   //console.log("decode2 string : " + string);
   return string;
