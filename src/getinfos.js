@@ -26,7 +26,7 @@ class Profile extends Component {
  	}
 
   async Load(){
-    fetch("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/private/"+this.uuid+".json")
+    fetch("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.uuid+".json")
     .then(response => response.json())
       .then(data => {
         console.log("uuid :" + this.uuid);
