@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as openpgp from 'openpgp';
+import {encodePgp, decodePgp, initTools} from './tools.js';
 import awsmobile from './aws-exports';
+import {gzip, ungzip} from 'node-gzip';
+import arrayBufferToBuffer from 'arraybuffer-to-buffer';
 
 class Profile extends Component {
 
@@ -15,49 +17,43 @@ class Profile extends Component {
 
   const { params } = this.props.match;
   this.uuid = params.uuid;
-  this.key = params.key;
+  console.log(this.uuid);
+  this.code = params.code;
+  console.log(this.code);
   this.sizePict = 350;
-  
-  openpgp.config.debug = true;
-
-  openpgp.initWorker({ path: 'openpgp.worker.min.js'});
 
   this.Load();
  	}
 
   async Load(){
-    fetch("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.uuid+".json")
+    fetch("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/private/"+this.uuid+".json")
     .then(response => response.json())
       .then(data => {
-        //console.log("data :" + JSON.stringify(data));
-        for (var k in data) {
-          this.decodePgp(k, data[k], this.key);
-        }
+        console.log("uuid :" + this.uuid);
+        console.log("data :" + JSON.stringify(data));
+        //Unzip
+        data.arrayBuffer()
+          .then(data=>{
+            //console.log(arrayBufferToBuffer(data));
+            ungzip(arrayBufferToBuffer(data))
+              .then((data) => {
+                //console.log("data :" + data+ " -- "+data.length); 
+                var myData = JSON.parse(data.toString());
+                if(myData.nom!==undefined){
+                  for (let key in myData) {
+                    this.loadAsync(key, myData[key]);
+                  }
+                }
+              });
+          })
+          .catch(error => {console.log(error)}); 
       })
       .catch(error => {console.log(error);});
   }
 
-  async decodePgp(key, message, code){
+  async loadAsync(key, message){
     //console.log(message);
-    if(message===""){
-      return;
-    }
-    var u8_2 = new Uint8Array(atob(message).split("").map(function(c) {return c.charCodeAt(0); }));
-    var options;
-    
-    options = {
-      message: await openpgp.message.read(u8_2),
-      passwords: [code],
-      format: 'binary'
-    };
-
-    openpgp.decrypt(options).then((plaintext)=> {
-        var string = new TextDecoder("utf-8").decode(plaintext.data);
-        //console.log("decode string : " + string);
-        this.setState({
-          [key]: string
-        });
-    });
+    this.setState({[key]: await decodePgp(message, this.code)});
   }
 
   processItems(itemArray) {
