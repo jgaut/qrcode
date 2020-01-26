@@ -54,8 +54,8 @@ class Profile extends Component {
     .then(user => {
       this.sub = user.attributes.sub;
       //console.log(JSON.stringify(user));
-      this.file = 'data.json';
-      this.level = 'private' ;
+      this.file = this.sub+'.json';
+      this.level = 'public' ;
       console.log(user.identityId);
       this.forceUpdate();
       this.Load();
@@ -320,7 +320,8 @@ class Profile extends Component {
 
 
   render() {
-    this.qrcodeValue = awsmobile.aws_content_delivery_url+"/getinfos?"+encodeURIComponent("uuid=")+encodeURIComponent(this.sub)+encodeURIComponent("&code=")+encodeURIComponent(this.code);
+    this.qrcodeValue = awsmobile.aws_content_delivery_url+"/getinfos/"+encodeURIComponent(this.sub)+encodeURIComponent(this.code);
+    //this.qrcodeValue = "http://localhost:3000"+"/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     //this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
     console.log(this.qrcodeValue);
 
