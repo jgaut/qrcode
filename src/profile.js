@@ -320,7 +320,7 @@ class Profile extends Component {
 
 
   render() {
-    this.qrcodeValue = awsmobile.aws_content_delivery_url+"/getinfos?"+"uuid="+encodeURIComponent(this.sub)+"&code="+encodeURIComponent(this.code);
+    this.qrcodeValue = awsmobile.aws_content_delivery_url+"/getinfos?"+encodeURIComponent("uuid=")+encodeURIComponent(this.sub)+encodeURIComponent"&code=")+encodeURIComponent(this.code);
     //this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
     console.log(this.qrcodeValue);
 
