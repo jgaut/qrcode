@@ -19,14 +19,23 @@ class Profile extends Component {
     super(props);
     this.state = {};
 
-    this.minFields = {
+    /*this.minFields = {
       nom: '',
       prenom: '',
       age: '',
       gs:'',
       notes:'',
       image:''
-    };
+    };*/
+
+    this.minFields = [
+      {'l':'nom', 'v': '', 'p':0},
+      {'l':'prenom', 'v': '', 'p':1},
+      {'l':'age', 'v': '', 'p':2},
+      {'l':'gs', 'v': '', 'p':3},
+      {'l':'notes', 'v': '', 'p':4},
+      {'l':'image', 'v': '', 'p':5}
+    ];
 
     this.code = '';
     this.copyState={};
@@ -62,6 +71,7 @@ class Profile extends Component {
     })
     .catch(err => console.log(err));
     
+
     initTools();
  	}
 
@@ -80,8 +90,9 @@ class Profile extends Component {
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
-      var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
-      ls.set(this.sub, tmpCode.toString());
+      /*var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
+      ls.set(this.sub, tmpCode.toString());*/
+      this.props.history.push('/bip39');
     }
 
     this.code = ls.get(this.sub);
@@ -113,7 +124,7 @@ class Profile extends Component {
             return response;})
             .then(data => {
 
-              console.log("myData : "+JSON.stringify(data));
+              //console.log("myData : "+JSON.stringify(data));
               
               if(data===""){
                 console.log("data is empty");
@@ -124,34 +135,39 @@ class Profile extends Component {
               //Unzip
               data.arrayBuffer()
                 .then(data=>{
-                  //console.log(arrayBufferToBuffer(data));
                   ungzip(arrayBufferToBuffer(data))
                     .then((data) => {
-                      //console.log("data :" + data+ " -- "+data.length); 
-                      var myData = JSON.parse(data.toString());
-                      if(myData.nom!==undefined){
 
-                        for (var key in this.minFields){
-                          //console.log('add field : '+key +'==>'+myData[key]);
-                          if(!myData[key]){
-                            //console.log('add field : '+key +'==>'+myData[key]);
-                            myData[key]='';  
+                      //Init with minimum fileds
+                      var myData = this.minFields;
+                      //console.log(this.minFields);
+
+                      //Add storaged fields
+                      var tmpData = JSON.parse(data.toString());
+                      //tmpData['10']={'prenom':{'v':'X', 'p':10}};
+                      //console.log(tmpData);
+                      for (var key in tmpData){
+                        //console.log("Storaged fields => "+key+" : "+tmpData[key].v +" in "+tmpData[key].p);
+                        if(tmpData[key].v){
+                          for(var key2 in myData){
+                            //console.log("Actual table => " + key + " + " +myData[key]);
+                            if(myData[key2].l===tmpData[key].l){
+                              myData[key2].v=tmpData[key].v;
+                              myData[key2].p=tmpData[key].p;
+                            }
                           }
+                          //myData[key]=tmpData[key];
                         }
-
-                        for (key in myData) {
-                          this.loadAsync(key, myData[key]);
-                        }
-                      }else{
-                        for (key in this.minFields){
-                          //console.log('add field : '+key +'==>'+myData[key]);
-                          
-                            //console.log('add field : '+key +'==>'+myData[key]);
-                            this.setState({[key]:''});  
-                          
-                        }
-                        console.log("NEW data :" + JSON.stringify(this.state) + " -- "+ this.state.length);
                       }
+                      
+                      console.log("uncrypt");
+                      for (key in myData) {
+                        //console.log(key + " : " + JSON.stringify(myData[key]));
+                        this.loadAsync(key, myData[key]);
+                      }
+
+                      //console.log(myData);
+                      
                     });
                 })
                 .catch(error => {console.log(error)});              
@@ -163,9 +179,11 @@ class Profile extends Component {
       .catch(error => console.log(error));
   }
 
-  async loadAsync(key, message){
-    //console.log(message);
-    this.setState({[key]: await decodePgp(message, this.code)});
+  async loadAsync(key, obj){
+    console.log(key+" : " +obj.l+" : "+obj.v+" : "+obj.p);
+    obj.v = await decodePgp(obj.v, this.code);
+    console.log(obj.v);
+    this.setState({[key]: obj});
   }
 
 	LogOut(){
@@ -186,9 +204,9 @@ class Profile extends Component {
     //console.log("this.copyState :" + JSON.stringify(this.copyState));
     for (var key in this.copyState) {
       //console.log(key, " => ", this.copyState[key]);
-      if(this.copyState[key] && this.copyState[key]!==''){
+      if(this.copyState[key] && this.copyState[key].v!==''){
         //console.log(key, " => ", this.copyState[key]);
-        this.copyState[key] = await encodePgp(this.copyState[key], this.code);
+        this.copyState[key].v = await encodePgp(this.copyState[key].v, this.code);
       }
       
       //console.log(key, " => ", this.copyState[key]);
@@ -211,8 +229,10 @@ class Profile extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
-    this.setState({[name]: value},()=>{this.ischange=true;});
+    const id = target.id;
+    //console.log(target);
+    //console.log(this.state[id]);
+    this.setState({[id]: {'l':name, 'v':value, 'p':this.state[id].p}},()=>{this.ischange=true;});
   }
 
   ChangeMasterKey(){
@@ -229,13 +249,16 @@ class Profile extends Component {
     // Create an empty array that will hold the final JSX output.
     let buffer = [];
 
+    //console.log(this.state);
+    //console.log("Process graphics");
     for (var key in itemArray) {
       //console.log(key);
-      let myKey = key;
-      if(key === 'image'){
+      ///console.log(itemArray[key]);
+      let obj = itemArray[key];
+      if(obj.l === 'image'){
         buffer.unshift(
-          <div className="row" key={myKey} style={{"textAlign": "center"}}>
-            <img src={this.state[myKey] || this.state[myKey]===undefined?"":"data:image/png;base64,"+this.state[myKey]} alt="Profile picture" style={!this.state[myKey] || this.state[myKey]===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
+          <div className="row" key={key} style={{"textAlign": "center"}}>
+            <img src={obj.v || obj.v===undefined?"":"data:image/png;base64,"+obj.v} alt="Profile picture" style={!obj.v || obj.v===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
             <br></br>
              <input type="file"
                     id="avatar" name="avatar"
@@ -246,12 +269,12 @@ class Profile extends Component {
         );
       }else{
         buffer.push(
-          <div className="row" key={myKey}>
+          <div className="row" key={key}>
             <div className="col-25">
-              <label htmlFor={myKey}>{myKey}</label>
+              <label htmlFor={obj.l}>{obj.l}</label>
             </div>
             <div className="col-75">
-              <input type="text" id={myKey} name={myKey} placeholder={myKey} value={this.state[myKey]} onChange={this.handleChange} onBlur={this.Save}/>
+              <input type="text" id={key} name={obj.l} placeholder={obj.l} value={obj.v} onChange={this.handleChange} onBlur={this.Save}/>
             </div>
           </div>
         );

@@ -34,12 +34,19 @@ export const encodePgp = async(message, code) => {
 
 export const decodePgp = async (message, code) => {
 
-  if(message===""){
-    return;
+  if(message==="" || message===undefined){
+    return "";
   }
-  var u8_2 = new Uint8Array(atob(message).split("").map(function(c) {return c.charCodeAt(0); }));
-  var options, string;
-  
+
+
+  try{
+    console.log("Transform to bytes array : " + message);
+    var u8_2 = new Uint8Array(atob(message).split("").map(function(c) {return c.charCodeAt(0); }));
+    var options, string;
+  } catch(error){
+    console.log("Error lors du déchiffrement : atob");
+  }
+
   options = {
     message: await openpgp.message.read(u8_2),
     passwords: [code],
