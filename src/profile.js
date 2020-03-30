@@ -17,18 +17,9 @@ class Profile extends Component {
 
 	constructor(props) {
     super(props);
-    this.state = {};
+    
 
-    /*this.minFields = {
-      nom: '',
-      prenom: '',
-      age: '',
-      gs:'',
-      notes:'',
-      image:''
-    };*/
-
-    this.minFields = [
+    this.state = [
       {'l':'nom', 'v': '', 'p':0},
       {'l':'prenom', 'v': '', 'p':1},
       {'l':'age', 'v': '', 'p':2},
@@ -59,6 +50,7 @@ class Profile extends Component {
     this.DeletePicture = this.DeletePicture.bind(this);
     this.Reset = this.Reset.bind(this);
     this.ShowState = this.ShowState.bind(this);
+    this.shuffle = this.shuffle.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -99,8 +91,6 @@ class Profile extends Component {
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
       console.log("need to generate a new mnemonic");
-      /*var tmpCode = new Mnemonic(Mnemonic.Words.FRENCH);
-      ls.set(this.sub, tmpCode.toString());*/
       this.props.history.push('/bip39');
     }
 
@@ -115,13 +105,13 @@ class Profile extends Component {
           .then(response =>
           {
             if (!response.ok) {
-              for (var key in this.minFields){
+              /*for (var key in this.minFields){
                 //console.log('add field : '+key +'==>'+myData[key]);
                 if(!this.state[key]){
                   //console.log('add field : '+key +'==>'+this.state[key]);
                   this.setState({[key]:''});  
                 }
-              }
+              }*/
             }
             return response;})
             .then(data => {
@@ -141,34 +131,11 @@ class Profile extends Component {
                     .then((data) => {
 
                       //Init with minimum fileds
-                      var myData = this.minFields;
                       //console.log(this.minFields);
 
                       //Add storaged fields
-                      var tmpData = JSON.parse(data.toString());
-                      //tmpData['10']={'prenom':{'v':'X', 'p':10}};
-                      //console.log(tmpData);
-                      for (var key in tmpData){
-                        //console.log("Storaged fields => "+key+" : "+tmpData[key].v +" in "+tmpData[key].p);
-                        if(tmpData[key].v){
-                          for(var key2 in myData){
-                            //console.log("Actual table => " + key + " + " +myData[key]);
-                            if(myData[key2].l===tmpData[key].l){
-                              myData[key2].v=tmpData[key].v;
-                              myData[key2].p=tmpData[key].p;
-                            }
-                          }
-                          //myData[key]=tmpData[key];
-                        }
-                      }
-                      
-                      //console.log("uncrypt");
-                      for (key in myData) {
-                        //console.log(key + " : " + JSON.stringify(myData[key]));
-                        this.loadAsync(key, myData[key]);
-                      }
-
-                      //console.log(myData);
+                      console.log(data);
+                      this.loadAsync(data);
                       
                     });
                 })
@@ -181,13 +148,54 @@ class Profile extends Component {
       .catch(error => console.log(error));
   }
 
-  async loadAsync(key, obj){
-    //console.log(key+" : " +obj.l+" : "+obj.v+" : "+obj.p);
-    obj.v = await decodePgp(obj.v, this.code);
-    //console.log("decrypt : " +obj.v);
-    this.setState({[key]: obj});
-    //console.log(this.state);
+  async loadAsync(data){
+    //console.log("data : " + data);
+    data = await decodePgp(data, this.code);
+    data = JSON.parse(data); 
+    //console.log("data : " + data);
+    
+    var tmp = [];
+    for(var k in data){
+      //console.log(data[k]);
+      tmp.push(data[k]);
+    }
+    //console.log(tmp);
+    tmp.sort(function compare(a,b){
+      if(a.p>b.p){
+        return 1;
+      }else{
+        return -1;
+      }
+    })
+    //console.log(tmp);
+    
+    //console.log(tmp);
+
+    for(var k in tmp){
+      //console.log(data[k]);
+      this.setState({[k]:tmp[k]});
+    }
   }
+
+  shuffle(array) {
+  var copy = [], n = array.length, i;
+
+  // While there remain elements to shuffle…
+  while (n) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * array.length);
+
+    // If not already shuffled, move it to the new array.
+    if (i in array) {
+      copy.push(array[i]);
+      delete array[i];
+      n--;
+    }
+  }
+
+  return copy;
+}
 
 	LogOut(){
     Auth.signOut()
@@ -203,24 +211,26 @@ class Profile extends Component {
       return;
     }
     console.log("Process to save data...");
-    //console.log(this.state);
-    var copyState=JSON.parse(JSON.stringify(this.state));
 
-    //console.log("this.copyState :" + JSON.stringify(this.copyState));
-    for (var key in copyState) {
-      //console.log(key, " => ", this.copyState[key]);
-      if(copyState[key] && copyState[key].v!==''){
-        //console.log(key, " => ", copyState[key].v);
-        copyState[key].v = await encodePgp(copyState[key].v, this.code);
-        //console.log(key, " => ", copyState[key].v);
-      }
-      
-      //console.log(key, " => ", this.copyState[key]);
+    var tmp = [];
+    var copyState={};
+    for(var k in this.state){
+      //console.log(data[k]);
+      tmp.push(this.state[k]);
     }
-    //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
-    //console.log("compressed : "+compressed);
-    console.log(JSON.stringify(copyState));
-    Storage.put(this.file, await gzip(JSON.stringify(copyState)), {
+    tmp = this.shuffle(tmp);
+    for(k in tmp){
+      copyState[k]=tmp[k];
+    }
+    copyState=JSON.stringify(copyState);
+    console.log("copyState :" + copyState);
+    
+
+    copyState = await encodePgp(copyState, this.code);
+
+    //console.log("copyState :" + copyState);
+
+    Storage.put(this.file, await gzip(copyState), {
       level: this.level,
       contentType: 'text/plain'
     })
@@ -229,7 +239,7 @@ class Profile extends Component {
       this.ischange=false;
     })
     .catch(err => console.log(err));
-    //console.log(this.state);
+
   }
 
   handleChange(event) {
