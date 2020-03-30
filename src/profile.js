@@ -38,7 +38,6 @@ class Profile extends Component {
     ];
 
     this.code = '';
-    this.copyState={};
     this.sub = '';
     this.ischange=false;
     this.qrcodeValue = '';
@@ -58,6 +57,8 @@ class Profile extends Component {
     this.ShowQRCode = this.ShowQRCode.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
     this.DeletePicture = this.DeletePicture.bind(this);
+    this.Reset = this.Reset.bind(this);
+    this.ShowState = this.ShowState.bind(this);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -74,6 +75,14 @@ class Profile extends Component {
 
     initTools();
  	}
+
+  Reset(){
+    for(var k in this.state){
+      var tmp = this.state[k];
+      tmp.v=""
+      this.setState({[k]: tmp}, ()=>{this.ischange=true;this.Save();});
+    }
+  }
 
   componentDidMount(){
     Auth.currentAuthenticatedUser({bypassCache: false})
@@ -98,17 +107,10 @@ class Profile extends Component {
     this.code = ls.get(this.sub);
     var hash = sha512(this.code);
     this.hash = hash.toString('hex');
-    //console.log('hash : ' + hash);
-    //console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.sub+"_____"+this.hash+".json");
-    
-    /*Storage.list('', {level: 'public'})
-      .then(result => console.log(result))
-      .catch(err => console.log(err));
-    */
 
     await Storage.get(this.file, {level: this.level})
       .then(result => {
-        console.log("result : " +result.toString());
+        //console.log("result : " +result.toString());
         fetch(result)
           .then(response =>
           {
@@ -116,7 +118,7 @@ class Profile extends Component {
               for (var key in this.minFields){
                 //console.log('add field : '+key +'==>'+myData[key]);
                 if(!this.state[key]){
-                  console.log('add field : '+key +'==>'+this.state[key]);
+                  //console.log('add field : '+key +'==>'+this.state[key]);
                   this.setState({[key]:''});  
                 }
               }
@@ -160,7 +162,7 @@ class Profile extends Component {
                         }
                       }
                       
-                      console.log("uncrypt");
+                      //console.log("uncrypt");
                       for (key in myData) {
                         //console.log(key + " : " + JSON.stringify(myData[key]));
                         this.loadAsync(key, myData[key]);
@@ -180,10 +182,11 @@ class Profile extends Component {
   }
 
   async loadAsync(key, obj){
-    console.log(key+" : " +obj.l+" : "+obj.v+" : "+obj.p);
+    //console.log(key+" : " +obj.l+" : "+obj.v+" : "+obj.p);
     obj.v = await decodePgp(obj.v, this.code);
-    console.log(obj.v);
+    //console.log("decrypt : " +obj.v);
     this.setState({[key]: obj});
+    //console.log(this.state);
   }
 
 	LogOut(){
@@ -195,25 +198,29 @@ class Profile extends Component {
   }
 
   async Save(){
-
+    
     if(!this.ischange){
       return;
     }
     console.log("Process to save data...");
-    this.copyState = {...this.state};
+    //console.log(this.state);
+    var copyState=JSON.parse(JSON.stringify(this.state));
+
     //console.log("this.copyState :" + JSON.stringify(this.copyState));
-    for (var key in this.copyState) {
+    for (var key in copyState) {
       //console.log(key, " => ", this.copyState[key]);
-      if(this.copyState[key] && this.copyState[key].v!==''){
-        //console.log(key, " => ", this.copyState[key]);
-        this.copyState[key].v = await encodePgp(this.copyState[key].v, this.code);
+      if(copyState[key] && copyState[key].v!==''){
+        //console.log(key, " => ", copyState[key].v);
+        copyState[key].v = await encodePgp(copyState[key].v, this.code);
+        //console.log(key, " => ", copyState[key].v);
       }
       
       //console.log(key, " => ", this.copyState[key]);
     }
     //console.log("Save this.copyState :" + JSON.stringify(this.copyState));
     //console.log("compressed : "+compressed);
-    Storage.put(this.file, await gzip(JSON.stringify(this.copyState)), {
+    console.log(JSON.stringify(copyState));
+    Storage.put(this.file, await gzip(JSON.stringify(copyState)), {
       level: this.level,
       contentType: 'text/plain'
     })
@@ -222,17 +229,22 @@ class Profile extends Component {
       this.ischange=false;
     })
     .catch(err => console.log(err));
+    //console.log(this.state);
   }
 
   handleChange(event) {
-
+    //console.log('handleChange');
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
     const id = target.id;
     //console.log(target);
     //console.log(this.state[id]);
-    this.setState({[id]: {'l':name, 'v':value, 'p':this.state[id].p}},()=>{this.ischange=true;});
+    //console.log(this.state);
+    var tmp=this.state[id];
+    tmp.v=value;
+    //console.log(tmp);
+    this.setState({[id] : tmp},()=>{this.ischange=true;});
+    //console.log(this.state);
   }
 
   ChangeMasterKey(){
@@ -240,7 +252,13 @@ class Profile extends Component {
   }
 
   DeletePicture(){
-    this.setState({['image']: ''}, ()=>{this.ischange=true; this.Save();});
+    for(var k in this.state){
+      if(this.state[k].l==='image'){
+        var tmp = this.state[k];
+        tmp.v="";
+        this.setState({[k]: tmp}, ()=>{this.ischange=true; this.Save();});
+      }
+    }
   }
   
 
@@ -255,26 +273,28 @@ class Profile extends Component {
       //console.log(key);
       ///console.log(itemArray[key]);
       let obj = itemArray[key];
-      if(obj.l === 'image' && obj.v!="" ){
-        buffer.unshift(
-          <div className="row" key={key} style={{"textAlign": "center"}}>
-            <img src={obj.v || obj.v===undefined?"":"data:image/png;base64,"+obj.v} alt="Profile picture" style={!obj.v || obj.v===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
-            <br></br>
-             <input type="file"
-                    id="avatar" name="avatar"
-                    accept="image/png, image/jpeg" onChange={this.handleFiles} />
-       <button onClick={this.DeletePicture}>Delete picture</button>
-          </div>
+      if(obj.l === 'image'){
+        //console.log(obj.v);
+          buffer.unshift(
+            <div className="row" key={key} style={{"textAlign": "center"}}>
+              <img src={obj.v==="" || obj.v===undefined?"":"data:image/png;base64,"+obj.v} alt="Profile picture" style={!obj.v || obj.v===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
+              <br></br>
+               <input type="file"
+                      id="avatar" name="avatar"
+                      accept="image/png, image/jpeg" onChange={this.handleFiles} />
+         <button onClick={this.DeletePicture}>Delete picture</button>
+            </div>
 
-        );
+          );
+        
       }else{
         buffer.push(
-          <div className="row" key={key}>
+          <div className="row" key={key+":"+obj.l}>
             <div className="col-25">
               <label htmlFor={obj.l}>{obj.l}</label>
             </div>
             <div className="col-75">
-              <input type="text" id={key} name={obj.l} placeholder={obj.l} value={obj.v} onChange={this.handleChange} onBlur={this.Save}/>
+              <input type="text" id={key} name={obj.l} placeholder={obj.l} value={this.state[key].v} onChange={this.handleChange} onBlur={this.Save}/>
             </div>
           </div>
         );
@@ -291,6 +311,8 @@ class Profile extends Component {
         <button onClick={this.LogOut}>Logout</button>
         <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
         <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>  
+        <button onClick={this.Reset}>Reset</button>  
+        <button onClick={this.ShowState}>ShowState</button>  
       </div>
       
       <div className="row" style={{"display":this.QRCodeVisibility, "textAlign": "center"}}>
@@ -303,6 +325,10 @@ class Profile extends Component {
   
     </div>
     );
+  }
+
+  ShowState(){
+    console.log(this.state);
   }
 
   ShowQRCode() {
@@ -320,7 +346,7 @@ class Profile extends Component {
             fileInput = true
         }
         if(fileInput) {
-          console.log(event.target.files[0]);
+          //console.log(event.target.files[0]);
           this.err = JSON.stringify(event.target.files[0]);
             Resizer.imageFileResizer(
                 event.target.files[0],
@@ -332,9 +358,13 @@ class Profile extends Component {
                 uri => {
                     //console.log(uri);
                     var img = uri.split("base64,");
-                    this.setState({image : img[1]});
-                    this.ischange=true;
-                    this.Save();
+                    for(var k in this.state){
+                      if(this.state[k].l==='image'){
+                        var tmp = this.state[k];
+                        tmp.v=img[1];
+                        this.setState({[k]: tmp}, ()=>{this.ischange=true; this.Save();});
+                      }
+                    }
                 },
                 'base64'
             );
@@ -346,7 +376,7 @@ class Profile extends Component {
     this.qrcodeValue = awsmobile.aws_content_delivery_url+"/getinfos/"+encodeURIComponent(this.sub)+encodeURIComponent(this.code);
     //this.qrcodeValue = "http://localhost:3000"+"/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     //this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
-    console.log(this.qrcodeValue);
+    //console.log(this.qrcodeValue);
 
     return (
     <div>

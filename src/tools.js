@@ -40,7 +40,7 @@ export const decodePgp = async (message, code) => {
 
 
   try{
-    console.log("Transform to bytes array : " + message);
+    //console.log("Transform to bytes array : " + message);
     var u8_2 = new Uint8Array(atob(message).split("").map(function(c) {return c.charCodeAt(0); }));
     var options, string;
   } catch(error){
