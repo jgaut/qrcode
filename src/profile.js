@@ -10,6 +10,7 @@ import {gzip, ungzip} from 'node-gzip';
 import sha512 from 'sha512';
 import arrayBufferToBuffer from 'arraybuffer-to-buffer';
 import {encodePgp, decodePgp, initTools} from './tools.js';
+import img from './logo.png';
 
 Amplify.configure(awsmobile);
 
@@ -321,10 +322,10 @@ class Profile extends Component {
     // And return the buffer for display inside the render() function
     return (
       
-      <div >
+      <div>
 
       <div className={statusClass}>{!this.ischange?"SAVED":"SAVING..."}</div>
-      <div className="container">
+      <div>
       {buffer}
 
       <div className="row" style={{"textAlign": "center"}}>
@@ -340,11 +341,12 @@ class Profile extends Component {
         <QRCode value={this.qrcodeValue} size={this.qrcodesize} includeMargin={true}/>
       </div>
 
-      <div className="row" style={{"textAlign": "center", color:'red'}}>
-        <label>{this.err}</label>
-      </div>
+      
   
     </div>
+    <div style={{"textAlign": "center", color:'red'}}>
+        <label>{this.err}</label>
+      </div>
     </div>
     
     );
@@ -403,10 +405,14 @@ class Profile extends Component {
 
     return (
     <div>
-      <div className="row" style={{"textAlign": "center"}}>
-        <h1>Profile</h1>
+    <div className="logo"><img src={img}/></div>
+      <div className="container">
+      <div style={{"textAlign": "left"}}>
+        <h2>Profile</h2>
       </div>
+
       {this.state!=undefined?this.processItems(this.state['data']):"Loading..."}
+    </div> 
     </div>  
     );
       

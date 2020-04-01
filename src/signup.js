@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Auth from '@aws-amplify/auth';
+import img from './logo.png';
 
 class SignInUp extends Component {
 
@@ -62,10 +63,11 @@ class SignInUp extends Component {
  
   render() {
     return ( 
- 
-    <div className="container">
-      <div className="row">
-        <h2>Sign Up</h2>
+    <div>
+    <div className="logo"><img src={img}/></div>
+      <div className="container">
+      <div style={{"textAlign": "left"}}>
+        <h2>Sign up</h2>
       </div>
       <form onSubmit={this.handleSubmit}>
         
@@ -96,8 +98,9 @@ class SignInUp extends Component {
         </div>
       </form>
       <div className="row">
-        <button onClick={this.signIn}>Sign In</button>
+        <div>I have an account : <button onClick={this.signIn}>Sign In</button></div>
       </div>
+    </div>
     </div>
 
 
