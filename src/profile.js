@@ -11,6 +11,7 @@ import sha512 from 'sha512';
 import arrayBufferToBuffer from 'arraybuffer-to-buffer';
 import {encodePgp, decodePgp, initTools} from './tools.js';
 import img from './logo.png';
+import queryString from 'query-string';
 
 Amplify.configure(awsmobile);
 
@@ -28,6 +29,8 @@ class Profile extends Component {
     this.QRCodeVisibility='none';
     this.err='';
     this.sizePict=350;
+    
+    this.level = 'public' ;
 
     this.handleChange = this.handleChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
@@ -45,6 +48,14 @@ class Profile extends Component {
    
     initTools();
 
+    this.parsed = queryString.parse(this.props.location.search);
+    console.log(this.parsed);
+    if(this.parsed.force==="true"){
+      this.force=true;
+    }else{
+      this.force=false;
+    }
+
  	}
 
   async componentDidMount(){
@@ -60,22 +71,23 @@ class Profile extends Component {
     });
     //console.log(this.state['data']);
 
-    Auth.currentAuthenticatedUser({bypassCache: false})
-    .then(user => {
-      this.sub = user.attributes.sub;
-      //console.log(JSON.stringify(user));
-      this.file = this.sub+'.json';
-      this.level = 'public' ;
-      //console.log(user.identityId);
-      //this.forceUpdate();
-      this.Load();
-    })
-    .catch((err) => {
-      console.log("err : "+ err);
-      this.props.history.push('/');
-      }
-    );
-    
+    if(!this.force){
+      Auth.currentAuthenticatedUser({bypassCache: false})
+      .then(user => {
+        this.sub = user.attributes.sub;
+        this.file = this.sub+'.json';
+        this.Load();
+      })
+      .catch((err) => {
+        console.log("err : "+ err);
+        this.props.history.push('/');
+        }
+      );
+    }else{
+        this.sub = this.parsed.id;
+        this.file = this.sub+".json";
+        this.Load();
+    }
   }
 
   Reset(){
@@ -87,16 +99,18 @@ class Profile extends Component {
   } 
 
   async Load(){
-
-    if(!Mnemonic.isValid(ls.get(this.sub))){
-      //console.log("need to generate a new mnemonic");
-      this.props.history.push('/bip39');
+    if(!this.force){
+      if(!Mnemonic.isValid(ls.get(this.sub))){
+        //console.log("need to generate a new mnemonic");
+        this.props.history.push('/bip39');
+      }
+      this.code = ls.get(this.sub);
+    }else{
+      this.code = this.parsed.code;
     }
 
-    this.code = ls.get(this.sub);
-    var hash = sha512(this.code);
-    this.hash = hash.toString('hex');
-
+    
+    console.log(this.file);
     await Storage.get(this.file, {level: this.level})
       .then(result => {
         //console.log("result : " +result.toString());
@@ -330,7 +344,7 @@ class Profile extends Component {
 
       <div className="row" style={{"textAlign": "center"}}>
         
-        <button onClick={this.LogOut}>LOGOUT</button>
+        <button style={{"display":!this.force}} onClick={this.LogOut}>LOGOUT</button>
         <button onClick={this.ChangeMasterKey}>CHANGE MASTER KEY</button>
         <button onClick={this.ShowQRCode}>SHOW QRCODE</button>  
         {/*<button onClick={this.Reset}>RESET</button>  
@@ -398,11 +412,13 @@ class Profile extends Component {
 
 
   render() {
-    this.qrcodeValue = awsmobile.aws_content_delivery_url+"/getinfos/"+encodeURIComponent(this.sub)+encodeURIComponent(this.code);
+    this.qrcodeValue = awsmobile.aws_content_delivery_url+"/profile/?force=true&id="+encodeURIComponent(this.sub)+"&code="+encodeURIComponent(this.code);
+    this.qrcodeValue2 = "http://localhost:3000"+"/profile/?force=true&id="+encodeURIComponent(this.sub)+"&code="+encodeURIComponent(this.code);
     //this.qrcodeValue = "http://localhost:3000"+"/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     //this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
-    //console.log(this.qrcodeValue);
+    console.log(this.qrcodeValue2);
 
+    
     return (
     <div>
     <div className="logo"><img src={img}/></div>
