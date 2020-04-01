@@ -17,16 +17,6 @@ class Profile extends Component {
 
 	constructor(props) {
     super(props);
-    
-
-    this.state = [
-      {'l':'nom', 'v': '', 'p':0},
-      {'l':'prenom', 'v': '', 'p':1},
-      {'l':'age', 'v': '', 'p':2},
-      {'l':'gs', 'v': '', 'p':3},
-      {'l':'notes', 'v': '', 'p':4},
-      {'l':'image', 'v': '', 'p':5}
-    ];
 
     this.code = '';
     this.sub = '';
@@ -51,6 +41,23 @@ class Profile extends Component {
     this.Reset = this.Reset.bind(this);
     this.ShowState = this.ShowState.bind(this);
     this.shuffle = this.shuffle.bind(this);
+   
+    initTools();
+
+ 	}
+
+  async componentDidMount(){
+
+    await this.setState({['data'] : [
+      {'l':'nom', 'v': '', 'p':0},
+      {'l':'prenom', 'v': '', 'p':1},
+      {'l':'age', 'v': '', 'p':2},
+      {'l':'gs', 'v': '', 'p':3},
+      {'l':'notes', 'v': '', 'p':4},
+      {'l':'image', 'v': '', 'p':5}
+      ]
+    });
+    //console.log(this.state['data']);
 
     Auth.currentAuthenticatedUser({bypassCache: false})
     .then(user => {
@@ -58,39 +65,30 @@ class Profile extends Component {
       //console.log(JSON.stringify(user));
       this.file = this.sub+'.json';
       this.level = 'public' ;
-      console.log(user.identityId);
-      this.forceUpdate();
+      //console.log(user.identityId);
+      //this.forceUpdate();
       this.Load();
     })
-    .catch(err => console.log(err));
-    
-
-    initTools();
- 	}
-
-  Reset(){
-    for(var k in this.state){
-      var tmp = this.state[k];
-      tmp.v=""
-      this.setState({[k]: tmp}, ()=>{this.ischange=true;this.Save();});
-    }
-  }
-
-  componentDidMount(){
-    Auth.currentAuthenticatedUser({bypassCache: false})
-    .then((user) => {}
-    ).catch((err) => {
+    .catch((err) => {
       console.log("err : "+ err);
       this.props.history.push('/');
       }
     );
     
+  }
+
+  Reset(){
+    for(var k in this.state['data']){
+      var tmp = this.state['data'][k];
+      tmp.v=""
+      this.setState({[k]: tmp}, ()=>{this.ischange=true;this.Save();});
+    }
   } 
 
   async Load(){
 
     if(!Mnemonic.isValid(ls.get(this.sub))){
-      console.log("need to generate a new mnemonic");
+      //console.log("need to generate a new mnemonic");
       this.props.history.push('/bip39');
     }
 
@@ -107,8 +105,8 @@ class Profile extends Component {
             if (!response.ok) {
               /*for (var key in this.minFields){
                 //console.log('add field : '+key +'==>'+myData[key]);
-                if(!this.state[key]){
-                  //console.log('add field : '+key +'==>'+this.state[key]);
+                if(!this.state['data'][key]){
+                  //console.log('add field : '+key +'==>'+this.state['data'][key]);
                   this.setState({[key]:''});  
                 }
               }*/
@@ -119,9 +117,9 @@ class Profile extends Component {
               //console.log("myData : "+JSON.stringify(data));
               
               if(data===""){
-                console.log("data is empty");
+                //console.log("data is empty");
               }else{
-
+                //console.log("data is present");
               }
 
               //Unzip
@@ -134,7 +132,7 @@ class Profile extends Component {
                       //console.log(this.minFields);
 
                       //Add storaged fields
-                      console.log(data);
+                      //console.log(data);
                       this.loadAsync(data);
                       
                     });
@@ -173,8 +171,10 @@ class Profile extends Component {
 
     for(var k in tmp){
       //console.log(data[k]);
-      this.setState({[k]:tmp[k]});
+      this.setState({['data']:{...this.state['data'], [k]:tmp[k]}});
     }
+    //console.log(this.state);
+    this.forceUpdate();
   }
 
   shuffle(array) {
@@ -210,20 +210,20 @@ class Profile extends Component {
     if(!this.ischange){
       return;
     }
-    console.log("Process to save data...");
+    //console.log("Process to save data...");
 
     var tmp = [];
     var copyState={};
-    for(var k in this.state){
+    for(var k in this.state['data']){
       //console.log(data[k]);
-      tmp.push(this.state[k]);
+      tmp.push(this.state['data'][k]);
     }
     tmp = this.shuffle(tmp);
     for(k in tmp){
       copyState[k]=tmp[k];
     }
     copyState=JSON.stringify(copyState);
-    console.log("copyState :" + copyState);
+    //console.log("copyState :" + copyState);
     
 
     copyState = await encodePgp(copyState, this.code);
@@ -235,8 +235,9 @@ class Profile extends Component {
       contentType: 'text/plain'
     })
     .then (result => {
-      console.log("Data saved");
+      //console.log("Data saved");
       this.ischange=false;
+      this.forceUpdate();
     })
     .catch(err => console.log(err));
 
@@ -248,13 +249,13 @@ class Profile extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const id = target.id;
     //console.log(target);
-    //console.log(this.state[id]);
-    //console.log(this.state);
-    var tmp=this.state[id];
+    //console.log(this.state['data'][id]);
+    //console.log(this.state['data']);
+    var tmp=this.state['data'][id];
     tmp.v=value;
     //console.log(tmp);
     this.setState({[id] : tmp},()=>{this.ischange=true;});
-    //console.log(this.state);
+    //console.log(this.state['data']);
   }
 
   ChangeMasterKey(){
@@ -262,9 +263,9 @@ class Profile extends Component {
   }
 
   DeletePicture(){
-    for(var k in this.state){
-      if(this.state[k].l==='image'){
-        var tmp = this.state[k];
+    for(var k in this.state['data']){
+      if(this.state['data'][k].l==='image'){
+        var tmp = this.state['data'][k];
         tmp.v="";
         this.setState({[k]: tmp}, ()=>{this.ischange=true; this.Save();});
       }
@@ -277,7 +278,7 @@ class Profile extends Component {
     // Create an empty array that will hold the final JSX output.
     let buffer = [];
 
-    //console.log(this.state);
+    //console.log(this.state['data']);
     //console.log("Process graphics");
     for (var key in itemArray) {
       //console.log(key);
@@ -301,28 +302,38 @@ class Profile extends Component {
         buffer.push(
           <div className="row" key={key+":"+obj.l}>
             <div className="col-25">
-              <label htmlFor={obj.l}>{obj.l}</label>
+              <label htmlFor={obj.l}>{ obj.l.charAt(0).toUpperCase() + obj.l.slice(1)}</label>
             </div>
             <div className="col-75">
-              <input type="text" id={key} name={obj.l} placeholder={obj.l} value={this.state[key].v} onChange={this.handleChange} onBlur={this.Save}/>
+              <input type="text" id={key} name={obj.l} placeholder={ obj.l.charAt(0).toUpperCase() + obj.l.slice(1)} value={this.state['data'][key].v} onChange={this.handleChange} onBlur={this.Save}/>
             </div>
           </div>
         );
       }
     }
 
+    let statusClass = [
+      'container',
+      'status'
+    ]
+    statusClass = statusClass.join(' ')
+
     // And return the buffer for display inside the render() function
     return (
-      <div className="container">
       
+      <div >
+
+      <div className={statusClass}>{!this.ischange?"SAVED":"SAVING..."}</div>
+      <div className="container">
       {buffer}
 
       <div className="row" style={{"textAlign": "center"}}>
-        <button onClick={this.LogOut}>Logout</button>
-        <button onClick={this.ChangeMasterKey}>ChangeMasterKey</button>
-        <button onClick={this.ShowQRCode}>Show/Hide QRCode</button>  
-        <button onClick={this.Reset}>Reset</button>  
-        <button onClick={this.ShowState}>ShowState</button>  
+        
+        <button onClick={this.LogOut}>LOGOUT</button>
+        <button onClick={this.ChangeMasterKey}>CHANGE MASTER KEY</button>
+        <button onClick={this.ShowQRCode}>SHOW QRCODE</button>  
+        {/*<button onClick={this.Reset}>RESET</button>  
+        <button onClick={this.ShowState}>SHOW STATE VAR</button>*/} 
       </div>
       
       <div className="row" style={{"display":this.QRCodeVisibility, "textAlign": "center"}}>
@@ -334,11 +345,13 @@ class Profile extends Component {
       </div>
   
     </div>
+    </div>
+    
     );
   }
 
   ShowState(){
-    console.log(this.state);
+    console.log(this.state['data']);
   }
 
   ShowQRCode() {
@@ -368,9 +381,9 @@ class Profile extends Component {
                 uri => {
                     //console.log(uri);
                     var img = uri.split("base64,");
-                    for(var k in this.state){
-                      if(this.state[k].l==='image'){
-                        var tmp = this.state[k];
+                    for(var k in this.state['data']){
+                      if(this.state['data'][k].l==='image'){
+                        var tmp = this.state['data'][k];
                         tmp.v=img[1];
                         this.setState({[k]: tmp}, ()=>{this.ischange=true; this.Save();});
                       }
@@ -393,7 +406,7 @@ class Profile extends Component {
       <div className="row" style={{"textAlign": "center"}}>
         <h1>Profile</h1>
       </div>
-      {this.processItems(this.state)}
+      {this.state!=undefined?this.processItems(this.state['data']):"Loading..."}
     </div>  
     );
       

@@ -3,12 +3,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #121212;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-size: calc(12px + 2vmin);
-  color: grey;
+  color: rgba(255, 255, 255, 0.87);
+  font-family: "Gill Sans", sans-serif;
 }
 
 
@@ -29,29 +30,42 @@ label {
   display: inline-block;
 }
 
+
+
 input[type=submit],button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
+  background-color: #BB86FC;
+  font-weight: bolder;
+  color: #121212;
+  padding: 8px;
   border: none;
-  border-radius: 4px;
+  border-radius: 2px;
   cursor: pointer;
-  margin-top: 10px !important;
-  width: 100px;
+  margin: 10px !important;
+  width: auto;
+  opacity: 90%;
 }
 
-input[type=submit]:hover, button {
-  background-color: #45a049;
+input[type=submit]:hover, button:hover {
+  opacity: 100%;
 }
 
-.container {
+.container{
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: rgba(255,255,255,0.16);
   margin: auto;
   width: 80%;
   padding: 10px;
   max-width: 600px;
 
+}
+
+.status{
+  background-color: rgba(255,255,255,0);
+  text-align: right;
+  font-size: calc(1px + 1vmin);
+  font-weight: bolder;
+  margin-bottom:0;
+  padding-bottom:0;
 }
 
 .col-25 {
