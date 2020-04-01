@@ -45,6 +45,7 @@ class Profile extends Component {
     this.Reset = this.Reset.bind(this);
     this.ShowState = this.ShowState.bind(this);
     this.shuffle = this.shuffle.bind(this);
+    this.signin = this.signin.bind(this);
    
     initTools();
 
@@ -55,6 +56,7 @@ class Profile extends Component {
     }else{
       this.force=false;
     }
+    console.log("Force : " +this.force);
 
  	}
 
@@ -111,6 +113,8 @@ class Profile extends Component {
 
     
     console.log(this.file);
+    if(!this.force){
+    console.log("Normal access");
     await Storage.get(this.file, {level: this.level})
       .then(result => {
         //console.log("result : " +result.toString());
@@ -159,6 +163,27 @@ class Profile extends Component {
           .catch(error=>{console.log(error)});
       })
       .catch(error => console.log(error));
+    }else{
+      console.log("Force access");
+      //console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.file);
+      fetch("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.file)
+      .then(response => {/*console.log(response);*/ return response;})
+        .then(data => {
+          //Unzip
+          data.arrayBuffer()
+            .then(data=>{
+              //console.log(arrayBufferToBuffer(data));
+              ungzip(arrayBufferToBuffer(data))
+                .then((data) => {
+                  //console.log("data :" + data+ " -- "+data.length); 
+                  this.loadAsync(data);
+                });
+            })
+            .catch(error => {console.log(error)}); 
+        })
+        .catch(error => {console.log(error);});
+
+    }
   }
 
   async loadAsync(data){
@@ -277,6 +302,12 @@ class Profile extends Component {
     this.props.history.push('/bip39');
   }
 
+  signin(){
+    //this.props.history.push('/profile');
+    this.force=false;
+    this.componentDidMount()
+  }
+
   DeletePicture(){
     for(var k in this.state['data']){
       if(this.state['data'][k].l==='image'){
@@ -305,22 +336,25 @@ class Profile extends Component {
             <div className="row" key={key} style={{"textAlign": "center"}}>
               <img src={obj.v==="" || obj.v===undefined?"":"data:image/png;base64,"+obj.v} alt="Profile picture" style={!obj.v || obj.v===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
               <br></br>
+              <div style={this.force?{visibility: 'hidden' }:{visibility: ''}}>
                <input type="file"
                       id="avatar" name="avatar"
                       accept="image/png, image/jpeg" onChange={this.handleFiles} />
          <button onClick={this.DeletePicture}>Delete picture</button>
             </div>
+            </div>
 
           );
         
       }else{
+        
         buffer.push(
           <div className="row" key={key+":"+obj.l}>
             <div className="col-25">
               <label htmlFor={obj.l}>{ obj.l.charAt(0).toUpperCase() + obj.l.slice(1)}</label>
             </div>
             <div className="col-75">
-              <input type="text" id={key} name={obj.l} placeholder={ obj.l.charAt(0).toUpperCase() + obj.l.slice(1)} value={this.state['data'][key].v} onChange={this.handleChange} onBlur={this.Save}/>
+              <input readOnly={this.force} type="text" id={key} name={obj.l} placeholder={ obj.l.charAt(0).toUpperCase() + obj.l.slice(1)} value={this.state['data'][key].v} onChange={this.handleChange} onBlur={this.Save}/>
             </div>
           </div>
         );
@@ -338,17 +372,23 @@ class Profile extends Component {
       
       <div>
 
-      <div className={statusClass}>{!this.ischange?"SAVED":"SAVING..."}</div>
+      <div style={this.force?{visibility: 'hidden' }:{visibility: ''}} className={statusClass}>{!this.ischange?"SAVED":"SAVING..."}</div>
       <div>
       {buffer}
 
-      <div className="row" style={{"textAlign": "center"}}>
+      <div className="row" style={{"textAlign": "center"}} style={this.force?{visibility: 'hidden' }:{visibility: ''}}>
         
-        <button style={{"display":!this.force}} onClick={this.LogOut}>LOGOUT</button>
+        <button onClick={this.LogOut}>LOGOUT</button>
         <button onClick={this.ChangeMasterKey}>CHANGE MASTER KEY</button>
         <button onClick={this.ShowQRCode}>SHOW QRCODE</button>  
         {/*<button onClick={this.Reset}>RESET</button>  
         <button onClick={this.ShowState}>SHOW STATE VAR</button>*/} 
+      </div>
+
+      <div className="row" style={{"textAlign": "center"}} style={!this.force?{visibility: 'hidden' }:{visibility: ''}}>
+        
+        <button onClick={this.signin}>Sign In</button>
+        
       </div>
       
       <div className="row" style={{"display":this.QRCodeVisibility, "textAlign": "center"}}>
