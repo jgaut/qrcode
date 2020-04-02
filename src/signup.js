@@ -102,11 +102,6 @@ class SignInUp extends Component {
       </div>
     </div>
     </div>
-
-
-
-    
-
     );      
   }
 }

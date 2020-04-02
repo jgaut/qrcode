@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Auth from '@aws-amplify/auth';
 import awsconfig from './aws-exports';
+import img from './logo.png';
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -16,9 +17,22 @@ class SignInConfirm extends Component {
     };
     
     this.handleChange = this.handleChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
 
-    this.state.email = this.props.location.state.email;
+  }
+
+
+  componentDidMount(){
+    Auth.currentAuthenticatedUser({bypassCache: false})
+      .then(user => {
+        console.log(user);
+        this.setState({['email']:user.attributes.email});
+      })
+      .catch((err) => {
+        console.log("err : "+ err);
+        this.setState({['email']:err});
+        this.props.history.push('/');
+        }
+      );
 
   }
 
@@ -34,7 +48,7 @@ class SignInConfirm extends Component {
     });
   }
 
-  onSubmit(){
+  handleSubmit(){
 
     var username = this.state.email;
     var code = this.state.code;
@@ -59,39 +73,43 @@ class SignInConfirm extends Component {
     //console.log(JSON.stringify(this.state));
     return (
 
-    <div>
-    <h1 style={{"textAlign": "center"}}>Account validation</h1>
-    <table> 
-    <tbody>    
-      <tr>
-          <td>
-            <label>Email</label>
-          </td>
-          <td>
-            {this.props.location.state.email}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label>Validation code</label>
-          </td>
-          <td>
-            <input type="text" name="code" value={this.state.code} onChange={this.handleChange}/>
-          </td>
-        </tr>
-        <tr>
-          <td colspan='2'>
-            <button onClick={this.onSubmit}>Validate</button>
-          </td>
-        </tr>
-        <tr>
-          <td colspan='2'>
-            <label>{this.state.err}</label>
-          </td>
-        </tr>
-    </tbody> 
-    </table>
-    </div> 
+
+      <div>
+    <div className="logo"><img src={img}/></div>
+      <div className="container">
+      <div style={{"textAlign": "left"}}>
+        <h2>Account validation</h2>
+      </div>
+      <form onSubmit={this.handleSubmit}>
+        
+        <div className={this.state.error==='' ? 'hidden-label': 'row error-label'}>
+          <label>{this.state.error}</label>
+        </div>
+        
+        <div className="row">
+          <div className="col-25">
+            <label htmlFor="email">{this.state.email}</label>
+          </div>
+        </div>
+        
+        <div className="row">
+          <div className="col-25">
+            <label htmlFor="password">Code</label>
+          </div>
+          <div className="col-75">
+            <input type="text" id="validationcode" name="validationcode" placeholder="Your validation code..." value={this.state.code} onChange={this.handleChange}/>
+          </div>
+        </div>
+        
+        <div className="row">
+          <input type="submit" value="Sign Up"/>
+        </div>
+      </form>
+      <div className="row">
+       <label>{this.state.err}</label>
+      </div>
+    </div>
+    </div>
     );
   }
 }

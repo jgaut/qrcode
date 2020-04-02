@@ -5,11 +5,10 @@ import awsconfig from './aws-exports';
 import SignIn from './signin';
 import SignUp from './signup';
 import SignInConfirm from './signinconfirm';
-import First from './first';
 import NoAuth from './noauth';
+import LogOut from './logout';
 import Profile from './profile';
 import Bip39 from './bip39';
-import GetInfos from './getinfos';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 
 // retrieve temporary AWS credentials and sign requests
@@ -27,11 +26,10 @@ class App extends Component {
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/signinconfirm" component={SignInConfirm} />
-            <Route exact path="/first" component={First} />
             <Route exact path="/noauth" component={NoAuth} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/bip39" component={Bip39} />
-            <Route path="/getinfos/:uuid/:key" component={GetInfos} />
+            <Route exact path="/logout" component={LogOut} />
             <Route path='/' render={() => (<Redirect to="/noauth" />)}/> 
           </Switch>
         </header>

@@ -7,7 +7,6 @@ import ls from 'local-storage';
 import Mnemonic from 'bitcore-mnemonic';
 import Resizer from 'react-image-file-resizer';
 import {gzip, ungzip} from 'node-gzip';
-import sha512 from 'sha512';
 import arrayBufferToBuffer from 'arraybuffer-to-buffer';
 import {encodePgp, decodePgp, initTools} from './tools.js';
 import img from './logo.png';
@@ -21,6 +20,7 @@ class Profile extends Component {
     super(props);
 
     this.code = '';
+    this.newCode = '';
     this.sub = '';
     this.ischange=false;
     this.qrcodeValue = '';
@@ -107,6 +107,7 @@ class Profile extends Component {
         this.props.history.push('/bip39');
       }
       this.code = ls.get(this.sub);
+      this.newCode = this.code;
     }else{
       this.code = this.parsed.code;
     }
@@ -117,7 +118,7 @@ class Profile extends Component {
     console.log("Normal access");
     await Storage.get(this.file, {level: this.level})
       .then(result => {
-        //console.log("result : " +result.toString());
+        console.log("result : " +result.toString());
         fetch(result)
           .then(response =>
           {
@@ -187,34 +188,36 @@ class Profile extends Component {
   }
 
   async loadAsync(data){
-    //console.log("data : " + data);
+    console.log("data : " + data);
+    console.log("code : " + this.code);
     data = await decodePgp(data, this.code);
-    data = JSON.parse(data); 
-    //console.log("data : " + data);
-    
-    var tmp = [];
-    for(var k in data){
-      //console.log(data[k]);
-      tmp.push(data[k]);
-    }
-    //console.log(tmp);
-    tmp.sort(function compare(a,b){
-      if(a.p>b.p){
-        return 1;
-      }else{
-        return -1;
+    console.log("data : " + data);
+    if(data!=undefined){
+      data = JSON.parse(data);  
+      var tmp = [];
+      for(var k in data){
+        //console.log(data[k]);
+        tmp.push(data[k]);
       }
-    })
-    //console.log(tmp);
-    
-    //console.log(tmp);
+      //console.log(tmp);
+      tmp.sort(function compare(a,b){
+        if(a.p>b.p){
+          return 1;
+        }else{
+          return -1;
+        }
+      })
+      //console.log(tmp);
+      
+      //console.log(tmp);
 
-    for(var k in tmp){
-      //console.log(data[k]);
-      this.setState({['data']:{...this.state['data'], [k]:tmp[k]}});
+      for(var k in tmp){
+        //console.log(data[k]);
+        this.setState({['data']:{...this.state['data'], [k]:tmp[k]}});
+      }
+      //console.log(this.state);
+      this.forceUpdate();
     }
-    //console.log(this.state);
-    this.forceUpdate();
   }
 
   shuffle(array) {
@@ -238,11 +241,12 @@ class Profile extends Component {
 }
 
 	LogOut(){
-    Auth.signOut()
+    /*Auth.signOut()
     .then((data) => {
         this.props.history.push('/');
       })
-      .catch(err => console.log(err));  
+      .catch(err => console.log(err));*/
+    this.props.history.push('/logout');
   }
 
   async Save(){
