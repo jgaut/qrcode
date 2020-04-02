@@ -338,7 +338,7 @@ class Profile extends Component {
         //console.log(obj.v);
           buffer.unshift(
             <div className="row" key={key} style={{"textAlign": "center"}}>
-              <img src={obj.v==="" || obj.v===undefined?"":"data:image/png;base64,"+obj.v} alt="Profile picture" style={!obj.v || obj.v===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
+              <img className="picture" src={obj.v==="" || obj.v===undefined?"":"data:image/png;base64,"+obj.v} alt="Profile picture" style={!obj.v || obj.v===''?{visibility: 'hidden' }:{ width: this.sizePict+'px' }}/>
               <br></br>
               <div style={this.force?{visibility: 'hidden' }:{visibility: ''}}>
                <input type="file"
