@@ -101,15 +101,15 @@ class Profile extends Component {
   } 
 
   async Load(){
-    if(!this.force){
+    if(this.force){
+      this.code = this.parsed.code;
+    }else{
       if(!Mnemonic.isValid(ls.get(this.sub))){
         //console.log("need to generate a new mnemonic");
         this.props.history.push('/bip39');
       }
       this.code = ls.get(this.sub);
       this.newCode = this.code;
-    }else{
-      this.code = this.parsed.code;
     }
 
     
@@ -167,7 +167,7 @@ class Profile extends Component {
     }else{
       console.log("Force access");
       //console.log("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.file);
-      fetch("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.file)
+      fetch("https://"+awsmobile.aws_user_files_s3_bucket+".s3."+awsmobile.aws_user_files_s3_bucket_region+".amazonaws.com/public/"+this.file, {cache: "no-store"})
       .then(response => {/*console.log(response);*/ return response;})
         .then(data => {
           //Unzip
@@ -457,10 +457,10 @@ class Profile extends Component {
 
   render() {
     this.qrcodeValue = awsmobile.aws_content_delivery_url+"/profile/?force=true&id="+encodeURIComponent(this.sub)+"&code="+encodeURIComponent(this.code);
-    this.qrcodeValue2 = "http://localhost:3000"+"/profile/?force=true&id="+encodeURIComponent(this.sub)+"&code="+encodeURIComponent(this.code);
+    //this.qrcodeValue2 = "http://localhost:3000"+"/profile/?force=true&id="+encodeURIComponent(this.sub)+"&code="+encodeURIComponent(this.code);
     //this.qrcodeValue = "http://localhost:3000"+"/getinfos/"+encodeURIComponent(this.sub)+"/"+encodeURIComponent(this.code);
     //this.dataLink = "https://s3-eu-west-1.amazonaws.com/qrcodebbae64624e2c4eaa95c85650b48ffb6c/public/"+this.sub+".json";
-    console.log(this.qrcodeValue2);
+    console.log(this.qrcodeValue);
 
     
     return (
